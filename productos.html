@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - CubeZone</title>
+    <meta name="description" content="Descubre nuestra amplia gama de cubos Rubik y puzzles 3D. Speedcubes, Megaminx, Pyraminx y más con la mejor calidad.">
+    
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación fija -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>CubeZone</span>
+            </div>
+            
+            <!-- Menú de navegación -->
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link active">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            
+            <!-- Botón hamburguesa para móvil -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Productos -->
+    <section id="productos" class="products-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Nuestros Productos</h1>
+                <p class="section-subtitle">Descubre nuestra amplia gama de cubos y puzzles</p>
+            </div>
+            
+            <!-- Filtros de productos -->
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="speedcube">Speedcubes</button>
+                <button class="filter-btn" data-filter="megaminx">Megaminx</button>
+                <button class="filter-btn" data-filter="pyraminx">Pyraminx</button>
+                <button class="filter-btn" data-filter="square1">Square-1</button>
+            </div>
+            
+            <!-- Grid de productos -->
+            <div class="products-grid">
+                <!-- Producto 1: Cubo 2x2 -->
+                <div class="product-card" data-category="speedcube">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Rubik 2x2">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cubo Rubik 2x2 Speed</h3>
+                        <p>Perfecto para principiantes. Mecanismo suave y giros rápidos.</p>
+                        <div class="product-price">€12.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+                
+                <!-- Producto 2: Cubo 3x3 Clásico -->
+                <div class="product-card" data-category="speedcube">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Rubik 3x3">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cubo Rubik 3x3 Original</h3>
+                        <p>El clásico cubo de competición. Ideal para speedcubing profesional.</p>
+                        <div class="product-price">€19.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+                
+                <!-- Producto 3: Cubo 4x4 -->
+                <div class="product-card" data-category="speedcube">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Rubik 4x4">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cubo Rubik 4x4 Master</h3>
+                        <p>Para cubers avanzados. Desafío y diversión en un solo cubo.</p>
+                        <div class="product-price">€29.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 4: Megaminx -->
+                <div class="product-card" data-category="megaminx">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/8367439/pexels-photo-8367439.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Megaminx">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Megaminx Dodecaedro</h3>
+                        <p>El puzzle de 12 caras más desafiante. Para expertos en cubos.</p>
+                        <div class="product-price">€39.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 5: Pyraminx -->
+                <div class="product-card" data-category="pyraminx">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/1191578/pexels-photo-1191578.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Pyraminx">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Pyraminx Tetraédrico</h3>
+                        <p>Puzzle piramidal de 4 caras. Diferente y divertido.</p>
+                        <div class="product-price">€16.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 6: Square-1 -->
+                <div class="product-card" data-category="square1">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/1191456/pexels-photo-1191456.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Square-1">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Square-1 Shape Shifter</h3>
+                        <p>El puzzle que cambia de forma. Máximo desafío garantizado.</p>
+                        <div class="product-price">€24.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <!-- Productos adicionales -->
+                <div class="product-card" data-category="speedcube">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Rubik 5x5">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cubo Rubik 5x5 Professor</h3>
+                        <p>El desafío definitivo para speedcubers expertos.</p>
+                        <div class="product-price">€45.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="speedcube">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Mirror">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Mirror Cube Plateado</h3>
+                        <p>Cubo de formas irregulares que desafía tu percepción.</p>
+                        <div class="product-price">€22.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="pyraminx">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/1191578/pexels-photo-1191578.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Skewb">
+                        <div class="product-overlay">
+                            <button class="btn-view">Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Skewb Diamond</h3>
+                        <p>Puzzle de esquinas que gira de forma única.</p>
+                        <div class="product-price">€18.99</div>
+                        <button class="btn btn-primary">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de información adicional -->
+            <div class="product-info-section">
+                <h3>¿Por qué elegir CubeZone?</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <i class="fas fa-medal"></i>
+                        <h4>Calidad Garantizada</h4>
+                        <p>Todos nuestros cubos pasan rigurosos controles de calidad antes del envío.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-truck"></i>
+                        <h4>Envío Gratuito</h4>
+                        <p>Envío gratuito en pedidos superiores a €30 en toda España.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-undo"></i>
+                        <h4>Devolución Fácil</h4>
+                        <p>30 días para devolver tu producto si no estás completamente satisfecho.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-headset"></i>
+                        <h4>Soporte 24/7</h4>
+                        <p>Nuestro equipo está disponible para ayudarte en cualquier momento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>CubeZone</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik y puzzles 3D. Calidad garantizada y envío rápido.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="productos.html">Cubos 2x2</a></li>
+                        <li><a href="productos.html">Cubos 3x3</a></li>
+                        <li><a href="productos.html">Cubos 4x4+</a></li>
+                        <li><a href="productos.html">Megaminx</a></li>
+                        <li><a href="productos.html">Pyraminx</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="aprende.html">Tutoriales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Suscríbete para recibir ofertas exclusivas y novedades</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2024 CubeZone. Todos los derechos reservados.</span>
+                    <div class="legal-links">
+                        <a href="#">Política de Privacidad</a>
+                        <a href="#">Términos de Servicio</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón scroll to top -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="scripts/main.js"></script>
+</body>
+</html>

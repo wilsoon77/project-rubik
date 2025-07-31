@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - CubeZone</title>
+    <meta name="description" content="Ponte en contacto con CubeZone. Estamos aquí para ayudarte con cualquier pregunta sobre nuestros productos y servicios.">
+    
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación fija -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>CubeZone</span>
+            </div>
+            
+            <!-- Menú de navegación -->
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
+            </ul>
+            
+            <!-- Botón hamburguesa para móvil -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="contact-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Contacto</h1>
+                <p class="section-subtitle">¿Tienes preguntas? Estamos aquí para ayudarte</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Dirección</h4>
+                            <p>Calle de los Cubos, 123<br>28001 Madrid, España</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Teléfono</h4>
+                            <p>+34 91 123 45 67</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>info@cubezone.es</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Horario</h4>
+                            <p>Lun - Vie: 9:00 - 18:00<br>Sáb: 10:00 - 14:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario de contacto -->
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required>
+                        <label for="name">Nombre completo</label>
+                        <span class="form-line"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">Correo electrónico</label>
+                        <span class="form-line"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone">
+                        <label for="phone">Teléfono (opcional)</label>
+                        <span class="form-line"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select id="subject" name="subject" required>
+                            <option value="">Selecciona un tema</option>
+                            <option value="general">Consulta general</option>
+                            <option value="product">Información de producto</option>
+                            <option value="support">Soporte técnico</option>
+                            <option value="wholesale">Ventas al por mayor</option>
+                        </select>
+                        <label for="subject">Asunto</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <label for="message">Mensaje</label>
+                        <span class="form-line"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+
+            <!-- Sección de FAQ -->
+            <div class="faq-section">
+                <h3>Preguntas Frecuentes</h3>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>¿Cuánto tiempo tarda el envío?</h4>
+                        <p>Los envíos dentro de España tardan entre 24-48 horas. Para envíos internacionales, el tiempo puede variar entre 3-7 días laborables.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>¿Ofrecen garantía en los productos?</h4>
+                        <p>Sí, todos nuestros cubos tienen garantía de 1 año contra defectos de fabricación. También ofrecemos 30 días para devoluciones.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>¿Tienen tienda física?</h4>
+                        <p>Actualmente somos una tienda online, pero puedes visitarnos en nuestras oficinas en Madrid con cita previa.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>¿Organizan competiciones?</h4>
+                        <p>Sí, organizamos eventos y competiciones regulares. Síguenos en redes sociales para estar al día de próximos eventos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>CubeZone</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik y puzzles 3D. Calidad garantizada y envío rápido.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="productos.html">Cubos 2x2</a></li>
+                        <li><a href="productos.html">Cubos 3x3</a></li>
+                        <li><a href="productos.html">Cubos 4x4+</a></li>
+                        <li><a href="productos.html">Megaminx</a></li>
+                        <li><a href="productos.html">Pyraminx</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="aprende.html">Tutoriales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Suscríbete para recibir ofertas exclusivas y novedades</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2024 CubeZone. Todos los derechos reservados.</span>
+                    <div class="legal-links">
+                        <a href="#">Política de Privacidad</a>
+                        <a href="#">Términos de Servicio</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón scroll to top -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="scripts/main.js"></script>
+</body>
+</html>

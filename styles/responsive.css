@@ -1,0 +1,660 @@
+/* ===========================
+   ESTILOS RESPONSIVOS - CUBEZONE
+   Diseño adaptativo para móvil, tablet y desktop
+   ========================== */
+
+/* ===========================
+   BREAKPOINTS PRINCIPALES
+   ========================== */
+
+/* Tablet (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Hero section en tablet */
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .cube-3d {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .face {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .face.front,
+    .face.right,
+    .face.left {
+        transform: translateZ(75px);
+    }
+    
+    .face.back {
+        transform: translateZ(-75px) rotateY(180deg);
+    }
+    
+    .face.right {
+        transform: rotateY(90deg) translateZ(75px);
+    }
+    
+    .face.left {
+        transform: rotateY(-90deg) translateZ(75px);
+    }
+    
+    .face.top {
+        transform: rotateX(90deg) translateZ(75px);
+    }
+    
+    .face.bottom {
+        transform: rotateX(-90deg) translateZ(75px);
+    }
+    
+    /* About section en tablet */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .stats {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+    
+    /* Productos en tablet */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    /* Contacto en tablet */
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    /* Footer en tablet */
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* ===========================
+   MÓVIL (max-width: 768px)
+   ========================== */
+@media screen and (max-width: 768px) {
+    /* Navegación móvil */
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 2rem;
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 1rem 0;
+    }
+    
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+    
+    /* Hero section móvil */
+    .hero-section {
+        min-height: 100vh;
+        padding: 6rem 0 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Cubo móvil más pequeño */
+    .cube-3d {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .face {
+        width: 120px;
+        height: 120px;
+        padding: 8px;
+        gap: 2px;
+    }
+    
+    .face.front,
+    .face.right,
+    .face.left {
+        transform: translateZ(60px);
+    }
+    
+    .face.back {
+        transform: translateZ(-60px) rotateY(180deg);
+    }
+    
+    .face.right {
+        transform: rotateY(90deg) translateZ(60px);
+    }
+    
+    .face.left {
+        transform: rotateY(-90deg) translateZ(60px);
+    }
+    
+    .face.top {
+        transform: rotateX(90deg) translateZ(60px);
+    }
+    
+    .face.bottom {
+        transform: rotateX(-90deg) translateZ(60px);
+    }
+    
+    /* Secciones móvil */
+    .about-section,
+    .products-section,
+    .learn-section,
+    .contact-section {
+        padding: 4rem 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* About section móvil */
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .about-features {
+        gap: 1rem;
+    }
+    
+    .feature-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .feature-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    /* Productos móvil */
+    .product-filters {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .product-image {
+        height: 200px;
+    }
+    
+    /* Learn section móvil */
+    .skill-levels {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .level-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .level-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Contacto móvil */
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    /* Footer móvil */
+    .footer {
+        padding: 3rem 0 1.5rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .legal-links {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    /* Newsletter móvil */
+    .newsletter-form {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    /* Botón scroll to top móvil */
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* ===========================
+   MÓVIL PEQUEÑO (max-width: 480px)
+   ========================== */
+@media screen and (max-width: 480px) {
+    /* Contenedor más pequeño */
+    .container {
+        padding: 0 10px;
+    }
+    
+    /* Navegación móvil pequeño */
+    .nav-container {
+        padding: 0 15px;
+    }
+    
+    .nav-logo {
+        font-size: 1.3rem;
+    }
+    
+    .nav-logo i {
+        font-size: 1.5rem;
+    }
+    
+    /* Hero section móvil pequeño */
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    /* Cubo aún más pequeño */
+    .cube-3d {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .face {
+        width: 100px;
+        height: 100px;
+        padding: 6px;
+        gap: 2px;
+    }
+    
+    .face.front,
+    .face.right,
+    .face.left {
+        transform: translateZ(50px);
+    }
+    
+    .face.back {
+        transform: translateZ(-50px) rotateY(180deg);
+    }
+    
+    .face.right {
+        transform: rotateY(90deg) translateZ(50px);
+    }
+    
+    .face.left {
+        transform: rotateY(-90deg) translateZ(50px);
+    }
+    
+    .face.top {
+        transform: rotateX(90deg) translateZ(50px);
+    }
+    
+    .face.bottom {
+        transform: rotateX(-90deg) translateZ(50px);
+    }
+    
+    /* Secciones móvil pequeño */
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    /* Cards más compactas */
+    .product-card,
+    .feature-card,
+    .contact-item,
+    .level-card {
+        padding: 1rem;
+    }
+    
+    .product-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .product-price {
+        font-size: 1.3rem;
+    }
+    
+    /* Botones móvil pequeño */
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* Footer móvil pequeño */
+    .footer-section h4 {
+        font-size: 1.1rem;
+    }
+    
+    .footer-logo {
+        font-size: 1.3rem;
+    }
+}
+
+/* ===========================
+   LANDSCAPE MÓVIL
+   ========================== */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .hero-section {
+        min-height: auto;
+        padding: 8rem 0 2rem;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .cube-3d {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .nav-menu {
+        height: calc(100vh - 70px);
+        padding-top: 1rem;
+    }
+    
+    .nav-menu li {
+        margin: 0.5rem 0;
+    }
+}
+
+/* ===========================
+   OPTIMIZACIONES TÁCTILES
+   ========================== */
+@media (hover: none) and (pointer: coarse) {
+    /* Elementos táctiles más grandes */
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-link {
+        padding: 1rem;
+    }
+    
+    .filter-btn {
+        min-height: 44px;
+        padding: 10px 20px;
+    }
+    
+    .social-link {
+        width: 48px;
+        height: 48px;
+    }
+    
+    /* Deshabilitamos algunos efectos hover en táctil */
+    .product-card:hover,
+    .feature-card:hover,
+    .level-card:hover {
+        transform: none;
+    }
+    
+    .product-overlay {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Cubo sin pausa en táctil */
+    .hero-cube:hover .cube-3d {
+        animation-play-state: running;
+    }
+}
+
+/* ===========================
+   ALTA DENSIDAD DE PÍXELES
+   ========================== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Mejoramos la nitidez de bordes */
+    .sticker {
+        border-width: 1px;
+    }
+    
+    .face {
+        gap: 2px;
+    }
+    
+    /* Iconos más nítidos */
+    .nav-logo i,
+    .feature-icon i,
+    .contact-icon i {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* ===========================
+   MODO OSCURO
+   ========================== */
+@media (prefers-color-scheme: dark) {
+    .navbar {
+        background: rgba(26, 26, 26, 0.95);
+    }
+    
+    .nav-link {
+        color: white;
+    }
+    
+    .hero-section {
+        background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(33, 33, 33, 0.9));
+    }
+    
+    .hero-title {
+        color: white;
+    }
+    
+    .about-section,
+    .learn-section {
+        background: #1a1a1a;
+        color: white;
+    }
+    
+    .section-title {
+        color: white;
+    }
+    
+    .product-card,
+    .feature-card,
+    .level-card,
+    .contact-item {
+        background: #2a2a2a;
+        color: white;
+    }
+    
+    .contact-form {
+        background: #2a2a2a;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        color: white;
+        border-bottom-color: #555;
+    }
+    
+    .form-group label {
+        color: #ccc;
+    }
+}
+
+/* ===========================
+   REDUCCIÓN DE MOVIMIENTO
+   ========================== */
+@media (prefers-reduced-motion: reduce) {
+    /* Deshabilitamos animaciones para usuarios que prefieren menos movimiento */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .cube-3d {
+        animation: none;
+        transform: rotateX(-15deg) rotateY(25deg);
+    }
+    
+    .floating-cube {
+        animation: none;
+        opacity: 0.05;
+    }
+    
+    .scroll-indicator {
+        animation: none;
+    }
+}
+
+/* ===========================
+   IMPRESIÓN
+   ========================== */
+@media print {
+    /* Estilos para impresión */
+    .navbar,
+    .scroll-to-top,
+    .hero-cube,
+    .floating-cube,
+    .animated-background {
+        display: none !important;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .section-title {
+        color: black !important;
+    }
+    
+    .btn {
+        border: 1px solid black;
+        background: white !important;
+        color: black !important;
+    }
+    
+    .footer {
+        background: white !important;
+        color: black !important;
+    }
+    
+    a {
+        text-decoration: underline;
+        color: black !important;
+    }
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CubeZone - Tu Tienda de Cubos Rubik</title>
+    <meta name="description" content="CubeZone - La mejor tienda online de cubos Rubik. Encuentra cubos 2x2, 3x3, 4x4, Megaminx y más. Aprende a resolver con nuestros tutoriales.">
+    
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación fija -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>CubeZone</span>
+            </div>
+            
+            <!-- Menú de navegación -->
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link active">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            
+            <!-- Botón hamburguesa para móvil -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Inicio -->
+    <section id="inicio" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Bienvenido a <span class="highlight">CubeZone</span>
+                </h1>
+                <p class="hero-subtitle">
+                    La tienda online líder en cubos Rubik y puzzles 3D. 
+                    Descubre nuestra amplia colección y aprende a dominar el arte de resolver cubos.
+                </p>
+                <div class="hero-buttons">
+                    <a href="productos.html" class="btn btn-primary">Ver Productos</a>
+                    <a href="aprende.html" class="btn btn-secondary">Aprender a Resolver</a>
+                </div>
+            </div>
+            
+            <!-- Cubo Rubik animado en 3D -->
+            <div class="hero-cube">
+                <div class="cube-3d">
+                    <div class="face front">
+                        <div class="sticker red"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker blue"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker green"></div>
+                        <div class="sticker orange"></div>
+                        <div class="sticker red"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker blue"></div>
+                    </div>
+                    <div class="face back">
+                        <div class="sticker orange"></div>
+                        <div class="sticker green"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker blue"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker red"></div>
+                        <div class="sticker orange"></div>
+                        <div class="sticker green"></div>
+                        <div class="sticker yellow"></div>
+                    </div>
+                    <div class="face right">
+                        <div class="sticker blue"></div>
+                        <div class="sticker red"></div>
+                        <div class="sticker green"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker orange"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker blue"></div>
+                        <div class="sticker red"></div>
+                        <div class="sticker green"></div>
+                    </div>
+                    <div class="face left">
+                        <div class="sticker green"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker orange"></div>
+                        <div class="sticker red"></div>
+                        <div class="sticker blue"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker green"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker orange"></div>
+                    </div>
+                    <div class="face top">
+                        <div class="sticker white"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker white"></div>
+                        <div class="sticker white"></div>
+                    </div>
+                    <div class="face bottom">
+                        <div class="sticker yellow"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker yellow"></div>
+                        <div class="sticker yellow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Flecha de scroll -->
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>CubeZone</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik y puzzles 3D. Calidad garantizada y envío rápido.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="productos.html">Cubos 2x2</a></li>
+                        <li><a href="productos.html">Cubos 3x3</a></li>
+                        <li><a href="productos.html">Cubos 4x4+</a></li>
+                        <li><a href="productos.html">Megaminx</a></li>
+                        <li><a href="productos.html">Pyraminx</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="aprende.html">Tutoriales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Suscríbete para recibir ofertas exclusivas y novedades</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2024 CubeZone. Todos los derechos reservados.</span>
+                    <div class="legal-links">
+                        <a href="#">Política de Privacidad</a>
+                        <a href="#">Términos de Servicio</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón scroll to top -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="scripts/main.js"></script>
+</body>
+</html>

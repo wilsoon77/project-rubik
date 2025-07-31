@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende a Resolver - CubeZone</title>
+    <meta name="description" content="Aprende a resolver cubos Rubik desde principiante hasta speedcuber profesional. Tutoriales, guías y recursos gratuitos.">
+    
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación fija -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>CubeZone</span>
+            </div>
+            
+            <!-- Menú de navegación -->
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link active">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            
+            <!-- Botón hamburguesa para móvil -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Aprende -->
+    <section id="aprende" class="learn-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Aprende a Resolver</h1>
+                <p class="section-subtitle">Desde principiante hasta speedcuber profesional</p>
+            </div>
+            
+            <div class="learn-content">
+                <!-- Niveles de aprendizaje -->
+                <div class="skill-levels">
+                    <div class="level-card beginner">
+                        <div class="level-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Principiante</h3>
+                        <p>Aprende los conceptos básicos y resuelve tu primer cubo</p>
+                        <ul>
+                            <li>Notación básica</li>
+                            <li>Método capa por capa</li>
+                            <li>Algoritmos fundamentales</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Comenzar</a>
+                    </div>
+                    
+                    <div class="level-card intermediate">
+                        <div class="level-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Intermedio</h3>
+                        <p>Mejora tu velocidad con métodos avanzados</p>
+                        <ul>
+                            <li>Método CFOP</li>
+                            <li>F2L avanzado</li>
+                            <li>OLL y PLL</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Continuar</a>
+                    </div>
+                    
+                    <div class="level-card advanced">
+                        <div class="level-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Avanzado</h3>
+                        <p>Técnicas de competición para speedcubing</p>
+                        <ul>
+                            <li>Métodos de inspección</li>
+                            <li>Cross + F2L</li>
+                            <li>Lookahead avanzado</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Dominar</a>
+                    </div>
+                </div>
+                
+                <!-- Recursos adicionales -->
+                <div class="learning-resources">
+                    <h3>Recursos de Aprendizaje</h3>
+                    <div class="resources-grid">
+                        <div class="resource-card">
+                            <i class="fas fa-video"></i>
+                            <h4>Tutoriales en Video</h4>
+                            <p>Guías paso a paso con explicaciones detalladas</p>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <i class="fas fa-book"></i>
+                            <h4>Guías PDF</h4>
+                            <p>Descarga nuestras guías completas en formato PDF</p>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <i class="fas fa-stopwatch"></i>
+                            <h4>Timer Online</h4>
+                            <p>Practica y mide tus tiempos con nuestro cronómetro</p>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <i class="fas fa-comments"></i>
+                            <h4>Comunidad</h4>
+                            <p>Únete a nuestro foro y comparte experiencias</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de algoritmos populares -->
+                <div class="algorithms-section">
+                    <h3>Algoritmos Populares</h3>
+                    <div class="algorithms-grid">
+                        <div class="algorithm-card">
+                            <h4>T-Perm</h4>
+                            <div class="algorithm-notation">R U R' F' R U R' U' R' F R2 U' R'</div>
+                            <p>Uno de los algoritmos PLL más comunes para intercambiar esquinas.</p>
+                        </div>
+                        
+                        <div class="algorithm-card">
+                            <h4>Sune</h4>
+                            <div class="algorithm-notation">R U R' U R U2 R'</div>
+                            <p>Algoritmo básico para orientar la última capa.</p>
+                        </div>
+                        
+                        <div class="algorithm-card">
+                            <h4>J-Perm</h4>
+                            <div class="algorithm-notation">R U R' F' R U R' U' R' F R2 U' R'</div>
+                            <p>Permutación en forma de J para la última capa.</p>
+                        </div>
+                        
+                        <div class="algorithm-card">
+                            <h4>Y-Perm</h4>
+                            <div class="algorithm-notation">F R U' R' U' R U R' F' R U R' U' R' F R F'</div>
+                            <p>Intercambio diagonal de esquinas en la última capa.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de consejos -->
+                <div class="tips-section">
+                    <h3>Consejos para Mejorar</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4>Practica Regularmente</h4>
+                            <p>Dedica al menos 15-30 minutos diarios a resolver cubos para mantener y mejorar tu velocidad.</p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h4>Desarrolla Lookahead</h4>
+                            <p>Aprende a ver las próximas piezas mientras ejecutas algoritmos para reducir pausas.</p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-hand-paper"></i>
+                            </div>
+                            <h4>Mejora tu Grip</h4>
+                            <p>Encuentra la forma más cómoda de sostener el cubo para ejecutar movimientos fluidos.</p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>Memoriza Algoritmos</h4>
+                            <p>Practica los algoritmos hasta que se vuelvan automáticos y no tengas que pensar en ellos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>CubeZone</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik y puzzles 3D. Calidad garantizada y envío rápido.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="productos.html">Cubos 2x2</a></li>
+                        <li><a href="productos.html">Cubos 3x3</a></li>
+                        <li><a href="productos.html">Cubos 4x4+</a></li>
+                        <li><a href="productos.html">Megaminx</a></li>
+                        <li><a href="productos.html">Pyraminx</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="aprende.html">Tutoriales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Suscríbete para recibir ofertas exclusivas y novedades</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2024 CubeZone. Todos los derechos reservados.</span>
+                    <div class="legal-links">
+                        <a href="#">Política de Privacidad</a>
+                        <a href="#">Términos de Servicio</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón scroll to top -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="scripts/main.js"></script>
+</body>
+</html>
