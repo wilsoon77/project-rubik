@@ -1,17 +1,31 @@
 {
-  "name": "vite-starter",
+  "name": "cubezone-vite",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "vite preview --port 4173"
   },
   "devDependencies": {
-    "vite": "^5.4.2"
+    "vite": "^5.4.19"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0"
-  }
+  },
+  "description": "CubeZone - Tienda profesional de cubos Rubik con Vite",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilsoon77/project-rubik.git"
+  },
+  "keywords": ["vite", "cubos-rubik", "tienda-online", "speedcubing"],
+  "author": "CubeZone Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wilsoon77/project-rubik/issues"
+  },
+  "homepage": "https://github.com/wilsoon77/project-rubik#readme"
 }
