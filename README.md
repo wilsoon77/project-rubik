@@ -53,8 +53,9 @@ AetherCubix es un sitio web estático profesional y visualmente atractivo diseñ
 
 ### Desarrollo Local
 1. **Clona o descarga el proyecto**
-2. **Abre `index.html` en tu navegador**
-3. **¡Listo!** - No requiere servidor web para funcionar
+2. **Instalar Dependencias** `npm install`
+2. **Iniciar el servidor local (Vite) `npm run dev`**
+3. **¡Listo!** - Abrir en el navegador (http://localhost:3000/)
 
 ### Servidor de Desarrollo (Recomendado)
 ```bash
