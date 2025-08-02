@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos - CubeZone</title>
-    <meta name="description" content="Descubre nuestra amplia gama de cubos Rubik y puzzles 3D. Speedcubes, Megaminx, Pyraminx y más con la mejor calidad.">
-    
+    <meta name="description"
+        content="Descubre nuestra amplia gama de cubos Rubik y puzzles 3D. Speedcubes, Megaminx, Pyraminx y más con la mejor calidad.">
+
     <!-- Preconnect para optimización -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/animations.css">
@@ -23,7 +27,17 @@
 
     <!-- Vercel Analytics -->
     <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF14S5ZVZF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-LF14S5ZVZF');
+    </script>
 </head>
+
 <body>
     <!-- Fondo animado -->
     <div class="animated-background">
@@ -39,7 +53,7 @@
                 <i class="fas fa-cube"></i>
                 <span>CubeZone</span>
             </div>
-            
+
             <!-- Menú de navegación -->
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Inicio</a></li>
@@ -48,7 +62,7 @@
                 <li><a href="aprende.html" class="nav-link">Aprende</a></li>
                 <li><a href="contacto.html" class="nav-link">Contacto</a></li>
             </ul>
-            
+
             <!-- Botón hamburguesa para móvil -->
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -65,7 +79,7 @@
                 <h1 class="section-title">Nuestros Productos</h1>
                 <p class="section-subtitle">Descubre nuestra amplia gama de cubos y puzzles</p>
             </div>
-            
+
             <!-- Filtros de productos -->
             <div class="product-filters">
                 <button class="filter-btn active" data-filter="all">Todos</button>
@@ -74,13 +88,14 @@
                 <button class="filter-btn" data-filter="pyraminx">Pyraminx</button>
                 <button class="filter-btn" data-filter="square1">Square-1</button>
             </div>
-            
+
             <!-- Grid de productos -->
             <div class="products-grid">
                 <!-- Producto 1: Cubo 2x2 -->
                 <div class="product-card" data-category="speedcube">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Rubik 2x2">
+                        <img src="https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Cubo Rubik 2x2">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -92,11 +107,12 @@
                         <button class="btn btn-primary">Añadir al Carrito</button>
                     </div>
                 </div>
-                
+
                 <!-- Producto 2: Cubo 3x3 Clásico -->
                 <div class="product-card" data-category="speedcube">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Rubik 3x3">
+                        <img src="https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Cubo Rubik 3x3">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -108,11 +124,12 @@
                         <button class="btn btn-primary">Añadir al Carrito</button>
                     </div>
                 </div>
-                
+
                 <!-- Producto 3: Cubo 4x4 -->
                 <div class="product-card" data-category="speedcube">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Rubik 4x4">
+                        <img src="https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Cubo Rubik 4x4">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -128,7 +145,8 @@
                 <!-- Producto 4: Megaminx -->
                 <div class="product-card" data-category="megaminx">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/8367439/pexels-photo-8367439.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Megaminx">
+                        <img src="https://images.pexels.com/photos/8367439/pexels-photo-8367439.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Megaminx">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -144,7 +162,8 @@
                 <!-- Producto 5: Pyraminx -->
                 <div class="product-card" data-category="pyraminx">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/1191578/pexels-photo-1191578.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Pyraminx">
+                        <img src="https://images.pexels.com/photos/1191578/pexels-photo-1191578.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Pyraminx">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -160,7 +179,8 @@
                 <!-- Producto 6: Square-1 -->
                 <div class="product-card" data-category="square1">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/1191456/pexels-photo-1191456.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Square-1">
+                        <img src="https://images.pexels.com/photos/1191456/pexels-photo-1191456.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Square-1">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -176,7 +196,8 @@
                 <!-- Productos adicionales -->
                 <div class="product-card" data-category="speedcube">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Rubik 5x5">
+                        <img src="https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Cubo Rubik 5x5">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -191,7 +212,8 @@
 
                 <div class="product-card" data-category="speedcube">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cubo Mirror">
+                        <img src="https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Cubo Mirror">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -206,7 +228,8 @@
 
                 <div class="product-card" data-category="pyraminx">
                     <div class="product-image">
-                        <img src="https://images.pexels.com/photos/1191578/pexels-photo-1191578.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Skewb">
+                        <img src="https://images.pexels.com/photos/1191578/pexels-photo-1191578.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="Skewb">
                         <div class="product-overlay">
                             <button class="btn-view">Ver Detalles</button>
                         </div>
@@ -259,7 +282,7 @@
                         <span>CubeZone</span>
                     </div>
                     <p>Tu tienda de confianza para cubos Rubik y puzzles 3D. Calidad garantizada y envío rápido.</p>
-                    
+
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -267,7 +290,7 @@
                         <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Productos</h4>
                     <ul>
@@ -279,7 +302,7 @@
                         <li><a href="productos.html">Accesorios</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Soporte</h4>
                     <ul>
@@ -291,7 +314,7 @@
                         <li><a href="aprende.html">Tutoriales</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Newsletter</h4>
                     <p>Suscríbete para recibir ofertas exclusivas y novedades</p>
@@ -301,7 +324,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-legal">
                     <span>&copy; 2024 CubeZone. Todos los derechos reservados.</span>
@@ -323,4 +346,5 @@
     <!-- JavaScript -->
     <script src="scripts/main.js"></script>
 </body>
+
 </html>
