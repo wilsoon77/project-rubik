@@ -125,7 +125,14 @@
                 </div>
 
                 <!-- Formulario de contacto -->
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" name="contacto" method="POST" data-netlify="true"
+                    data-netlify-honeypot="bot-field" netlify-recaptcha>
+                    <!-- Honeypot anti-spam -->
+                    <input type="hidden" name="form-name" value="contacto">
+                    <p style="display:none">
+                        <label>¡No rellenes esto! <input name="bot-field"></label>
+                    </p>
+
                     <div class="form-group">
                         <input type="text" id="name" name="name" required>
                         <label for="name">Nombre completo</label>
@@ -160,6 +167,9 @@
                         <label for="message">Mensaje</label>
                         <span class="form-line"></span>
                     </div>
+
+                    <!-- Captcha -->
+                    <div data-netlify-recaptcha="true"></div>
 
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-paper-plane"></i>
