@@ -643,7 +643,7 @@ function initEventListeners() {
  * Inicialización principal cuando el DOM está listo
  */
 function init() {
-    console.log('🎲 CubeZone Website Initialized');
+    console.log('🎲 Aethercubix Website Initialized');
     
     // Inicializa componentes
     initEventListeners();

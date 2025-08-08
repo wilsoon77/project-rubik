@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'path'
 
 export default defineConfig({
   root: '.',
@@ -8,11 +9,21 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       input: {
-        main: './index.html',
-        about: './sobre-nosotros.html',
-        products: './productos.html',
-        learn: './aprende.html',
-        contact: './contacto.html'
+        main: resolve(__dirname, 'index.html'),
+        about: resolve(__dirname, 'sobre-nosotros.html'),
+        products: resolve(__dirname, 'productos.html'),
+        learn: resolve(__dirname, 'aprende.html'),
+        contact: resolve(__dirname, 'contacto.html')
+      },
+      output: {
+        entryFileNames: 'scripts/[name].js',
+        chunkFileNames: 'scripts/[name].js',
+        assetFileNames: ({name}) => {
+          if (/\.(css)$/.test(name ?? '')) {
+            return 'styles/[name][extname]';
+          }
+          return 'assets/[name][extname]';
+        }
       }
     }
   },
