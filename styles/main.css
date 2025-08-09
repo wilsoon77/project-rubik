@@ -357,8 +357,12 @@
 
     .about-section {
         padding: 6rem 0;
-        background:  #333333 !important;
-        
+        background: #333333 !important;
+
+    }
+
+    .section-header {
+        color: var(--light-bg) !important;
     }
 
     .about-content {
@@ -378,7 +382,7 @@
     .about-text p {
         margin-bottom: 1.5rem;
         line-height: 1.8;
-        color: var(--text-light);
+        color: var(--light-bg);
     }
 
     .stats {
@@ -409,7 +413,7 @@
     }
 
     .stat-label {
-        color: var(--text-light);
+        color: var(--light-bg);
         font-weight: 500;
     }
 
@@ -455,7 +459,7 @@
         font-size: 1.2rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color:white;
+        color: white;
     }
 
     .feature-card p {
@@ -586,9 +590,9 @@
         color: white;
     }
 
-.Porque {
-  color: white !important;
-}
+    .Porque {
+        color: white !important;
+    }
 
 
 
@@ -764,194 +768,271 @@
         line-height: 1.6;
     }
 
+    /* Glosario de notación Rubik */
+    .glossary-section {
+        margin: 4rem 0 2rem 0;
+        text-align: center;
+    }
+
+    .glossary-section h3 {
+        font-family: 'Orbitron', monospace;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: var(--cube-red);
+    }
+
+    .glossary-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem 1.5rem;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 4px 20px var(--shadow);
+        display: flex;
+        justify-content: center;
+    }
+
+    .glossary-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+
+    .glossary-list li {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        margin-bottom: 0.7rem;
+        padding-left: 0.5rem;
+    }
+
+    .glossary-list strong {
+        color: var(--cube-red);
+        font-weight: 700;
+        margin-right: 0.5rem;
+    }
+
+    .video-grid {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+    }
+
+    .video-container {
+        flex: 1 1 320px;
+        max-width: 360px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .video-title {
+        margin-top: 0.7rem;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--cube-red, #e53935);
+        text-align: center;
+    }
+
+    @media (max-width: 1100px) {
+        .video-grid {
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+    }
+
     /* ===========================
     SECCIÓN CONTACTO
     ========================== */
-   
-
-.fixed-label {
-    display: block !important;
-    margin-bottom: 5px !important;
-    font-size: 0.9rem !important;
-    color: var(--text-light) !important;
-    position: static !important;
-}
 
 
-.contact-section {
-    padding: 6rem 0;
-    background: #333333;
-}
-
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px var(--shadow);
-    transition: all 0.3s ease;
-}
-
-.contact-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 30px var(--shadow-hover);
-}
-
-.contact-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1.5rem;
-    flex-shrink: 0;
-}
-
-.contact-icon i {
-    font-size: 1.5rem;
-    color: white;
-}
-
-.contact-details h4 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: white;
-}
-
-.contact-details p {
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-/* Formulario de contacto */
-.contact-form {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px var(--shadow);
-}
-
-.form-group {
-    position: relative;
-    margin-bottom: 2rem;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 15px 0 10px;
-    border: none;
-    border-bottom: 2px solid #e0e0e0;
-    background: transparent;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    outline: none;
-}
-
-/* Select separado */
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    background-color: transparent;
-    border-radius: 4px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    color: black;
-}
-
-/* Etiquetas flotantes */
-.form-group input:focus,
-.form-group textarea:focus {
-    border-bottom-color: var(--cube-red);
-}
-
-.form-group label {
-    position: absolute;
-    top: 15px;
-    left: 0;
-    color: var(--text-light);
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-/* Label flotante para inputs y textarea */
-.form-group input:focus + label,
-.form-group input:not(:placeholder-shown) + label,
-.form-group textarea:focus + label,
-.form-group textarea:not(:placeholder-shown) + label {
-    top: -5px;
-    font-size: 0.8rem;
-    color: var(--cube-red);
-}
+    .fixed-label {
+        display: block !important;
+        margin-bottom: 5px !important;
+        font-size: 0.9rem !important;
+        color: var(--text-light) !important;
+        position: static !important;
+    }
 
 
-/* Línea decorativa debajo de input/textarea */
-.form-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--gradient-primary);
-    transition: width 0.3s ease;
-}
+    .contact-section {
+        padding: 6rem 0;
+        background: #333333;
+    }
 
-.form-group input:focus ~ .form-line,
-.form-group textarea:focus ~ .form-line {
-    width: 100%;
-}
+    .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
 
-/* Label fijo solo para SELECT */
-.fixed-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    color: var(--text-light);
-}
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px var(--shadow);
+        transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 30px var(--shadow-hover);
+    }
+
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        background: var(--gradient-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .contact-icon i {
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .contact-details h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: white;
+    }
+
+    .contact-details p {
+        color: var(--text-light);
+        line-height: 1.6;
+    }
+
+    /* Formulario de contacto */
+    .contact-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+    }
+
+    .form-group {
+        position: relative;
+        margin-bottom: 2rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 15px 0 10px;
+        border: none;
+        border-bottom: 2px solid #e0e0e0;
+        background: transparent;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+
+    /* Select separado */
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        background-color: transparent;
+        border-radius: 4px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        color: black;
+    }
+
+    /* Etiquetas flotantes */
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-bottom-color: var(--cube-red);
+    }
+
+    .form-group label {
+        position: absolute;
+        top: 15px;
+        left: 0;
+        color: var(--text-light);
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    /* Label flotante para inputs y textarea */
+    .form-group input:focus+label,
+    .form-group input:not(:placeholder-shown)+label,
+    .form-group textarea:focus+label,
+    .form-group textarea:not(:placeholder-shown)+label {
+        top: -5px;
+        font-size: 0.8rem;
+        color: var(--cube-red);
+    }
+
+
+    /* Línea decorativa debajo de input/textarea */
+    .form-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width 0.3s ease;
+    }
+
+    .form-group input:focus~.form-line,
+    .form-group textarea:focus~.form-line {
+        width: 100%;
+    }
+
+    /* Label fijo solo para SELECT */
+    .fixed-label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
 
 
 
-/* Hace el texto del label "Asunto" blanco */
-.fixed-label {
-    color: white !important;
-}
+    /* Hace el texto del label "Asunto" blanco */
+    .fixed-label {
+        color: white !important;
+    }
 
-/* Hace el texto del select blanco */
-.form-group select {
-    color: white !important;
-}
+    /* Hace el texto del select blanco */
+    .form-group select {
+        color: white !important;
+    }
 
-/* Asegura que el fondo del select sea transparente o combine bien */
-.form-group select {
-    background-color: transparent !important;
-    border: 1px solid white !important;
-}
+    /* Asegura que el fondo del select sea transparente o combine bien */
+    .form-group select {
+        background-color: transparent !important;
+        border: 1px solid white !important;
+    }
 
-/* Opcional: estilo de opciones desplegables */
-.form-group select option {
-    background-color: #333 !important;
-    color: white !important;
-}
+    /* Opcional: estilo de opciones desplegables */
+    .form-group select option {
+        background-color: #333 !important;
+        color: white !important;
+    }
 
 
 
