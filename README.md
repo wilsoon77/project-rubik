@@ -2,77 +2,73 @@
 
 ## 📄 Descripción
 
-AetherCubix es un sitio web estático profesional y visualmente atractivo diseñado para una tienda ficticia especializada en la venta de cubos Rubik y puzzles 3D. El proyecto está desarrollado con tecnologías web modernas y presenta una interfaz de usuario elegante, animaciones fluidas y una experiencia de usuario excepcional.
+AetherCubix es un sitio web estático profesional y visualmente atractivo diseñado para una tienda especializada en la venta de cubos Rubik. El proyecto utiliza tecnologías web modernas y presenta una interfaz elegante, animaciones fluidas y una experiencia de usuario excepcional.
 
 ## ✨ Características Principales
 
 ### 🎨 Diseño Visual
-- **Esquema de colores del cubo Rubik**: Utiliza los colores icónicos (rojo, azul, verde, amarillo, naranja, blanco)
-- **Animación 3D del cubo**: Cubo Rubik completamente animado en CSS3 sin librerías externas
+- **Colores icónicos del cubo Rubik**: Rojo, azul, verde, amarillo, naranja y blanco
+- **Animación 3D del cubo**: Cubo Rubik animado en CSS3
 - **Diseño responsivo**: Adaptado para móvil, tablet y desktop
-- **Efectos visuales modernos**: Glassmorphism, gradientes, sombras suaves y micro-interacciones
-- **Tipografía profesional**: Combinación de Orbitron (futurista) e Inter (legible)
+- **Efectos visuales modernos**: Animaciones, gradientes, sombras suaves e interacciones
+- **Tipografía profesional**: Orbitron (futurista) e Inter (legible)
 
 ### 🏗️ Estructura del Sitio
 1. **Inicio** - Landing page con hero section y cubo animado
-2. **Sobre Nosotros** - Historia de la empresa, estadísticas y características
-3. **Productos** - Catálogo filtrable de diferentes tipos de cubos
-4. **Aprende** - Recursos educativos y niveles de aprendizaje
-5. **Contacto** - Formulario funcional con validación
+2. **Sobre Nosotros** - Historia, estadísticas y equipo
+3. **Productos** - Catálogo filtrable de cubos y accesorios
+4. **Aprende** - Recursos educativos, tutoriales y niveles de aprendizaje
+5. **Contacto** - Formulario funcional con validación y animación
 
 ### 🔧 Funcionalidades Técnicas
 - **Navegación fija**: Menú sticky con efectos de scroll
 - **Filtros de productos**: Sistema de filtrado dinámico con JavaScript
-- **Formulario de contacto**: Validación completa y feedback visual
-- **Animaciones CSS**: Efectos de entrada, hover states y transiciones suaves
-- **Optimización de rendimiento**: Lazy loading, debouncing y throttling
-- **Easter egg**: Código Konami para sorpresa oculta
+- **Formulario de contacto**: Validación completa, feedback visual y animación de envío
+- **Animaciones CSS**: Efectos de entrada, hover y transiciones suaves
+- **Easter egg**: Código Konami para activar un cubo virtual oculto
 
 ## 🛠️ Tecnologías Utilizadas
 
 ### Frontend
 - **HTML5**: Estructura semántica moderna
-- **CSS3**: Estilos avanzados con Grid, Flexbox y animaciones
-- **JavaScript ES6+**: Funcionalidad interactiva sin frameworks
+- **CSS3**: Grid, Flexbox, animaciones y media queries
+- **JavaScript ES6+**: Funcionalidad interactiva
 - **Font Awesome**: Iconografía profesional
-- **Google Fonts**: Tipografías web optimizadas
+- **Google Fonts**: Tipografías Orbitron e Inter
 
 ### Estructura de Archivos
 ```
-├── index.html              # Página principal
+├── index.html
+├── aprende.html
+├── productos.html
+├── sobre-nosotros.html
+├── contacto.html
 ├── styles/
-│   ├── main.css           # Estilos principales
-│   ├── animations.css     # Animaciones CSS
-│   └── responsive.css     # Media queries responsivas
+│   ├── main.css
+│   ├── animations.css
+│   └── responsive.css
 ├── scripts/
-│   └── main.js           # JavaScript principal
-└── README.md             # Documentación
+│   └── main.js
+├── public/
+├── README.md
+├── package.json
+├── vite.config.ts
+└── vercel.json
 ```
 
 ## 🚀 Instalación y Uso
 
-### Desarrollo Local
+### Desarrollo en servidor Local (VITE)
 1. **Clona o descarga el proyecto**
-2. **Instalar Dependencias** `npm install`
-2. **Iniciar el servidor local (Vite) `npm run dev`**
-3. **¡Listo!** - Abrir en el navegador (http://localhost:3000/)
+2. **Instala dependencias**: `npm install`
+3. **Inicia el servidor local (Vite)**: `npm run dev`
+4. **Abre** en el navegador: [http://localhost:3000/](http://localhost:3000/)
 
-### Servidor de Desarrollo (Recomendado)
-```bash
-# Con Python
-python -m http.server 8000
-
-# Con Node.js (http-server)
-npx http-server
-
-# Con Live Server (VS Code Extension)
-# Clic derecho en index.html > "Open with Live Server"
-```
 
 ### Despliegue
 El sitio es completamente estático y puede desplegarse en:
 - **GitHub Pages**
-- **Netlify** 
+- **Netlify**
 - **Vercel**
 - **Surge.sh**
 - Cualquier servidor web estático
@@ -80,10 +76,10 @@ El sitio es completamente estático y puede desplegarse en:
 ## 📱 Responsive Design
 
 ### Breakpoints
-- **Desktop**: > 1024px - Layout completo
-- **Tablet**: 768px - 1024px - Adaptación a tablet
-- **Móvil**: < 768px - Menú hamburguesa y layout simplificado
-- **Móvil pequeño**: < 480px - Optimización máxima
+- **Desktop**: > 1024px
+- **Tablet**: 768px - 1024px
+- **Móvil**: < 768px
+- **Móvil pequeño**: < 480px
 
 ### Características Móviles
 - Menú hamburguesa animado
@@ -95,22 +91,21 @@ El sitio es completamente estático y puede desplegarse en:
 ## 🎛️ Funcionalidades JavaScript
 
 ### Navegación
-- **Scroll suave**: Animaciones fluidas entre secciones
-- **Indicador activo**: Resalta la sección actual en el menú
-- **Navbar dinámico**: Cambia apariencia al hacer scroll
-- **Menú móvil**: Toggle hamburguesa con animaciones
+- **Scroll suave** entre secciones
+- **Indicador activo** en el menú
+- **Navbar dinámico** al hacer scroll
+- **Menú móvil** con animación hamburguesa
 
 ### Interactividad
-- **Filtros de productos**: Sistema de filtrado dinámico
-- **Validación de formularios**: Feedback en tiempo real
-- **Efectos visuales**: Ripple effects, hover states
-- **Cubo interactivo**: Pausa animación en interacción
+- **Filtros de productos** dinámicos
+- **Validación de formularios** con feedback visual
+- **Efectos visuales**: Ripple, hover, animaciones de tarjetas
+- **Cubo interactivo**: Pausa animación en hover/touch
 
 ### Optimización
-- **Debouncing**: Optimiza eventos de scroll
-- **Throttling**: Limita frecuencia de actualizaciones
-- **Lazy loading**: Carga diferida de imágenes
-- **Precarga**: Recursos críticos precargados
+- **Debouncing** y **throttling** en eventos de scroll
+- **Lazy loading** de imágenes
+- **Precarga** de recursos críticos
 
 ## 🎨 Personalización
 
@@ -127,52 +122,35 @@ El sitio es completamente estático y puede desplegarse en:
 ```
 
 ### Animaciones
-- **Duración**: Variables CSS para control global
-- **Easing**: Curvas de animación personalizables
-- **Reduced Motion**: Respeta preferencias de accesibilidad
+- Variables CSS para duración y easing
+- Respeta preferencias de accesibilidad
 
 ### Contenido
-- **Productos**: Fácil adición/edición en el HTML
-- **Imágenes**: URLs de Pexels (reemplazables)
-- **Textos**: Contenido localizado en español
+- Productos y textos fácilmente editables en HTML
 
-## 🔍 Características Avanzadas
+## Características Avanzadas
 
 ### Cubo Rubik 3D
-- **CSS puro**: Sin bibliotecas 3D externas
-- **6 caras animadas**: Cada cara con 9 stickers
-- **Rotación continua**: Animación keyframe compleja
-- **Interactividad**: Pausa en hover/touch
+- **6 caras animadas** con 9 stickers cada una
+- **Rotación continua** y pausada en interacción
 - **Escalabilidad**: Adaptable a diferentes tamaños
 
 ### Sistema de Filtros
 - **Categorías dinámicas**: Speedcube, Megaminx, Pyraminx, etc.
-- **Animaciones suaves**: Fade in/out al filtrar
-- **Estado persistente**: Mantiene selección visual
-- **Responsive**: Funciona en todos los dispositivos
+- **Animaciones suaves** al filtrar
+- **Estado visual persistente**
+- **Totalmente responsive**
 
 ### Formulario Inteligente
-- **Validación HTML5**: Atributos nativos
-- **Validación JavaScript**: Reglas personalizadas
+- **Validación HTML5** y JavaScript personalizada
 - **Feedback visual**: Mensajes de error/éxito
-- **Estados de carga**: Indicadores de progreso
-- **Sanitización**: Limpieza de datos de entrada
+- **Animación de envío** en el botón
+- **Sanitización** de datos de entrada
 
-## 🎁 Easter Eggs
-
-### Código Konami
-Secuencia: ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA
-
-Activa una sorpresa oculta con un cubo virtual en modal.
-
-### Efectos Secretos
-- **Hover en logo**: Animación de rotación
-- **Scroll indicators**: Bounce animation
-- **Ripple effects**: Click feedback en botones
 
 ## 🔧 Configuración Avanzada
 
-### Variables de Configuración (main.js)
+### Variables de Configuración (`scripts/main.js`)
 ```javascript
 const CONFIG = {
     scrollOffset: 100,        // Offset para navegación
@@ -194,8 +172,8 @@ const CONFIG = {
 - **CSS crítico**: Carga inline de estilos importantes
 - **Preload fonts**: Precarga de tipografías Google
 - **Debounced scroll**: Optimización de eventos scroll
-- **Compressed images**: Imágenes optimizadas de Pexels
-- **Minimal JavaScript**: Sin dependencias externas
+- **Imágenes comprimidas**
+- **JavaScript mínimo**: Sin dependencias externas
 
 ### Métricas Objetivo
 - **First Contentful Paint**: < 1.5s
@@ -213,47 +191,33 @@ const CONFIG = {
 - **Móviles**: iOS 14+, Android 10+
 
 ### Características Modernas
-- **CSS Grid**: Layout avanzado
-- **CSS Custom Properties**: Variables CSS
-- **ES6+**: JavaScript moderno
-- **IntersectionObserver**: Optimización de scroll
-- **CSS Animations**: Transiciones fluidas
+- **CSS Grid** y **Flexbox**
+- **CSS Custom Properties**
+- **ES6+**
+- **IntersectionObserver**
+- **CSS Animations**
 
 ## 👥 Créditos y Recursos
 
-### Imágenes
-- **Pexels**: Fotografías de cubos Rubik de alta calidad
+### Imágenes y Fuentes
+- **Pexels**: Fotografías de cubos Rubik
 - **Font Awesome**: Iconografía profesional
-- **Google Fonts**: Tipografías Orbitron e Inter
+- **Google Fonts**: Orbitron e Inter
 
-### Inspiración
-- **Apple**: Principios de diseño minimalista
-- **Material Design**: Guidelines de interacción
-- **Speedcubing Community**: Cultura de los cubos Rubik
 
 ## 📝 Licencia
 
-Este proyecto es de código abierto y está disponible bajo la Licencia MIT. Siéntete libre de usar, modificar y distribuir el código para tus propios proyectos.
-
-## 🤝 Contribuciones
-
-¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar CubeZone:
-
-1. **Fork** el proyecto
-2. **Crea** una rama para tu feature
-3. **Commit** tus cambios
-4. **Push** a la rama
-5. **Abre** un Pull Request
+Este proyecto es de código abierto bajo la Licencia MIT. 
 
 ## 📞 Soporte
 
 Para preguntas, sugerencias o reportar bugs:
 - **GitHub Issues**: Usa el sistema de issues del repositorio
-- **Email**: contacto@cubezone.es (ficticio)
+- **Email**: info@ethercubix.me
 - **Documentación**: Revisa este README
 
 ---
 
-**Desarrollado con ❤️ para la comunidad de speedcubing**
+**Desarrollado para la comunidad de speedcubing**
 
-*CubeZone - Donde los cubos cobran vida* 🎲✨
+*- AetherCubix - *

@@ -296,7 +296,7 @@ function handleFormSubmit(event) {
         });
     } else {
         // Envía el formulario si por alguna razón no hay animación
-       contactForm.submit();
+        contactForm.submit();
     }
 }
 
@@ -452,7 +452,7 @@ function enhanceCardHovers() {
 }
 
 // ===========================
-// EASTER EGG - CUBO VIRTUAL
+// EASTER EGG - sorpresa
 // ===========================
 
 /**
@@ -508,9 +508,9 @@ function activateEasterEgg() {
                 animation: modalAppear 0.3s ease;
             ">
                 <h2 style="color: var(--cube-red); margin-bottom: 1rem;">🎉 ¡Easter Egg Activado!</h2>
-                <p style="margin-bottom: 2rem;">¡Felicidades! Has encontrado nuestro cubo virtual secreto.</p>
-                <div class="cube-3d" style="width: 150px; height: 150px; margin: 0 auto 2rem;"></div>
-                <button onclick="this.closest('div').remove()" style="
+                <p style="margin-bottom: 1.5rem;">¡Felicidades! Has encontrado nuestro cubo virtual secreto.</p>
+                <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHIyMXp2dmlxOTRhNm15MjB5MDRsbGo0bnJ6dWkzMTFjbzRzMGpjaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UqPhCdioYHmdq/giphy.gif" alt="Cubo Rubik animation" style="width:120px; margin-bottom:1.5rem; border-radius:12px;">
+                <button onclick="this.closest('div[style]').remove()" style="
                     background: var(--gradient-primary);
                     color: white;
                     border: none;
@@ -524,12 +524,28 @@ function activateEasterEgg() {
 
     document.body.appendChild(modal);
 
+    // Dispara confeti
+    if (window.confetti) {
+        confetti({
+            particleCount: 120,
+            spread: 90,
+            origin: { y: 0.6 }
+        });
+        setTimeout(() => {
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.7 }
+            });
+        }, 500);
+    }
+
     // Auto-remove después de 10 segundos
     setTimeout(() => {
         if (modal.parentNode) {
             modal.remove();
         }
-    }, 10000);
+    }, 6000);
 }
 
 // ===========================
