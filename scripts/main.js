@@ -503,9 +503,11 @@ function activateEasterEgg() {
                 background: white;
                 padding: 2rem;
                 border-radius: 16px;
-                text-align: center;
                 max-width: 400px;
                 animation: modalAppear 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             ">
                 <h2 style="color: var(--cube-red); margin-bottom: 1rem;">🎉 ¡Easter Egg Activado!</h2>
                 <p style="margin-bottom: 1.5rem;">¡Felicidades! Has encontrado nuestro cubo virtual secreto.</p>
@@ -517,6 +519,7 @@ function activateEasterEgg() {
                     padding: 10px 20px;
                     border-radius: 6px;
                     cursor: pointer;
+                    margin-top: 1rem;
                 ">¡Genial!</button>
             </div>
         </div>
@@ -537,7 +540,7 @@ function activateEasterEgg() {
                 spread: 70,
                 origin: { y: 0.7 }
             });
-        }, 500);
+        }, 1000);
     }
 
     // Auto-remove después de 10 segundos
@@ -545,7 +548,7 @@ function activateEasterEgg() {
         if (modal.parentNode) {
             modal.remove();
         }
-    }, 6000);
+    }, 10000);
 }
 
 // ===========================
