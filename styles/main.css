@@ -868,13 +868,15 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 4rem;
-        align-items: start;
+        align-items: stretch;
     }
 
     .contact-info {
+        height: 100%;
         display: flex;
         flex-direction: column;
         gap: 2rem;
+        justify-content: center;
     }
 
     .contact-item {
@@ -923,41 +925,53 @@
 
     /* Formulario de contacto */
     .contact-form {
-        background: white;
+        height: 100%;
+        background: var(--text-dark);
         padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 0 4px 20px var(--shadow);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(220, 20, 60, 0.10), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+        border: 1.5px solid rgba(220, 20, 60, 0.10);
     }
 
     .form-group {
         position: relative;
-        margin-bottom: 2rem;
+        margin-bottom: 1.7rem;
     }
 
     .form-group input,
-    .form-group textarea {
+    .form-group textarea,
+    .form-group select {
         width: 100%;
-        padding: 15px 0 10px;
-        border: none;
-        border-bottom: 2px solid #e0e0e0;
-        background: transparent;
+        padding: 14px 16px;
+        border: 1.5px solid #444;
+        background: #18181b;
+        color: #fff;
         font-size: 1rem;
-        transition: all 0.3s ease;
+        border-radius: 10px;
+        margin-top: 6px;
+        transition: border-color 0.3s, box-shadow 0.3s;
         outline: none;
+        box-shadow: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        border-color: var(--cube-red);
+        box-shadow: 0 0 0 2px rgba(220, 20, 60, 0.15);
     }
 
     /* Select separado */
     .form-group select {
-        width: 100%;
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        background-color: transparent;
-        border-radius: 4px;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        color: black;
+        color: #ffffff !important;
+        background: #18181b !important;
+        border: 1.5px solid #444 !important;
+        border-radius: 10px;
+    }
+
+    .form-group select option {
+        background: #232326 !important;
+        color: #c01212 !important;
     }
 
     /* Etiquetas flotantes */
@@ -966,13 +980,21 @@
         border-bottom-color: var(--cube-red);
     }
 
-    .form-group label {
-        position: absolute;
-        top: 15px;
-        left: 0;
-        color: var(--text-light);
-        pointer-events: none;
-        transition: all 0.3s ease;
+    .form-group label,
+    .fixed-label {
+        color: var(--cube-red) !important;
+        font-weight: 600;
+        font-size: 1rem !important;
+        margin-bottom: 4px !important;
+        letter-spacing: 0.5px;
+        position: static !important;
+        background: none !important;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: #bbb;
+        opacity: 1;
     }
 
     /* Label flotante para inputs y textarea */
@@ -1012,29 +1034,139 @@
 
 
 
-    /* Hace el texto del label "Asunto" blanco */
-    .fixed-label {
-        color: white !important;
+   
+    .button {
+        --text: #fff;
+        --plane: var(--cube-white, #e53935);
+        --background: transparent;
+        min-width: 200px;
+        width: auto;
+        padding: 0 32px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border: 0;
+        background: var(--gradient-primary);
+        border-radius: 30px;
+        box-shadow: 0 4px 15px rgba(220, 20, 60, 0.15);
+        color: var(--text);
+        cursor: pointer;
+        outline: none;
+        font-family: 'Orbitron', 'Inter', sans-serif;
+        transition: background 0.3s;
     }
 
-    /* Hace el texto del select blanco */
-    .form-group select {
-        color: white !important;
+    .button .btn-layer {
+        display: block;
+        position: absolute;
+        top: -20px;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        z-index: 2;
+        pointer-events: none;
+        fill: transparent;
     }
 
-    /* Asegura que el fondo del select sea transparente o combine bien */
-    .form-group select {
-        background-color: transparent !important;
-        border: 1px solid white !important;
+    .button .plane {
+        z-index: 3;
+        position: absolute;
+        left: 32px;
+        display: block;
+        width: 26px;
+        height: 28px;
+        fill: var(--plane);
+        transform: translate3d(0, 0, 0);
+        perspective: 500px;
     }
 
-    /* Opcional: estilo de opciones desplegables */
-    .form-group select option {
-        background-color: #333 !important;
-        color: white !important;
+    .button>ul {
+        width: 100%;
+        text-align: center;
+        list-style: none;
+        padding: 0 5px 0 0;
+        position: relative;
+        overflow: hidden;
     }
 
+    .button>ul>li {
+        display: inline-block;
+        position: relative;
+        z-index: 2;
+        padding-left: 48px;
+        font: 600 1.1rem 'Orbitron', 'Inter', sans-serif;
+        transition: transform .3s ease 0s, opacity .3s ease 0s;
+    }
 
+    .button>ul>li:first-child {
+        opacity: 1;
+    }
+
+    .button>ul>li:last-child {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        opacity: 0;
+    }
+
+    .button.active .plane {
+        animation: 1.5s orbit alternate linear;
+    }
+
+    .button.active>ul>li {
+        transform: translateY(-100%);
+        transition: transform .3s ease 1.2s, opacity .3s ease 1.2s;
+    }
+
+    .button.active>ul>li:first-child {
+        opacity: 0;
+    }
+
+    .button.active>ul>li:last-child {
+        opacity: 1;
+    }
+
+    @keyframes orbit {
+        0% {
+            transform: rotate3d(1, 0, 0, 0deg) translateZ(60px) scale3d(1, 1, 1);
+            animation-timing-function: ease-in;
+        }
+
+        10% {
+            z-index: 3;
+            transform: rotate3d(1, .6, 0, -10deg) translateZ(60px) scale3d(1, 1, 1);
+            animation-timing-function: ease-out;
+        }
+
+        20% {
+            z-index: 3;
+            transform: rotate3d(1, .6, 0, 30deg) translateZ(60px) scale3d(1, 1, 1);
+            animation-timing-function: ease-out;
+        }
+
+        30% {
+            z-index: 3;
+            transform: rotate3d(1, .6, 0, 35deg) translateZ(60px) scale3d(1, 1, 1);
+        }
+
+        40% {
+            z-index: 1;
+            transform: rotate3d(1, .6, 0, 120deg) translateZ(60px) scale3d(.7, .7, 1);
+        }
+
+        70% {
+            z-index: 1;
+            transform: rotate3d(1, .6, 0, 240deg) translateZ(60px) scale3d(.7, .7, 1);
+            animation-timing-function: ease-out;
+        }
+
+        100% {
+            z-index: 3;
+            transform: rotate3d(1, 0, 0, 360deg) translateZ(60px) scale3d(1, 1, 1);
+        }
+    }
 
     /* ===========================
     PIE DE PÁGINA

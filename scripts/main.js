@@ -53,7 +53,7 @@ function debounce(func, wait) {
  */
 function throttle(func, limit) {
     let inThrottle;
-    return function() {
+    return function () {
         const args = arguments;
         const context = this;
         if (!inThrottle) {
@@ -104,14 +104,14 @@ function isElementInViewport(element) {
  */
 function handleNavbarScroll() {
     const scrollY = window.scrollY;
-    
+
     // Añade clase 'scrolled' cuando se hace scroll
     if (scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-    
+
     // Muestra/oculta botón de scroll to top
     if (scrollY > 500) {
         scrollToTopBtn.classList.add('visible');
@@ -144,16 +144,16 @@ function closeMobileMenu() {
 function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id]');
     const scrollPos = window.scrollY + CONFIG.scrollOffset + 50;
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute('id');
-        
+
         if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
             // Remueve clase active de todos los links
             navLinks.forEach(link => link.classList.remove('active'));
-            
+
             // Añade clase active al link correspondiente
             const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
             if (activeLink) {
@@ -174,7 +174,7 @@ function updateActiveNavLink() {
 function filterProducts(category) {
     productCards.forEach(card => {
         const cardCategory = card.getAttribute('data-category');
-        
+
         if (category === 'all' || cardCategory === category) {
             card.style.display = 'block';
             card.style.animation = 'fadeInUp 0.5s ease forwards';
@@ -182,7 +182,7 @@ function filterProducts(category) {
             card.style.display = 'none';
         }
     });
-    
+
     // Actualiza botón activo
     filterButtons.forEach(btn => btn.classList.remove('active'));
     document.querySelector(`[data-filter="${category}"]`).classList.add('active');
@@ -200,14 +200,14 @@ function filterProducts(category) {
 function validateContactForm(formData) {
     const errors = {};
     let isValid = true;
-    
+
     // Validación del nombre
     const name = formData.get('name').trim();
     if (!name || name.length < 2) {
         errors.name = 'El nombre debe tener al menos 2 caracteres';
         isValid = false;
     }
-    
+
     // Validación del email
     const email = formData.get('email').trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -215,21 +215,21 @@ function validateContactForm(formData) {
         errors.email = 'Por favor ingresa un email válido';
         isValid = false;
     }
-    
+
     // Validación del mensaje
     const message = formData.get('message').trim();
-    if (!message || message.length < 10) {
-        errors.message = 'El mensaje debe tener al menos 10 caracteres';
+    if (!message || message.length < 5) {
+        errors.message = 'El mensaje debe tener al menos 5 caracteres';
         isValid = false;
     }
-    
+
     // Validación del asunto
     const subject = formData.get('subject');
     if (!subject) {
         errors.subject = 'Por favor selecciona un asunto';
         isValid = false;
     }
-    
+
     return { isValid, errors };
 }
 
@@ -241,12 +241,12 @@ function showFormErrors(errors) {
     // Limpia errores previos
     document.querySelectorAll('.error-message').forEach(error => error.remove());
     document.querySelectorAll('.form-group.error').forEach(group => group.classList.remove('error'));
-    
+
     // Muestra nuevos errores
     Object.keys(errors).forEach(field => {
         const formGroup = document.querySelector(`#${field}`).closest('.form-group');
         formGroup.classList.add('error');
-        
+
         const errorElement = document.createElement('span');
         errorElement.className = 'error-message';
         errorElement.textContent = errors[field];
@@ -254,7 +254,7 @@ function showFormErrors(errors) {
         errorElement.style.fontSize = '0.8rem';
         errorElement.style.marginTop = '0.5rem';
         errorElement.style.display = 'block';
-        
+
         formGroup.appendChild(errorElement);
     });
 }
@@ -265,44 +265,42 @@ function showFormErrors(errors) {
  */
 function handleFormSubmit(event) {
     event.preventDefault();
-    
+
     const formData = new FormData(contactForm);
     const validation = validateContactForm(formData);
-    
+
     if (!validation.isValid) {
         showFormErrors(validation.errors);
         return;
     }
-    
-    // Simula envío del formulario
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-    const originalText = submitButton.innerHTML;
-    
-    // Estado de carga
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-    submitButton.disabled = true;
-    
-    // Simula delay de envío
-    setTimeout(() => {
-        // Estado de éxito
-        submitButton.innerHTML = '<i class="fas fa-check"></i> ¡Mensaje Enviado!';
-        submitButton.style.background = 'var(--cube-green)';
-        
-        // Limpia el formulario
-        contactForm.reset();
-        
-        // Resetea el botón después de 3 segundos
-        setTimeout(() => {
-            submitButton.innerHTML = originalText;
-            submitButton.disabled = false;
-            submitButton.style.background = '';
-        }, 3000);
-        
-        // Muestra mensaje de éxito
-        showSuccessMessage('¡Gracias por tu mensaje! Te responderemos pronto.');
-        
-    }, 2000);
+
+    // Dispara la animación solo si es válido
+    const sendBtn = document.getElementById('animatedSendBtn');
+    if (sendBtn && !sendBtn.classList.contains('active')) {
+        sendBtn.classList.add('active');
+        let path = sendBtn.querySelector('.btn-layer path');
+        let tl = gsap.timeline();
+        tl.to(path, {
+            morphSVG: 'M136,77.5h-1H4.8H4c-2.2,0-4-1.8-4-4v-47c0-2.2,1.8-4,4-4c0,0,0.6,0,0.9,0C44,22.5,66,10,66,10  s3,12.5,69.1,12.5c0.2,0,0.9,0,0.9,0c2.2,0,4,1.8,4,4v47C140,75.7,138.2,77.5,136,77.5z',
+            duration: .3,
+            delay: .3
+        }).to(path, {
+            morphSVG: 'M136,77.5c0,0-11.7,0-12,0c-90,0-94.2,0-94.2,0s-10.8,0-25.1,0c-0.2,0-0.8,0-0.8,0c-2.2,0-4-1.8-4-4v-47  c0-2.2,1.8-4,4-4c0,0,0.6,0,0.9,0c39.1,0,61.1,0,61.1,0s3,0,69.1,0c0.2,0,0.9,0,0.9,0c2.2,0,4,1.8,4,4v47  C140,75.7,138.2,77.5,136,77.5z',
+            duration: 1.7,
+            ease: 'elastic.out(1, .15)',
+            onComplete() {
+                sendBtn.classList.remove('active');
+                // Envía el formulario realmente
+                contactForm.submit();
+            }
+        });
+    } else {
+        // Envía el formulario si por alguna razón no hay animación
+       contactForm.submit();
+    }
 }
+
+
 
 /**
  * Muestra un mensaje de éxito
@@ -327,9 +325,9 @@ function showSuccessMessage(message) {
             <i class="fas fa-check-circle"></i> ${message}
         </div>
     `;
-    
+
     document.body.appendChild(successDiv);
-    
+
     // Remueve el mensaje después de 5 segundos
     setTimeout(() => {
         successDiv.style.animation = 'slideOutRight 0.3s ease';
@@ -346,17 +344,17 @@ function showSuccessMessage(message) {
  */
 function handleScrollAnimations() {
     const elements = document.querySelectorAll('.scroll-reveal, .product-card, .feature-card, .level-card');
-    
+
     elements.forEach(element => {
         if (isElementInViewport(element)) {
             element.classList.add('revealed');
         }
     });
-    
+
     // Efecto parallax simple para elementos flotantes
     const scrolled = window.pageYOffset;
     const parallaxElements = document.querySelectorAll('.floating-cube');
-    
+
     parallaxElements.forEach((element, index) => {
         const speed = 0.1 + (index * 0.05);
         element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
@@ -378,7 +376,7 @@ function addRippleEffect(event) {
     const size = Math.max(rect.width, rect.height);
     const x = event.clientX - rect.left - size / 2;
     const y = event.clientY - rect.top - size / 2;
-    
+
     ripple.style.cssText = `
         position: absolute;
         width: ${size}px;
@@ -390,11 +388,11 @@ function addRippleEffect(event) {
         pointer-events: none;
         animation: ripple 0.6s ease-out;
     `;
-    
+
     button.style.position = 'relative';
     button.style.overflow = 'hidden';
     button.appendChild(ripple);
-    
+
     setTimeout(() => ripple.remove(), 600);
 }
 
@@ -404,29 +402,29 @@ function addRippleEffect(event) {
 function handleHeroCube() {
     const heroSection = document.getElementById('inicio');
     const cube = document.querySelector('.cube-3d');
-    
+
     if (!cube) return;
-    
+
     // Pausa la animación cuando el usuario interactúa
     let isInteracting = false;
-    
+
     heroSection.addEventListener('mouseenter', () => {
         if (!isInteracting) {
             cube.style.animationPlayState = 'paused';
             isInteracting = true;
         }
     });
-    
+
     heroSection.addEventListener('mouseleave', () => {
         cube.style.animationPlayState = 'running';
         isInteracting = false;
     });
-    
+
     // Control táctil para móviles
     heroSection.addEventListener('touchstart', () => {
         cube.style.animationPlayState = 'paused';
     });
-    
+
     heroSection.addEventListener('touchend', () => {
         setTimeout(() => {
             cube.style.animationPlayState = 'running';
@@ -439,14 +437,14 @@ function handleHeroCube() {
  */
 function enhanceCardHovers() {
     const cards = document.querySelectorAll('.product-card, .feature-card, .level-card');
-    
+
     cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-10px) rotateY(2deg)';
             this.style.boxShadow = '0 15px 50px rgba(0,0,0,0.2)';
         });
-        
-        card.addEventListener('mouseleave', function() {
+
+        card.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0) rotateY(0)';
             this.style.boxShadow = '';
         });
@@ -467,14 +465,14 @@ function initKonamiCode() {
         'KeyB', 'KeyA'
     ];
     let userInput = [];
-    
+
     document.addEventListener('keydown', (event) => {
         userInput.push(event.code);
-        
+
         if (userInput.length > konamiCode.length) {
             userInput.shift();
         }
-        
+
         if (userInput.join(',') === konamiCode.join(',')) {
             activateEasterEgg();
             userInput = [];
@@ -523,9 +521,9 @@ function activateEasterEgg() {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
-    
+
     // Auto-remove después de 10 segundos
     setTimeout(() => {
         if (modal.parentNode) {
@@ -543,7 +541,7 @@ function activateEasterEgg() {
  */
 function initLazyLoading() {
     const images = document.querySelectorAll('img[data-src]');
-    
+
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -554,7 +552,7 @@ function initLazyLoading() {
             }
         });
     });
-    
+
     images.forEach(img => imageObserver.observe(img));
 }
 
@@ -566,7 +564,7 @@ function preloadCriticalResources() {
         'https://images.pexels.com/photos/19670/pexels-photo.jpg',
         'https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg'
     ];
-    
+
     criticalImages.forEach(src => {
         const link = document.createElement('link');
         link.rel = 'preload';
@@ -587,26 +585,26 @@ function initEventListeners() {
     // Navegación
     window.addEventListener('scroll', throttle(handleNavbarScroll, 100));
     window.addEventListener('scroll', throttle(handleScrollAnimations, 100));
-    
+
     // Menú hamburguesa
     if (hamburger) {
         hamburger.addEventListener('click', toggleMobileMenu);
     }
-    
+
     // Links de navegación
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             closeMobileMenu();
         });
     });
-    
+
     // Scroll to top
     if (scrollToTopBtn) {
         scrollToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
-    
+
     // Filtros de productos
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -614,17 +612,17 @@ function initEventListeners() {
             filterProducts(filter);
         });
     });
-    
+
     // Formulario de contacto
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmit);
     }
-    
+
     // Botones con efecto ripple
     document.querySelectorAll('.btn').forEach(button => {
         button.addEventListener('click', addRippleEffect);
     });
-    
+
     // Newsletter form
     const newsletterForm = document.querySelector('.newsletter-form');
     if (newsletterForm) {
@@ -644,7 +642,7 @@ function initEventListeners() {
  */
 function init() {
     console.log('🎲 Aethercubix Website Initialized');
-    
+
     // Inicializa componentes
     initEventListeners();
     handleNavbarScroll();
@@ -654,15 +652,15 @@ function init() {
     initKonamiCode();
     initLazyLoading();
     preloadCriticalResources();
-    
+
     // Muestra contenido con fade in
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease';
-    
+
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
-    
+
     // Log de desarrollo
     if (window.location.hostname === 'localhost') {
         console.log('🔧 Development mode active');
@@ -705,4 +703,4 @@ document.addEventListener('dragstart', (event) => {
 });
 
 // Mejora la experiencia en iOS
-document.addEventListener('touchstart', () => {}, { passive: true });
+document.addEventListener('touchstart', () => { }, { passive: true });
