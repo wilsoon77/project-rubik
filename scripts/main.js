@@ -1,5 +1,5 @@
 /* ===========================
-   JAVASCRIPT PRINCIPAL - CUBEZONE
+   JAVASCRIPT PRINCIPAL - AetherCubix
    Funcionalidad interactiva para el sitio web
    ========================== */
 
@@ -711,7 +711,7 @@ if (document.readyState === 'loading') {
 
 // Manejo de errores globales
 window.addEventListener('error', (event) => {
-    console.error('🚨 Error en CubeZone:', event.error);
+    console.error('🚨 Error en AetherCubix:', event.error);
 });
 
 // Previene comportamientos por defecto en ciertos elementos
