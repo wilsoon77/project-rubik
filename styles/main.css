@@ -1032,9 +1032,29 @@
         color: var(--text-light);
     }
 
+    .whatsapp-link {
+        color: inherit;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: color 0.3s;
+    }
+
+    .whatsapp-link:hover {
+        color: #25D366;
+        /* Color de WhatsApp */
+    }
+
+    .whatsapp-link:hover::after {
+        content: "\f232";
+        /* Código del ícono de WhatsApp */
+        font-family: "Font Awesome 6 Brands";
+        margin-left: 8px;
+        font-size: 0.9em;
+    }
 
 
-   
+
     .button {
         --text: #fff;
         --plane: var(--cube-white, #e53935);
