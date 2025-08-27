@@ -52,8 +52,8 @@ AetherCubix es un sitio web estático profesional y visualmente atractivo diseñ
 ├── public/
 ├── README.md
 ├── package.json
-├── vite.config.ts
-└── vercel.json
+└── vite.config.ts
+
 ```
 
 ## 🚀 Instalación y Uso
@@ -69,7 +69,6 @@ AetherCubix es un sitio web estático profesional y visualmente atractivo diseñ
 El sitio es completamente estático y puede desplegarse en:
 - **GitHub Pages**
 - **Netlify**
-- **Vercel**
 - **Surge.sh**
 - Cualquier servidor web estático
 

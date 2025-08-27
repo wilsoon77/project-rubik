@@ -3,6 +3,25 @@
    Funcionalidad interactiva para el sitio web
    ========================== */
 
+// Importar servicios
+import { databases } from './services/appwrite.js';
+import config from './config.js';
+import { ProductoService } from './services/database.js';
+import { Client, Databases,Query } from 'appwrite';
+
+document.addEventListener('DOMContentLoaded', init);
+
+// Añadir después de la importación de ProductoService
+window.addEventListener('unhandledrejection', (event) => {
+    if (event.reason.code) {  // Error de Appwrite
+        log('Error de Appwrite:', {
+            code: event.reason.code,
+            message: event.reason.message,
+            type: event.reason.type
+        });
+    }
+});
+
 // ===========================
 // VARIABLES GLOBALES Y CONFIGURACIÓN
 // ===========================
@@ -12,6 +31,15 @@ const CONFIG = {
     debounceDelay: 250,
     transitionDuration: 300
 };
+
+// Al inicio del archivo, después de la configuración
+const DEBUG = window.location.hostname === 'localhost';
+
+function log(...args) {
+    if (DEBUG) {
+        console.log('🎲 [AetherCubix]:', ...args);
+    }
+}
 
 // Elementos DOM principales
 const navbar = document.getElementById('navbar');
@@ -171,21 +199,54 @@ function updateActiveNavLink() {
  * Filtra productos por categoría
  * @param {string} category - Categoría a filtrar
  */
-function filterProducts(category) {
-    productCards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-
-        if (category === 'all' || cardCategory === category) {
-            card.style.display = 'block';
-            card.style.animation = 'fadeInUp 0.5s ease forwards';
+async function filterProducts(category) {
+    try {
+        const productsGrid = document.querySelector('.products-grid');
+        
+        if (category === 'all') {
+            // Cargar todos los productos
+            const products = await ProductoService.getAllProducts();
+            renderProducts(products.documents);
         } else {
-            card.style.display = 'none';
+            // Filtrar por categoría
+            const products = await databases.listDocuments(
+                config.databaseId,
+                config.collectionId,
+                [
+                    Query.equal('categoria', category)
+                ]
+            );
+            renderProducts(products.documents);
         }
-    });
 
-    // Actualiza botón activo
-    filterButtons.forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`[data-filter="${category}"]`).classList.add('active');
+        // Actualizar botón activo
+        filterButtons.forEach(btn => {
+            if (btn.getAttribute('data-filter') === category) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+    } catch (error) {
+        console.error('Error filtrando productos:', error);
+    }
+}
+
+// Función para renderizar productos
+function renderProducts(products) {
+    const productsGrid = document.querySelector('.products-grid');
+    productsGrid.innerHTML = '';
+
+    if (products.length === 0) {
+        productsGrid.innerHTML = '<p>No hay productos en esta categoría</p>';
+        return;
+    }
+
+    products.forEach(product => {
+        const productCard = createProductCard(product);
+        productsGrid.appendChild(productCard);
+    });
 }
 
 // ===========================
@@ -656,11 +717,87 @@ function initEventListeners() {
     }
 }
 
-/**
- * Inicialización principal cuando el DOM está listo
- */
+// Función para cargar productos desde la base de datos
+async function loadProductsFromDB() {
+    try {
+        log('Cargando productos...');
+        const productsGrid = document.querySelector('.products-grid');
+        
+        if (!productsGrid) {
+            log('No se encontró el contenedor .products-grid');
+            return;
+        }
+
+        // Mostrar estado de carga
+        productsGrid.innerHTML = `
+            <div class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Cargando productos...</p>
+            </div>
+        `;
+
+        const products = await ProductoService.getAllProducts();
+        log(`${products.documents.length} productos cargados`);
+
+        // Limpiar grid existente
+        productsGrid.innerHTML = '';
+
+        if (products.documents.length === 0) {
+            productsGrid.innerHTML = '<p>No hay productos disponibles</p>';
+            return;
+        }
+
+        products.documents.forEach(product => {
+            const productCard = createProductCard(product);
+            productsGrid.appendChild(productCard);
+        });
+    } catch (error) {
+        log('Error cargando productos:', error);
+        const productsGrid = document.querySelector('.products-grid');
+        if (productsGrid) {
+            productsGrid.innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>Error cargando productos. Por favor, intenta más tarde.</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// Función para crear card de producto
+function createProductCard(product) {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.setAttribute('data-category', product.categoria);
+
+    card.innerHTML = `
+        <div class="product-image">
+            <img src="${product.imagen}" alt="${product.nombre}">
+        </div>
+        <div class="product-info">
+            <h3>${product.nombre}</h3>
+            <p>${product.descripcion}</p>
+            <div class="product-price">Q ${product.precio}</div>
+        </div>
+    `;
+
+    return card;
+}
+
+// Modificar la inicialización
 function init() {
     console.log('🎲 Aethercubix Website Initialized');
+
+    window.addEventListener('online', () => {
+        log('Conexión restaurada');
+        showSuccessMessage('Conexión restaurada');
+    });
+
+    window.addEventListener('offline', () => {
+        log('Conexión perdida');
+        showSuccessMessage('Conexión perdida', 'warning');
+    });
 
     // Inicializa componentes
     initEventListeners();
@@ -686,40 +823,18 @@ function init() {
         console.log('💡 Try the Konami Code for a surprise!');
         console.log('⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
     }
-}
 
-// ===========================
-// SERVICE WORKER (PWA BÁSICO)
-// ===========================
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // Por ahora comentado, se puede implementar después
-        // navigator.serviceWorker.register('/sw.js');
-    });
-}
-
-// ===========================
-// INICIALIZACIÓN
-// ===========================
-
-// Espera a que el DOM esté completamente cargado
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
-
-// Manejo de errores globales
-window.addEventListener('error', (event) => {
-    console.error('🚨 Error en AetherCubix:', event.error);
-});
-
-// Previene comportamientos por defecto en ciertos elementos
-document.addEventListener('dragstart', (event) => {
-    if (event.target.tagName === 'IMG') {
-        event.preventDefault();
+    if (window.location.pathname.includes('productos.html')) {
+        loadProductsFromDB();
+        initFilterButtons();
     }
-});
 
-// Mejora la experiencia en iOS
-document.addEventListener('touchstart', () => { }, { passive: true });
+    // Monitoreo de rendimiento
+    if (DEBUG) {
+        const timing = window.performance.timing;
+        const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+        log(`Página cargada en ${pageLoadTime}ms`);
+
+
+    }
+}
