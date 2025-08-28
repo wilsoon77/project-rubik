@@ -6,4 +6,12 @@ const appwriteConfig = {
     collectionId: import.meta.env.VITE_APPWRITE_COLLECTION_ID
 };
 
+// Verificación de configuración
+console.log("Config cargada:", {
+    endpoint: appwriteConfig.endpoint ? "✅ OK" : "❌ ERROR",
+    projectId: appwriteConfig.projectId ? "✅ OK" : "❌ ERROR",
+    databaseId: appwriteConfig.databaseId ? "✅ OK" : "❌ ERROR",
+    collectionId: appwriteConfig.collectionId ? "✅ OK" : "❌ ERROR"
+});
+
 export default appwriteConfig;
