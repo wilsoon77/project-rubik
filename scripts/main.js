@@ -641,8 +641,8 @@ function initLazyLoading() {
  */
 function preloadCriticalResources() {
     const criticalImages = [
-        'https://images.pexels.com/photos/19670/pexels-photo.jpg',
-        'https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg'
+        // 'https://images.pexels.com/photos/19670/pexels-photo.jpg',
+        // 'https://images.pexels.com/photos/279315/pexels-photo-279315.jpeg'
     ];
 
     criticalImages.forEach(src => {
@@ -720,30 +720,35 @@ function initEventListeners() {
 // Función para cargar productos desde la base de datos
 async function loadProductsFromDB() {
     try {
-        log('Cargando productos...');
+        console.log('🎲 [AetherCubix]: Cargando productos...');
         const productsGrid = document.querySelector('.products-grid');
         
         if (!productsGrid) {
-            log('No se encontró el contenedor .products-grid');
+            console.error('🎲 [AetherCubix]: No se encontró el contenedor .products-grid');
             return;
         }
 
         // Mostrar estado de carga
         productsGrid.innerHTML = `
-            <div class="loading-state">
-                <i class="fas fa-spinner fa-spin"></i>
+            <div class="loading-state" style="text-align: center; padding: 2rem 0;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--cube-red);"></i>
                 <p>Cargando productos...</p>
             </div>
         `;
 
         const products = await ProductoService.getAllProducts();
-        log(`${products.documents.length} productos cargados`);
+        console.log(`🎲 [AetherCubix]: ${products.documents.length} productos cargados`);
 
         // Limpiar grid existente
         productsGrid.innerHTML = '';
 
-        if (products.documents.length === 0) {
-            productsGrid.innerHTML = '<p>No hay productos disponibles</p>';
+        if (!products.documents || products.documents.length === 0) {
+            productsGrid.innerHTML = `
+                <div class="no-products" style="text-align: center; padding: 3rem 0;">
+                    <i class="fas fa-cube" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                    <p>No hay productos disponibles en este momento.</p>
+                </div>
+            `;
             return;
         }
 
@@ -752,15 +757,24 @@ async function loadProductsFromDB() {
             productsGrid.appendChild(productCard);
         });
     } catch (error) {
-        log('Error cargando productos:', error);
+        console.error('🎲 [AetherCubix]: Error cargando productos:', error);
         const productsGrid = document.querySelector('.products-grid');
         if (productsGrid) {
             productsGrid.innerHTML = `
-                <div class="error-state">
-                    <i class="fas fa-exclamation-circle"></i>
+                <div class="error-state" style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: var(--cube-red);"></i>
                     <p>Error cargando productos. Por favor, intenta más tarde.</p>
+                    <button class="btn btn-primary retry-btn" style="margin-top: 1rem;">
+                        <i class="fas fa-sync"></i> Reintentar
+                    </button>
                 </div>
             `;
+            
+            // Añadir evento para reintentar
+            const retryBtn = productsGrid.querySelector('.retry-btn');
+            if (retryBtn) {
+                retryBtn.addEventListener('click', loadProductsFromDB);
+            }
         }
     }
 }
@@ -785,7 +799,27 @@ function createProductCard(product) {
     return card;
 }
 
-// Modificar la inicialización
+// Función para inicializar botones de filtro
+function initFilterButtons() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    // Establecer el filtro "all" como activo por defecto
+    filterButtons.forEach(button => {
+        if (button.getAttribute('data-filter') === 'all') {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+        
+        // Asegurarse de que los event listeners estén configurados
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            filterProducts(filter);
+        });
+    });
+}
+
+// Modificar la función init para asegurar la carga de productos
 function init() {
     console.log('🎲 Aethercubix Website Initialized');
 
@@ -798,6 +832,19 @@ function init() {
         log('Conexión perdida');
         showSuccessMessage('Conexión perdida', 'warning');
     });
+
+    // Si estamos en la página de productos, cargar los productos primero
+    if (window.location.pathname.includes('productos.html')) {
+        console.log('🎲 [AetherCubix]: Página de productos detectada');
+        
+        // Inicializar filtros
+        initFilterButtons();
+        
+        // Cargar productos inmediatamente
+        loadProductsFromDB().catch(error => {
+            console.error('🎲 [AetherCubix]: Error crítico cargando productos:', error);
+        });
+    }
 
     // Inicializa componentes
     initEventListeners();
