@@ -3,6 +3,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   root: '.',
+  base: './', // Añadir esta línea para usar rutas relativas
   publicDir: 'public',
   build: {
     outDir: 'dist',
