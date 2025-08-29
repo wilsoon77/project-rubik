@@ -7,7 +7,7 @@
 import { databases } from './services/appwrite.js';
 import config from './config.js';
 import { ProductoService } from './services/database.js';
-import { Client, Databases,Query } from 'appwrite';
+import { Client, Databases, Query } from 'appwrite';
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -199,37 +199,93 @@ function updateActiveNavLink() {
  * Filtra productos por categoría
  * @param {string} category - Categoría a filtrar
  */
+
 async function filterProducts(category) {
     try {
+        console.log('🎲 [AetherCubix]: Aplicando filtro:', category);
         const productsGrid = document.querySelector('.products-grid');
-        
-        if (category === 'all') {
-            // Cargar todos los productos
-            const products = await ProductoService.getAllProducts();
-            renderProducts(products.documents);
-        } else {
-            // Filtrar por categoría
-            const products = await databases.listDocuments(
-                config.databaseId,
-                config.collectionId,
-                [
-                    Query.equal('categoria', category)
-                ]
-            );
-            renderProducts(products.documents);
+
+        if (!productsGrid) {
+            console.error('🎲 [AetherCubix]: No se encontró el contenedor de productos');
+            return;
         }
 
-        // Actualizar botón activo
-        filterButtons.forEach(btn => {
-            if (btn.getAttribute('data-filter') === category) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
+        // Mostrar loading
+        productsGrid.innerHTML = `
+            <div class="loading-state" style="text-align: center; padding: 2rem 0;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--cube-red);"></i>
+                <p>Filtrando productos...</p>
+            </div>
+        `;
+
+        let products;
+        if (category === 'all') {
+            products = await ProductoService.getAllProducts();
+        } else {
+            products = await databases.listDocuments(
+                config.databaseId,
+                config.collectionId,
+                [Query.equal('categoria', category)]
+            );
+        }
+
+        console.log(`🎲 [AetherCubix]: Productos filtrados:`, products.documents.length);
+        renderProducts(products.documents);
+
+    } catch (error) {
+        console.error('🎲 [AetherCubix]: Error filtrando productos:', error);
+        const productsGrid = document.querySelector('.products-grid');
+        if (productsGrid) {
+            productsGrid.innerHTML = `
+                <div class="error-state" style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: var(--cube-red);"></i>
+                    <p>Error al filtrar productos. Por favor, intenta más tarde.</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// Añadir esta función después de filterProducts()
+async function initializeDynamicFilters() {
+    try {
+        console.log('🎲 [AetherCubix]: Inicializando filtros dinámicos...');
+        const filterContainer = document.querySelector('.product-filters');
+
+        if (!filterContainer) {
+            console.error('🎲 [AetherCubix]: Contenedor de filtros no encontrado');
+            return;
+        }
+
+        // Obtener todos los productos
+        const products = await ProductoService.getAllProducts();
+
+        // Obtener categorías únicas
+        const categories = ['all', ...new Set(products.documents.map(product => product.categoria))];
+
+        console.log('🎲 [AetherCubix]: Categorías encontradas:', categories);
+
+        // Crear botones de filtro
+        filterContainer.innerHTML = categories.map(category => `
+            <button class="filter-btn ${category === 'all' ? 'active' : ''}" 
+                    data-filter="${category}">
+                ${category === 'all' ? 'Todos' :
+                category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>
+        `).join('');
+
+        // Añadir event listeners a los botones
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterProducts(button.getAttribute('data-filter'));
+            });
         });
 
     } catch (error) {
-        console.error('Error filtrando productos:', error);
+        console.error('🎲 [AetherCubix]: Error inicializando filtros:', error);
     }
 }
 
@@ -722,7 +778,7 @@ async function loadProductsFromDB() {
     try {
         console.log('🎲 [AetherCubix]: Cargando productos...');
         const productsGrid = document.querySelector('.products-grid');
-        
+
         if (!productsGrid) {
             console.error('🎲 [AetherCubix]: No se encontró el contenedor .products-grid');
             return;
@@ -769,7 +825,7 @@ async function loadProductsFromDB() {
                     </button>
                 </div>
             `;
-            
+
             // Añadir evento para reintentar
             const retryBtn = productsGrid.querySelector('.retry-btn');
             if (retryBtn) {
@@ -799,30 +855,12 @@ function createProductCard(product) {
     return card;
 }
 
-// Función para inicializar botones de filtro
-function initFilterButtons() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    // Establecer el filtro "all" como activo por defecto
-    filterButtons.forEach(button => {
-        if (button.getAttribute('data-filter') === 'all') {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
-        
-        // Asegurarse de que los event listeners estén configurados
-        button.addEventListener('click', () => {
-            const filter = button.getAttribute('data-filter');
-            filterProducts(filter);
-        });
-    });
-}
 
-// Modificar la función init para asegurar la carga de productos
+// Modificar la función init
 function init() {
     console.log('🎲 Aethercubix Website Initialized');
 
+    // Event listeners de conexión
     window.addEventListener('online', () => {
         log('Conexión restaurada');
         showSuccessMessage('Conexión restaurada');
@@ -833,20 +871,19 @@ function init() {
         showSuccessMessage('Conexión perdida', 'warning');
     });
 
-    // Si estamos en la página de productos, cargar los productos primero
+    // Inicialización de productos y filtros
     if (window.location.pathname.includes('productos.html')) {
         console.log('🎲 [AetherCubix]: Página de productos detectada');
-        
-        // Inicializar filtros
-        initFilterButtons();
-        
-        // Cargar productos inmediatamente
-        loadProductsFromDB().catch(error => {
-            console.error('🎲 [AetherCubix]: Error crítico cargando productos:', error);
-        });
+
+        // Una sola inicialización de productos y filtros
+        loadProductsFromDB()
+            .then(() => initializeDynamicFilters())
+            .catch(error => {
+                console.error('🎲 [AetherCubix]: Error en inicialización:', error);
+            });
     }
 
-    // Inicializa componentes
+    // Inicialización de componentes generales
     initEventListeners();
     handleNavbarScroll();
     handleScrollAnimations();
@@ -856,24 +893,18 @@ function init() {
     initLazyLoading();
     preloadCriticalResources();
 
-    // Muestra contenido con fade in
+    // Animación de fade in
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease';
-
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
 
-    // Log de desarrollo
+    // Logs de desarrollo
     if (window.location.hostname === 'localhost') {
         console.log('🔧 Development mode active');
         console.log('💡 Try the Konami Code for a surprise!');
         console.log('⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️BA');
-    }
-
-    if (window.location.pathname.includes('productos.html')) {
-        loadProductsFromDB();
-        initFilterButtons();
     }
 
     // Monitoreo de rendimiento
@@ -881,7 +912,5 @@ function init() {
         const timing = window.performance.timing;
         const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
         log(`Página cargada en ${pageLoadTime}ms`);
-
-
     }
 }
