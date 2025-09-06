@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login y Registro - AetherCubix</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navegación fija -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix</span>
+            </div>
+
+            <!-- Menú de navegación -->
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li><a href="login.html" class="nav-link active">Cuenta</a></li>
+            </ul>
+
+            <!-- Botón hamburguesa para móvil -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección principal -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-switch">
+                    <button class="auth-switch-btn active" data-form="login-form">Iniciar sesión</button>
+                    <button class="auth-switch-btn" data-form="register-form">Registrarse</button>
+                </div>
+
+                <!-- Formulario de login -->
+                <form id="login-form" class="auth-form active">
+                    <h2>Iniciar sesión</h2>
+                    
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Contraseña</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    
+                    <div id="login-error" class="auth-error"></div>
+                    
+                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                </form>
+
+                <!-- Formulario de registro -->
+                <form id="register-form" class="auth-form">
+                    <h2>Crear cuenta</h2>
+                    
+                    <div class="form-group">
+                        <label for="register-name">Nombre</label>
+                        <input type="text" id="register-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Contraseña</label>
+                        <input type="password" id="register-password" name="password" required>
+                        <small>Mínimo 8 caracteres, incluir letras y números</small>
+                    </div>
+                    
+                    <div id="register-error" class="auth-error"></div>
+                    
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </form>
+                
+                <!-- Perfil de usuario (se muestra cuando está logueado) -->
+                <div id="user-profile" class="user-profile" style="display: none;">
+                    <h2>Mi perfil</h2>
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-details">
+                            <h3 id="profile-name">Nombre de usuario</h3>
+                            <p id="profile-email">usuario@email.com</p>
+                        </div>
+                    </div>
+                    
+                    <button id="logout-btn" class="btn btn-outline">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AetherCubix</h4>
+                    <p>Revolucionando la experiencia de resolver cubos con innovación y calidad.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="productos.html">Cubos 2x2</a></li>
+                        <li><a href="productos.html">Cubos 3x3</a></li>
+                        <li><a href="productos.html">Cubos 4x4+</a></li>
+                        <li><a href="productos.html">Megaminx</a></li>
+                        <li><a href="productos.html">Pyraminx</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="aprende.html">Tutoriales</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Suscríbete</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 AetherCubix - Todos los derechos reservados</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/auth-ui.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo - AetherCubix</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/613/613962.png" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix Admin</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html" class="active"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="gestion-productos.html"><i class="fas fa-box"></i> Gestión de Productos</a></li>
+                <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver al sitio</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Dashboard Administrativo</h1>
+                <div class="admin-user">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Administrador</span>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Stats Cards existentes + nueva card -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-box"></i>
+                        <div class="stat-info">
+                            <h3 id="total-products">0</h3>
+                            <p>Total Productos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-layer-group"></i>
+                        <div class="stat-info">
+                            <h3 id="total-categories">0</h3>
+                            <p>Categorías</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="stat-info">
+                            <h3 id="total-value">Q 0.00</h3>
+                            <p>Valor Inventario</p>
+                        </div>
+                    </div>
+                    <!-- ⬇️ NUEVA CARD -->
+                    <div class="stat-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="stat-info">
+                            <h3 id="low-stock-products">0</h3>
+                            <p>Stock Bajo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⬇️ NUEVA SECCIÓN DE GRÁFICAS -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4><i class="fas fa-chart-pie"></i> Productos por Categoría</h4>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4><i class="fas fa-chart-bar"></i> Estado del Stock</h4>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="stockChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card large">
+                        <div class="chart-header">
+                            <h4><i class="fas fa-chart-area"></i> Valor por Categoría</h4>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="valueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions mejoradas -->
+                <div class="quick-actions">
+                    <h3>Acciones Rápidas</h3>
+                    <div class="action-buttons">
+                        <a href="gestion-productos.html" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Nuevo Producto
+                        </a>
+                        <button class="btn btn-secondary" onclick="loadDashboardStats()">
+                            <i class="fas fa-sync"></i> Actualizar Estadísticas
+                        </button>
+                        <!-- ⬇️ NUEVO BOTÓN -->
+                        <button class="btn btn-info" onclick="exportStats()">
+                            <i class="fas fa-download"></i> Exportar Datos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="scripts/admin.js"></script>
+</body>
+</html>

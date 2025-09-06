@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - AetherCubix Admin</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix Admin</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="gestion-productos.html" class="active"><i class="fas fa-box"></i> Gestión de Productos</a>
+                </li>
+                <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver al sitio</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Gestión de Productos</h1>
+                <button class="btn btn-primary" onclick="openAddProductModal()">
+                    <i class="fas fa-plus"></i> Nuevo Producto
+                </button>
+            </header>
+
+            <div class="admin-content">
+                <!-- Filtros y búsqueda -->
+                <div class="admin-filters">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-products" placeholder="Buscar productos...">
+                    </div>
+                    <select id="filter-category">
+                        <option value="">Cargando categorías...</option>
+                    </select>
+                </div>
+
+                <!-- Tabla de productos -->
+                <div class="products-table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body">
+                            <!-- Los productos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Controles de paginación -->
+                <div class="pagination-container">
+                    <div class="pagination-info">
+                        <span id="pagination-info-text">Mostrando 0 de 0 productos</span>
+                        <select id="items-per-page" class="items-per-page-select">
+                            <option value="10">10 por página</option>
+                            <option value="25" selected>25 por página</option>
+                            <option value="50">50 por página</option>
+                            <option value="100">100 por página</option>
+                        </select>
+                    </div>
+                    
+                    <div class="pagination-controls">
+                        <button id="first-page" class="pagination-btn" title="Primera página">
+                            <i class="fas fa-angle-double-left"></i>
+                        </button>
+                        <button id="prev-page" class="pagination-btn" title="Página anterior">
+                            <i class="fas fa-angle-left"></i>
+                        </button>
+                        
+                        <div class="pagination-numbers" id="pagination-numbers">
+                            <!-- Los números de página se generarán dinámicamente -->
+                        </div>
+                        
+                        <button id="next-page" class="pagination-btn" title="Página siguiente">
+                            <i class="fas fa-angle-right"></i>
+                        </button>
+                        <button id="last-page" class="pagination-btn" title="Última página">
+                            <i class="fas fa-angle-double-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para agregar/editar producto -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Nuevo Producto</h2>
+                <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            </div>
+            <form id="product-form" class="modal-body">
+                <div class="form-group">
+                    <label for="product-name">Nombre del producto</label>
+                    <input type="text" id="product-name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="product-description">Descripción</label>
+                    <textarea id="product-description" name="description" rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-price">Precio (Q)</label>
+                        <input type="number" id="product-price" name="price" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-stock">Stock</label>
+                        <input type="number" id="product-stock" name="stock" min="0">
+                    </div>
+                </div>
+
+                <!-- En gestion-productos.html - Cambia el select por: -->
+                <div class="form-group">
+                    <label for="product-category">Categoría</label>
+                    <select id="product-category" name="category" required>
+                        <option value="">Cargando categorías...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="product-image">URL de la imagen</label>
+                    <input type="url" id="product-image" name="image" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Cancelar</button>
+                <button type="submit" form="product-form" class="btn btn-primary" id="save-product-btn">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal personalizado para confirmaciones -->
+    <div id="custom-confirm-modal" class="custom-modal">
+        <div class="custom-modal-content">
+            <div class="custom-modal-header confirm">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3 id="confirm-title">Confirmar acción</h3>
+            </div>
+            <div class="custom-modal-body">
+                <p id="confirm-message">¿Estás seguro de que quieres continuar?</p>
+            </div>
+            <div class="custom-modal-footer">
+                <button class="btn btn-secondary" id="confirm-cancel">Cancelar</button>
+                <button class="btn btn-danger" id="confirm-accept">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal personalizado para prompt -->
+    <div id="custom-prompt-modal" class="custom-modal">
+        <div class="custom-modal-content">
+            <div class="custom-modal-header prompt">
+                <i class="fas fa-plus-circle"></i>
+                <h3 id="prompt-title">Agregar información</h3>
+            </div>
+            <div class="custom-modal-body">
+                <p id="prompt-message">Ingresa la información solicitada:</p>
+                <input type="text" id="prompt-input" class="custom-input" placeholder="Escribe aquí...">
+            </div>
+            <div class="custom-modal-footer">
+                <button class="btn btn-secondary" id="prompt-cancel">Cancelar</button>
+                <button class="btn btn-primary" id="prompt-accept">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="scripts/product-crud.js"></script>
+</body>
+
+</html>

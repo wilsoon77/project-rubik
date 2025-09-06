@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - AetherCubix</title>
+    <meta name="description" content="Revisa y finaliza tu compra de cubos Rubik y puzzles 3D en AetherCubix.">
+
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/613/613962.png" />
+</head>
+
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación fija -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix</span>
+            </div>
+
+            <!-- Menú de navegación -->
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                
+                <!-- Autenticación -->
+                <li class="auth-nav-item" id="auth-nav-item">
+                    <button class="auth-btn" id="auth-btn" onclick="showAuthModal()">
+                        <i class="fas fa-user"></i> Iniciar Sesión
+                    </button>
+                </li>
+                
+                <!-- Carrito -->
+                <li class="cart-nav-item" id="cart-nav-item" style="display: none;">
+                    <a href="carrito.html" class="cart-link active" title="Ver carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-counter" id="cart-counter">0</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Botón hamburguesa -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección principal del carrito -->
+    <section id="carrito" class="cart-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Mi Carrito</h1>
+                <p class="section-subtitle">Revisa tus productos y procede al checkout</p>
+            </div>
+
+            <!-- Contenido del carrito -->
+            <div class="cart-content">
+                
+                <!-- Carrito vacío (mostrar cuando no hay productos) -->
+                <div class="empty-cart" id="empty-cart" style="display: none;">
+                    <div class="empty-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Tu carrito está vacío</h3>
+                    <p>¡Agrega algunos productos increíbles para empezar!</p>
+                    <a href="productos.html" class="btn btn-primary">
+                        <i class="fas fa-cube"></i> Ver Productos
+                    </a>
+                </div>
+
+                <!-- Carrito con productos -->
+                <div class="cart-with-items" id="cart-with-items">
+                    <div class="cart-grid">
+                        
+                        <!-- Lista de productos del carrito -->
+                        <div class="cart-items">
+                            <h3>Productos en tu carrito</h3>
+                            <div class="cart-items-list" id="cart-items-list">
+                                <!-- Los productos se cargarán dinámicamente aquí -->
+                            </div>
+                        </div>
+
+                        <!-- Resumen del carrito -->
+                        <div class="cart-summary">
+                            <div class="summary-card">
+                                <h3>Resumen del Pedido</h3>
+                                
+                                <div class="summary-line">
+                                    <span>Subtotal:</span>
+                                    <span id="subtotal">Q 0.00</span>
+                                </div>
+                                
+                                <div class="summary-line">
+                                    <span>Envío:</span>
+                                    <span id="shipping">Q 25.00</span>
+                                </div>
+                                
+                                <div class="summary-line">
+                                    <span>IVA (12%):</span>
+                                    <span id="tax">Q 0.00</span>
+                                </div>
+                                
+                                <div class="summary-line total">
+                                    <span>Total:</span>
+                                    <span id="total">Q 0.00</span>
+                                </div>
+
+                                <div class="checkout-section">
+                                    <button class="btn btn-primary checkout-btn" id="checkout-btn">
+                                        <i class="fas fa-credit-card"></i> Proceder al Pago
+                                    </button>
+                                    
+                                    <a href="productos.html" class="continue-shopping">
+                                        <i class="fas fa-arrow-left"></i> Seguir Comprando
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de autenticación (igual que en otras páginas) -->
+    <div class="auth-modal-overlay" id="auth-modal-overlay">
+        <!-- Se cargará dinámicamente -->
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>AetherCubix</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik y puzzles 3D.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="productos.html">Productos</a></li>
+                        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2025 AetherCubix. Todos los derechos reservados.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón scroll to top -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+     <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/carrito-page.js"></script>
+</body>
+
+</html>

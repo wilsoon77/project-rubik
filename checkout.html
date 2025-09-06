@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AetherCubix</title>
+    <meta name="description" content="Finaliza tu compra de cubos Rubik y puzzles 3D.">
+
+    <!-- Estilos (iguales que otras páginas) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/613/613962.png" />
+</head>
+
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación (igual que otras páginas) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                
+                <li class="auth-nav-item" id="auth-nav-item">
+                    <button class="auth-btn" id="auth-btn" onclick="showAuthModal()">
+                        <i class="fas fa-user"></i> Iniciar Sesión
+                    </button>
+                </li>
+                
+                <li class="cart-nav-item" id="cart-nav-item" style="display: none;">
+                    <a href="carrito.html" class="cart-link" title="Ver carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-counter" id="cart-counter">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección principal del checkout -->
+    <section id="checkout" class="checkout-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Finalizar Compra</h1>
+                <p class="section-subtitle">Completa tus datos para recibir tu pedido</p>
+            </div>
+
+            <div class="checkout-content">
+                <div class="checkout-grid">
+                    
+                    <!-- Formulario de checkout -->
+                    <div class="checkout-form">
+                        <form id="checkout-form" class="form">
+                            <div class="form-section">
+                                <h3><i class="fas fa-user"></i> Información Personal</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre Completo*</label>
+                                        <input type="text" id="nombre" name="nombre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telefono">Teléfono*</label>
+                                        <input type="tel" id="telefono" name="telefono" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email*</label>
+                                    <input type="email" id="email" name="email" required readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3><i class="fas fa-map-marker-alt"></i> Dirección de Envío</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="departamento">Departamento*</label>
+                                        <select id="departamento" name="departamento" required>
+                                            <option value="">Selecciona...</option>
+                                            <option value="Guatemala">Guatemala</option>
+                                            <option value="Sacatepéquez">Sacatepéquez</option>
+                                            <option value="Chimaltenango">Chimaltenango</option>
+                                            <option value="Escuintla">Escuintla</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="municipio">Municipio*</label>
+                                        <input type="text" id="municipio" name="municipio" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="direccion">Dirección Completa*</label>
+                                    <textarea id="direccion" name="direccion" rows="3" required placeholder="Zona, calle, número de casa, referencias..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3><i class="fas fa-credit-card"></i> Método de Pago</h3>
+                                <div class="payment-methods">
+                                    <div class="payment-option">
+                                        <input type="radio" id="pago-efectivo" name="metodoPago" value="efectivo" checked>
+                                        <label for="pago-efectivo">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                            Pago contra entrega (Efectivo)
+                                        </label>
+                                    </div>
+                                    <div class="payment-option">
+                                        <input type="radio" id="pago-transferencia" name="metodoPago" value="transferencia">
+                                        <label for="pago-transferencia">
+                                            <i class="fas fa-university"></i>
+                                            Transferencia bancaria
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3><i class="fas fa-comment"></i> Notas Adicionales</h3>
+                                <div class="form-group">
+                                    <textarea id="notas" name="notas" rows="3" placeholder="Instrucciones especiales para la entrega..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="window.history.back()">
+                                    <i class="fas fa-arrow-left"></i> Volver al Carrito
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-large">
+                                    <i class="fas fa-check"></i> Confirmar Pedido
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Resumen del pedido -->
+                    <div class="order-summary">
+                        <div class="summary-card">
+                            <h3>Resumen del Pedido</h3>
+                            
+                            <div class="order-items" id="order-items">
+                                <!-- Los productos se cargarán dinámicamente -->
+                            </div>
+                            
+                            <div class="summary-line">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">Q 0.00</span>
+                            </div>
+                            
+                            <div class="summary-line">
+                                <span>Envío:</span>
+                                <span id="shipping">Q 25.00</span>
+                            </div>
+                            
+                            <div class="summary-line">
+                                <span>IVA (12%):</span>
+                                <span id="tax">Q 0.00</span>
+                            </div>
+                            
+                            <div class="summary-line total">
+                                <span>Total a Pagar:</span>
+                                <span id="total">Q 0.00</span>
+                            </div>
+
+                            <div class="shipping-info">
+                                <p><i class="fas fa-truck"></i> Entrega estimada: 2-3 días hábiles</p>
+                                <p><i class="fas fa-shield-alt"></i> Compra 100% segura</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (igual que otras páginas) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>AetherCubix</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik y puzzles 3D.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2025 AetherCubix. Todos los derechos reservados.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/checkout-page.js"></script>
+</body>
+</html>

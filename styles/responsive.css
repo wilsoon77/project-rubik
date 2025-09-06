@@ -805,7 +805,7 @@
     
     .form-group input,
     .form-group textarea {
-        color: white;
+        color: #333333;
         border-bottom-color: #555;
     }
     

@@ -62,6 +62,21 @@
                 <li><a href="productos.html" class="nav-link active">Productos</a></li>
                 <li><a href="aprende.html" class="nav-link">Aprende</a></li>
                 <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                
+                <!-- NUEVO: Autenticación -->
+                <li class="auth-nav-item" id="auth-nav-item">
+                    <button class="auth-btn" id="auth-btn" onclick="showAuthModal()">
+                        <i class="fas fa-user"></i> Iniciar Sesión
+                    </button>
+                </li>
+                
+                <!-- 🛒 NUEVO: Carrito -->
+                <li class="cart-nav-item" id="cart-nav-item" style="display: none;">
+                    <a href="carrito.html" class="cart-link" title="Ver carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-counter" id="cart-counter">0</span>
+                    </a>
+                </li>
             </ul>
 
             <!-- Botón hamburguesa para móvil -->
@@ -81,6 +96,20 @@
                 <p class="section-subtitle">Descubre nuestra amplia gama de cubos y puzzles</p>
             </div>
 
+            <!-- ÚNICO: Controles de paginación -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    <span id="pagination-info-text">Mostrando 0 de 0 productos</span>
+                    <select id="items-per-page" class="items-per-page-select">
+                        <option value="6">6 por página</option>
+                        <option value="12" selected>12 por página</option>
+                        <option value="24">24 por página</option>
+                        <option value="48">Todos</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Filtros de productos -->
             <div class="product-filters">
                 <!-- Los botones de filtro se generarán dinámicamente -->
             </div>
@@ -88,6 +117,27 @@
             <!-- Grid de productos -->
             <div class="products-grid">
                 <!-- Los productos se cargarán dinámicamente desde Appwrite -->
+            </div>
+
+            <!-- ÚNICO: Controles de paginación inferior -->
+            <div class="pagination-controls">
+                <button id="first-page" class="pagination-btn" title="Primera página">
+                    <i class="fas fa-angle-double-left"></i>
+                </button>
+                <button id="prev-page" class="pagination-btn" title="Página anterior">
+                    <i class="fas fa-angle-left"></i>
+                </button>
+                
+                <div class="pagination-numbers" id="pagination-numbers">
+                    <!-- Los números de página se generarán dinámicamente -->
+                </div>
+                
+                <button id="next-page" class="pagination-btn" title="Página siguiente">
+                    <i class="fas fa-angle-right"></i>
+                </button>
+                <button id="last-page" class="pagination-btn" title="Última página">
+                    <i class="fas fa-angle-double-right"></i>
+                </button>
             </div>
 
             <!-- Sección de información adicional -->
