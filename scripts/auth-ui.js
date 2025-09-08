@@ -1,4 +1,4 @@
-import { authService } from './auth.js';
+import { authService } from './services/auth.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const loginForm = document.getElementById('login-form');
