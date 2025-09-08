@@ -92,6 +92,7 @@ class PedidosService {
             direccion_envio: `${datosCheckout.direccion}, ${datosCheckout.municipio}, ${datosCheckout.departamento}`,
 
             // Totales
+            subtotal: totales.subtotal,
             costo_envio: totales.envio,
             total: totales.total,
 
