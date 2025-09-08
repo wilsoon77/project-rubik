@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado - AetherCubix</title>
+    <meta name="description" content="Tu pedido ha sido confirmado exitosamente.">
+
+    <!-- Estilos (iguales que otras páginas) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/613/613962.png" />
+</head>
+
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación (igual que otras páginas) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                
+                <li class="auth-nav-item" id="auth-nav-item">
+                    <button class="auth-btn" id="auth-btn" onclick="showAuthModal()">
+                        <i class="fas fa-user"></i> Iniciar Sesión
+                    </button>
+                </li>
+                
+                <li class="cart-nav-item" id="cart-nav-item" style="display: none;">
+                    <a href="carrito.html" class="cart-link" title="Ver carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-counter" id="cart-counter">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección principal de confirmación -->
+    <section id="confirmacion" class="confirmacion-section page-section">
+        <div class="container">
+            
+            <!-- Estado de carga -->
+            <div id="loading-state" class="loading-state">
+                <div class="loading-spinner"></div>
+                <h2>Cargando detalles de tu pedido...</h2>
+                <p>Por favor espera un momento</p>
+            </div>
+
+            <!-- Estado de error -->
+            <div id="error-state" class="error-state" style="display: none;">
+                <div class="error-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2>Error cargando el pedido</h2>
+                <p id="error-message">No se pudo cargar la información del pedido.</p>
+                <div class="error-actions">
+                    <a href="productos.html" class="btn btn-primary">
+                        <i class="fas fa-shopping-bag"></i> Seguir Comprando
+                    </a>
+                    <button onclick="window.location.reload()" class="btn btn-secondary">
+                        <i class="fas fa-refresh"></i> Intentar Nuevamente
+                    </button>
+                </div>
+            </div>
+
+            <!-- Estado de éxito -->
+            <div id="success-state" class="success-state" style="display: none;">
+                
+                <!-- Encabezado de éxito -->
+                <div class="success-header">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h1 class="success-title">¡Pedido Confirmado!</h1>
+                    <p class="success-subtitle">Tu pedido ha sido procesado exitosamente</p>
+                </div>
+
+                <!-- Información del pedido -->
+                <div class="confirmation-content">
+                    <div class="confirmation-grid">
+                        
+                        <!-- Resumen del pedido -->
+                        <div class="order-summary-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-receipt"></i> Resumen del Pedido</h3>
+                                <div class="order-id" id="order-id">
+                                    <span>Pedido: #</span>
+                                    <strong id="numero-pedido">AC25010100001</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="order-details">
+                                <div class="detail-row">
+                                    <span>Fecha:</span>
+                                    <span id="fecha-pedido">6 de Enero, 2025</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Estado:</span>
+                                    <span class="status-badge" id="estado-pedido">Pendiente</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Método de Pago:</span>
+                                    <span id="metodo-pago">Pago contra entrega</span>
+                                </div>
+                            </div>
+
+                            <!-- Productos del pedido -->
+                            <div class="order-items">
+                                <h4><i class="fas fa-cube"></i> Productos Comprados</h4>
+                                <div id="productos-list">
+                                    <!-- Los productos se cargarán dinámicamente -->
+                                </div>
+                            </div>
+
+                            <!-- Totales -->
+                            <div class="order-totals">
+                                <div class="total-row">
+                                    <span>Costo de Envío:</span>
+                                    <span id="costo-envio">Q 25.00</span>
+                                </div>
+                                <div class="total-row final-total">
+                                    <span>Total Pagado:</span>
+                                    <span id="total-pedido">Q 150.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información de entrega -->
+                        <div class="delivery-info-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-truck"></i> Información de Entrega</h3>
+                            </div>
+                            
+                            <div class="delivery-details">
+                                <div class="delivery-address">
+                                    <h4>Dirección de Entrega</h4>
+                                    <p id="direccion-entrega">
+                                        <!-- Se cargará dinámicamente -->
+                                    </p>
+                                </div>
+
+                                <div class="delivery-contact">
+                                    <h4>Datos de Contacto</h4>
+                                    <p><strong>Nombre:</strong> <span id="nombre-cliente"></span></p>
+                                    <p><strong>Teléfono:</strong> <span id="telefono-cliente"></span></p>
+                                    <p><strong>Email:</strong> <span id="email-cliente"></span></p>
+                                </div>
+
+                                <div class="delivery-timeline">
+                                    <h4>Tiempo Estimado de Entrega</h4>
+                                    <div class="timeline-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>2-3 días hábiles</span>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <i class="fas fa-phone"></i>
+                                        <span>Te contactaremos antes de la entrega</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notas adicionales -->
+                    <div id="notas-container" class="notas-container" style="display: none;">
+                        <div class="notas-card">
+                            <h4><i class="fas fa-sticky-note"></i> Notas del Pedido</h4>
+                            <p id="notas-pedido"></p>
+                        </div>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="confirmation-actions">
+                        <a href="productos.html" class="btn btn-primary btn-large">
+                            <i class="fas fa-shopping-bag"></i> Seguir Comprando
+                        </a>
+                        <button onclick="imprimirPedido()" class="btn btn-secondary">
+                            <i class="fas fa-print"></i> Imprimir Pedido
+                        </button>
+                        <a href="mailto:info@aethercubix.com?subject=Consulta sobre pedido #" id="email-soporte" class="btn btn-outline">
+                            <i class="fas fa-envelope"></i> Contactar Soporte
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (igual que otras páginas) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>AetherCubix</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik y puzzles 3D.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-phone"></i> +502 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> info@aethercubix.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2025 AetherCubix. Todos los derechos reservados.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/confirmacion-page.js"></script>
+</body>
+</html>

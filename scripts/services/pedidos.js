@@ -92,7 +92,6 @@ class PedidosService {
             direccion_envio: `${datosCheckout.direccion}, ${datosCheckout.municipio}, ${datosCheckout.departamento}`,
 
             // Totales
-            subtotal: totales.subtotal,
             costo_envio: totales.envio,
             total: totales.total,
 
@@ -104,14 +103,6 @@ class PedidosService {
             // Fecha
             fecha_creacion: new Date().toISOString()
 
-            // ❌ ELIMINAR ESTOS CAMPOS (no están en tu tabla):
-            // numero_pedido: this.generarNumeroPedido(), ← ELIMINAR
-            // direccion_departamento: datosCheckout.departamento, ← ELIMINAR
-            // direccion_municipio: datosCheckout.municipio, ← ELIMINAR
-            // direccion_completa: datosCheckout.direccion, ← ELIMINAR
-            // impuestos: totales.impuestos, ← ELIMINAR
-            // envio: totales.envio, ← ELIMINAR
-            // fecha_pedido: new Date().toISOString() ← ELIMINAR
         };
 
         console.log('📝 [Pedidos]: Datos a enviar:', pedidoData);
@@ -202,6 +193,33 @@ class PedidosService {
     }
 
     /**
+ * Obtener TODOS los pedidos (para administradores)
+ */
+async obtenerTodosPedidos() {
+    try {
+        console.log('📋 [Pedidos]: Obteniendo todos los pedidos para admin...');
+
+        const { Query } = await import('./appwrite.js');
+
+        const response = await databases.listDocuments(
+            this.databaseId,
+            this.pedidosCollectionId,
+            [
+                Query.orderDesc('fecha_creacion'),
+                Query.limit(1000) // Limitar a 1000 pedidos más recientes
+            ]
+        );
+
+        console.log(`✅ [Pedidos]: ${response.documents.length} pedidos obtenidos para admin`);
+        return response.documents;
+
+    } catch (error) {
+        console.error('❌ [Pedidos]: Error obteniendo todos los pedidos:', error);
+        throw error;
+    }
+}
+
+    /**
      * Obtener pedidos de un usuario
      */
     async obtenerPedidosUsuario() {
@@ -218,10 +236,12 @@ class PedidosService {
                 this.pedidosCollectionId,
                 [
                     Query.equal('usuario_id', usuario.$id),
-                    Query.orderDesc('fecha_pedido')
+                    Query.orderDesc('fecha_creacion'),
+                    Query.limit(100)
                 ]
             );
 
+            console.log(`✅ [Pedidos]: ${response.documents.length} detalles encontrados`);
             return response.documents;
 
         } catch (error) {

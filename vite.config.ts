@@ -8,11 +8,16 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       input: {
+        // Páginas principales
         main: './index.html',
         about: './sobre-nosotros.html',
         products: './productos.html',
         learn: './aprende.html',
-        contact: './contacto.html'
+        contact: './contacto.html',
+        
+        // ✅ AGREGAR PANEL ADMINISTRATIVO
+        'admin-dashboard': './admin/index.html',
+        'admin-productos': './admin/gestion-productos.html'
       }
     }
   },

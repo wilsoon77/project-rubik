@@ -11,11 +11,11 @@ let usuario = null;
 // ===========================
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('🛒 [Checkout]: Inicializando página de checkout...');
-    
+
     try {
         // Inicializar autenticación
         await authService.inicializar();
-        
+
         // Verificar usuario logueado
         usuario = await authService.obtenerUsuarioActual();
         if (!usuario) {
@@ -25,16 +25,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             }, 2000);
             return;
         }
-        
+
         // Cargar carrito
         await cargarDatosCheckout();
-        
+
         // Configurar formulario
         configurarFormulario();
-        
+
         // Configurar event listeners
         configurarEventListeners();
-        
+
     } catch (error) {
         console.error('❌ [Checkout]: Error en inicialización:', error);
         mostrarError('Error cargando la página de checkout');
@@ -53,7 +53,7 @@ async function cargarDatosCheckout() {
         // Cargar carrito desde BD
         await carritoService.cargarCarritoDesdeDB();
         carritoActual = carritoService.obtenerCarrito();
-        
+
         if (carritoActual.length === 0) {
             mostrarError('Tu carrito está vacío');
             setTimeout(() => {
@@ -61,12 +61,12 @@ async function cargarDatosCheckout() {
             }, 2000);
             return;
         }
-        
+
         // Renderizar resumen del pedido
         renderizarResumenPedido();
-        
+
         console.log('✅ [Checkout]: Datos cargados:', carritoActual);
-        
+
     } catch (error) {
         console.error('❌ [Checkout]: Error cargando datos:', error);
         throw error;
@@ -81,12 +81,12 @@ function configurarFormulario() {
         // Prellenar campos conocidos
         document.getElementById('email').value = usuario.email || '';
         document.getElementById('nombre').value = usuario.name || '';
-        
+
         // Si hay datos del perfil, usarlos
         if (usuario.telefono) {
             document.getElementById('telefono').value = usuario.telefono;
         }
-        
+
     } catch (error) {
         console.error('❌ [Checkout]: Error configurando formulario:', error);
     }
@@ -98,14 +98,14 @@ function configurarFormulario() {
 function renderizarResumenPedido() {
     const container = document.getElementById('order-items');
     if (!container) return;
-    
+
     container.innerHTML = '';
-    
+
     // Agregar cada producto
     carritoActual.forEach(item => {
         const itemElement = document.createElement('div');
         itemElement.className = 'order-item';
-        
+
         itemElement.innerHTML = `
             <div class="order-item-image">
                 <img src="${item.imagen || 'https://via.placeholder.com/50x50?text=Sin+Imagen'}" 
@@ -118,10 +118,10 @@ function renderizarResumenPedido() {
                 <div class="order-item-quantity">Cantidad: ${item.cantidad}</div>
             </div>
         `;
-        
+
         container.appendChild(itemElement);
     });
-    
+
     // Actualizar totales
     actualizarTotales();
 }
@@ -131,14 +131,14 @@ function renderizarResumenPedido() {
  */
 function actualizarTotales() {
     const totales = carritoService.calcularTotales();
-    
+
     const elements = {
         subtotal: document.getElementById('subtotal'),
         shipping: document.getElementById('shipping'),
         tax: document.getElementById('tax'),
         total: document.getElementById('total')
     };
-    
+
     if (elements.subtotal) elements.subtotal.textContent = `Q ${totales.subtotal.toFixed(2)}`;
     if (elements.shipping) {
         elements.shipping.textContent = totales.envio === 0 ? 'GRATIS' : `Q ${totales.envio.toFixed(2)}`;
@@ -159,7 +159,7 @@ function configurarEventListeners() {
     if (form) {
         form.addEventListener('submit', handleFormSubmit);
     }
-    
+
     // Validación en tiempo real
     const inputs = form.querySelectorAll('input, select, textarea');
     inputs.forEach(input => {
@@ -173,21 +173,21 @@ function configurarEventListeners() {
  */
 async function handleFormSubmit(e) {
     e.preventDefault();
-    
+
     const submitBtn = e.target.querySelector('button[type="submit"]');
     const textoOriginal = submitBtn.textContent;
-    
+
     try {
         // Mostrar loading
         submitBtn.classList.add('btn-loading');
         submitBtn.textContent = 'Procesando...';
         submitBtn.disabled = true;
-        
+
         // Validar formulario
         if (!validarFormulario()) {
             throw new Error('Por favor completa todos los campos requeridos');
         }
-        
+
         // Obtener datos del formulario
         const formData = new FormData(e.target);
         const datosCheckout = {
@@ -199,23 +199,23 @@ async function handleFormSubmit(e) {
             metodoPago: formData.get('metodoPago'),
             notas: formData.get('notas') || ''
         };
-        
+
         console.log('🛒 [Checkout]: Datos del formulario:', datosCheckout);
-        
+
         // Crear pedido
         const pedido = await pedidosService.crearPedido(datosCheckout);
-        
+
         // Mostrar éxito
         mostrarNotificacion('¡Pedido creado exitosamente!', 'success');
-        
+
         // Redirigir a página de confirmación
         setTimeout(() => {
-            window.location.href = `confirmacion.html?pedido=${pedido.$id}&numero=${pedido.numero_pedido}`;
+            window.location.href = `confirmacion.html?pedido=${pedido.$id}`;
         }, 1500);
-        
+
     } catch (error) {
         console.error('❌ [Checkout]: Error procesando pedido:', error);
-        
+
         let mensaje = 'Error procesando el pedido';
         if (error.message.includes('Stock insuficiente')) {
             mensaje = error.message;
@@ -224,9 +224,9 @@ async function handleFormSubmit(e) {
         } else if (error.message.includes('carrito está vacío')) {
             mensaje = 'Tu carrito está vacío';
         }
-        
+
         mostrarError(mensaje);
-        
+
     } finally {
         // Restaurar botón
         submitBtn.classList.remove('btn-loading');
@@ -241,15 +241,15 @@ async function handleFormSubmit(e) {
 function validarFormulario() {
     const form = document.getElementById('checkout-form');
     const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
-    
+
     let esValido = true;
-    
+
     inputs.forEach(input => {
         if (!validarCampo(input)) {
             esValido = false;
         }
     });
-    
+
     return esValido;
 }
 
@@ -259,16 +259,16 @@ function validarFormulario() {
 function validarCampo(input) {
     const grupo = input.closest('.form-group');
     const valor = input.value.trim();
-    
+
     // Limpiar estados previos
     limpiarError(input);
-    
+
     // Validar campo requerido
     if (input.hasAttribute('required') && !valor) {
         mostrarErrorCampo(grupo, 'Este campo es requerido');
         return false;
     }
-    
+
     // Validaciones específicas
     switch (input.type) {
         case 'email':
@@ -277,7 +277,7 @@ function validarCampo(input) {
                 return false;
             }
             break;
-            
+
         case 'tel':
             if (valor && !validarTelefono(valor)) {
                 mostrarErrorCampo(grupo, 'Teléfono inválido');
@@ -285,7 +285,7 @@ function validarCampo(input) {
             }
             break;
     }
-    
+
     // Campo válido
     grupo.classList.add('success');
     return true;
@@ -297,13 +297,13 @@ function validarCampo(input) {
 function mostrarErrorCampo(grupo, mensaje) {
     grupo.classList.remove('success');
     grupo.classList.add('error');
-    
+
     // Eliminar mensaje previo
     const mensajePrevio = grupo.querySelector('.error-message');
     if (mensajePrevio) {
         mensajePrevio.remove();
     }
-    
+
     // Agregar nuevo mensaje
     const mensajeError = document.createElement('div');
     mensajeError.className = 'error-message';
@@ -317,7 +317,7 @@ function mostrarErrorCampo(grupo, mensaje) {
 function limpiarError(input) {
     const grupo = input.closest('.form-group');
     grupo.classList.remove('error', 'success');
-    
+
     const mensajeError = grupo.querySelector('.error-message');
     if (mensajeError) {
         mensajeError.remove();
@@ -348,7 +348,7 @@ function mostrarNotificacion(mensaje, tipo = 'info') {
         <i class="fas fa-${getIconForType(tipo)}"></i>
         <span>${mensaje}</span>
     `;
-    
+
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -366,9 +366,9 @@ function mostrarNotificacion(mensaje, tipo = 'info') {
         animation: slideIn 0.3s ease;
         max-width: 400px;
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
@@ -380,7 +380,7 @@ function mostrarError(mensaje) {
 }
 
 function getIconForType(tipo) {
-    switch(tipo) {
+    switch (tipo) {
         case 'success': return 'check';
         case 'error': return 'exclamation-triangle';
         case 'warning': return 'exclamation-triangle';
@@ -389,7 +389,7 @@ function getIconForType(tipo) {
 }
 
 function getColorForType(tipo) {
-    switch(tipo) {
+    switch (tipo) {
         case 'success': return '#28a745';
         case 'error': return '#dc3545';
         case 'warning': return '#ffc107';

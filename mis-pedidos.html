@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - AetherCubix</title>
+    <meta name="description" content="Revisa el historial de todos tus pedidos y compras en AetherCubix.">
+
+    <!-- Estilos (iguales que otras páginas) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/613/613962.png" />
+</head>
+
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                
+                <li class="auth-nav-item" id="auth-nav-item">
+                    <button class="auth-btn" id="auth-btn" onclick="showAuthModal()">
+                        <i class="fas fa-user"></i> Iniciar Sesión
+                    </button>
+                </li>
+                
+                <li class="cart-nav-item" id="cart-nav-item" style="display: none;">
+                    <a href="carrito.html" class="cart-link" title="Ver carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-counter" id="cart-counter">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección principal -->
+    <section id="mis-pedidos" class="mis-pedidos-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Mis Pedidos</h1>
+                <p class="section-subtitle">Historial completo de todas tus compras</p>
+            </div>
+
+            <!-- Estados de la página -->
+            
+            <!-- Estado de carga -->
+            <div id="loading-state" class="loading-state">
+                <div class="loading-spinner"></div>
+                <h3>Cargando tus pedidos...</h3>
+                <p>Por favor espera un momento</p>
+            </div>
+
+            <!-- Estado sin login -->
+            <div id="not-logged-state" class="not-logged-state" style="display: none;">
+                <div class="not-logged-content">
+                    <i class="fas fa-user-lock"></i>
+                    <h2>Inicia Sesión</h2>
+                    <p>Debes iniciar sesión para ver tu historial de pedidos</p>
+                    <a href="login.html" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </a>
+                </div>
+            </div>
+
+            <!-- Estado sin pedidos -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <div class="empty-content">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h2>No tienes pedidos aún</h2>
+                    <p>Explora nuestros productos y realiza tu primera compra</p>
+                    <a href="productos.html" class="btn btn-primary">
+                        <i class="fas fa-cube"></i> Ver Productos
+                    </a>
+                </div>
+            </div>
+
+            <!-- Estado con pedidos -->
+            <div id="pedidos-content" class="pedidos-content" style="display: none;">
+                
+                <!-- Filtros y búsqueda -->
+                <div class="pedidos-filters">
+                    <div class="filter-group">
+                        <label for="estado-filter">Filtrar por estado:</label>
+                        <select id="estado-filter">
+                            <option value="">Todos los estados</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="confirmado">Confirmado</option>
+                            <option value="enviado">Enviado</option>
+                            <option value="entregado">Entregado</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="fecha-filter">Filtrar por fecha:</label>
+                        <select id="fecha-filter">
+                            <option value="">Todas las fechas</option>
+                            <option value="ultima-semana">Última semana</option>
+                            <option value="ultimo-mes">Último mes</option>
+                            <option value="ultimos-3-meses">Últimos 3 meses</option>
+                            <option value="ultimo-año">Último año</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <button id="limpiar-filtros" class="btn btn-secondary">
+                            <i class="fas fa-eraser"></i> Limpiar Filtros
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Resumen de pedidos -->
+                <div class="pedidos-summary">
+                    <div class="summary-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="total-pedidos">0</span>
+                                <span class="stat-label">Total Pedidos</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="total-gastado">Q 0.00</span>
+                                <span class="stat-label">Total Gastado</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="pedidos-pendientes">0</span>
+                                <span class="stat-label">Pendientes</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" id="pedidos-entregados">0</span>
+                                <span class="stat-label">Entregados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de pedidos -->
+                <div class="pedidos-list" id="pedidos-list">
+                    <!-- Los pedidos se cargarán dinámicamente -->
+                </div>
+
+                <!-- Paginación -->
+                <div id="pagination-container" class="pagination-container" style="display: none;">
+                    <div class="pagination">
+                        <button id="prev-page" class="pagination-btn" disabled>
+                            <i class="fas fa-chevron-left"></i> Anterior
+                        </button>
+                        
+                        <div class="pagination-info">
+                            <span>Página <span id="current-page">1</span> de <span id="total-pages">1</span></span>
+                        </div>
+                        
+                        <button id="next-page" class="pagination-btn" disabled>
+                            Siguiente <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estado de error -->
+            <div id="error-state" class="error-state" style="display: none;">
+                <div class="error-content">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h2>Error cargando pedidos</h2>
+                    <p id="error-message">No se pudieron cargar tus pedidos en este momento.</p>
+                    <button onclick="window.location.reload()" class="btn btn-primary">
+                        <i class="fas fa-refresh"></i> Intentar Nuevamente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de detalles del pedido -->
+    <div id="pedido-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Detalles del Pedido</h3>
+                <button class="modal-close" onclick="cerrarModalPedido()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body" id="modal-body">
+                <!-- Contenido del modal se carga dinámicamente -->
+            </div>
+            
+            <div class="modal-footer">
+                <button onclick="cerrarModalPedido()" class="btn btn-secondary">
+                    Cerrar
+                </button>
+                <button id="modal-print-btn" onclick="imprimirPedidoModal()" class="btn btn-primary">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>AetherCubix</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik y puzzles 3D.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="productos.html">Productos</a></li>
+                        <li><a href="carrito.html">Mi Carrito</a></li>
+                        <li><a href="mis-pedidos.html">Mis Pedidos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-phone"></i> +502 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> info@aethercubix.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2025 AetherCubix. Todos los derechos reservados.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/mis-pedidos-page.js"></script>
+</body>
+</html>

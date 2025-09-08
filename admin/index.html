@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="styles/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Favicon -->
+   
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/613/613962.png" />
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -21,7 +20,8 @@
                 <span>AetherCubix Admin</span>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="index.html" class="active"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="#dashboard" class="active" onclick="mostrarSeccion('dashboard')"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="#pedidos" onclick="mostrarSeccion('pedidos')"><i class="fas fa-shopping-cart"></i> Gestión de Pedidos</a></li>
                 <li><a href="gestion-productos.html"><i class="fas fa-box"></i> Gestión de Productos</a></li>
                 <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver al sitio</a></li>
             </ul>
@@ -30,90 +30,302 @@
         <!-- Main content -->
         <main class="admin-main">
             <header class="admin-header">
-                <h1>Dashboard Administrativo</h1>
+                <h1 id="page-title">Dashboard Administrativo</h1>
                 <div class="admin-user">
                     <i class="fas fa-user-circle"></i>
                     <span>Administrador</span>
+                    <button class="btn-notification" id="notifications-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count" id="notification-count">0</span>
+                    </button>
                 </div>
             </header>
 
             <div class="admin-content">
-                <!-- Stats Cards existentes + nueva card -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-box"></i>
-                        <div class="stat-info">
-                            <h3 id="total-products">0</h3>
-                            <p>Total Productos</p>
+                <!-- ===== SECCIÓN DASHBOARD ===== -->
+                <div id="section-dashboard" class="admin-section active">
+                    <!-- Stats Cards combinadas -->
+                    <div class="stats-grid">
+                        <!-- Stats originales del inventario -->
+                        <div class="stat-card">
+                            <i class="fas fa-box"></i>
+                            <div class="stat-info">
+                                <h3 id="total-products">0</h3>
+                                <p>Total Productos</p>
+                                <div class="stat-change positive" id="products-change">+0%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-layer-group"></i>
+                            <div class="stat-info">
+                                <h3 id="total-categories">0</h3>
+                                <p>Categorías</p>
+                                <div class="stat-change neutral">3 tipos</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-chart-line"></i>
+                            <div class="stat-info">
+                                <h3 id="total-value">Q 0.00</h3>
+                                <p>Valor Inventario</p>
+                                <div class="stat-change positive" id="inventory-change">+0%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card alert">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="stat-info">
+                                <h3 id="low-stock-products">0</h3>
+                                <p>Stock Bajo</p>
+                                <div class="stat-change negative">Revisar</div>
+                            </div>
+                        </div>
+                  <!--en desarrollo -->      
+                        <!-- Nuevas stats de pedidos
+                        <div class="stat-card">
+                            <i class="fas fa-shopping-cart"></i>
+                            <div class="stat-info">
+                                <h3 id="pedidos-hoy">0</h3>
+                                <p>Pedidos Hoy</p>
+                                <div class="stat-change positive" id="pedidos-change">+0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <div class="stat-info">
+                                <h3 id="ventas-hoy">Q 0.00</h3>
+                                <p>Ventas Hoy</p>
+                                <div class="stat-change positive" id="ventas-change">+Q 0.00</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <div class="stat-info">
+                                <h3 id="total-usuarios">0</h3>
+                                <p>Total Usuarios</p>
+                                <div class="stat-change positive" id="usuarios-change">+0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card warning">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <h3 id="pedidos-pendientes">0</h3>
+                                <p>Pendientes</p>
+                                <div class="stat-change neutral">Procesar</div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <!-- Resumen Rápido -->
+                    <div class="summary-section">
+                        <h3><i class="fas fa-chart-line"></i> Resumen del Día</h3>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-label">Ingresos Totales</div>
+                                <div class="summary-value" id="ingresos-totales">Q 0.00</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Productos Vendidos</div>
+                                <div class="summary-value" id="productos-vendidos">0</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Ticket Promedio</div>
+                                <div class="summary-value" id="ticket-promedio">Q 0.00</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Conversión</div>
+                                <div class="summary-value" id="tasa-conversion">0%</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <i class="fas fa-layer-group"></i>
-                        <div class="stat-info">
-                            <h3 id="total-categories">0</h3>
-                            <p>Categorías</p>
+
+                    <!-- Gráficas combinadas -->
+                    <div class="charts-grid">
+                        <!-- Gráficas originales de inventario -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-pie"></i> Productos por Categoría</h4>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-bar"></i> Estado del Stock</h4>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="stockChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- Nuevas gráficas de ventas -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-line"></i> Ventas Últimos 7 Días</h4>
+                                <select id="ventas-period">
+                                    <option value="7">7 días</option>
+                                    <option value="30">30 días</option>
+                                    <option value="90">3 meses</option>
+                                </select>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="ventasChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-pie"></i> Estados de Pedidos</h4>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="pedidosChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card large">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-area"></i> Valor por Categoría</h4>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="valueChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-bar"></i> Productos Más Vendidos</h4>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="productosChart"></canvas>
+                            </div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <i class="fas fa-chart-line"></i>
-                        <div class="stat-info">
-                            <h3 id="total-value">Q 0.00</h3>
-                            <p>Valor Inventario</p>
+
+                    <!-- Pedidos Recientes -->
+                    <div class="recent-orders">
+                        <div class="section-header">
+                            <h3><i class="fas fa-clock"></i> Pedidos Recientes</h3>
+                            <a href="#pedidos" onclick="mostrarSeccion('pedidos')" class="btn btn-outline">Ver Todos</a>
+                        </div>
+                        <div class="orders-table-container">
+                            <table class="orders-table" id="recent-orders-table">
+                                <thead>
+                                    <tr>
+                                        <th>Pedido</th>
+                                        <th>Cliente</th>
+                                        <th>Total</th>
+                                        <th>Estado</th>
+                                        <th>Fecha</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-orders-body">
+                                    <!-- Se cargan dinámicamente -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <!-- ⬇️ NUEVA CARD -->
-                    <div class="stat-card">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div class="stat-info">
-                            <h3 id="low-stock-products">0</h3>
-                            <p>Stock Bajo</p>
+
+                    <!-- Quick Actions mejoradas -->
+                    <div class="quick-actions">
+                        <h3>Acciones Rápidas</h3>
+                        <div class="action-buttons">
+                            <a href="gestion-productos.html" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Nuevo Producto
+                            </a>
+                            <button class="btn btn-secondary" onclick="loadDashboardStats()">
+                                <i class="fas fa-sync"></i> Actualizar
+                            </button>
+                            <button class="btn btn-info" onclick="exportStats()">
+                                <i class="fas fa-download"></i> Exportar
+                            </button>
+                            <button class="btn btn-warning" onclick="mostrarAlertasStock()">
+                                <i class="fas fa-bell"></i> Alertas Stock
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- ⬇️ NUEVA SECCIÓN DE GRÁFICAS -->
-                <div class="charts-grid">
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h4><i class="fas fa-chart-pie"></i> Productos por Categoría</h4>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="categoryChart"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h4><i class="fas fa-chart-bar"></i> Estado del Stock</h4>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="stockChart"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-card large">
-                        <div class="chart-header">
-                            <h4><i class="fas fa-chart-area"></i> Valor por Categoría</h4>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="valueChart"></canvas>
+                <!-- ===== SECCIÓN GESTIÓN DE PEDIDOS ===== -->
+                <div id="section-pedidos" class="admin-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-shopping-cart"></i> Gestión de Pedidos</h2>
+                        <div class="section-filters">
+                            <select id="filtro-estado" class="filter-select">
+                                <option value="">Todos los estados</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="confirmado">Confirmado</option>
+                                <option value="enviado">Enviado</option>
+                                <option value="entregado">Entregado</option>
+                                <option value="cancelado">Cancelado</option>
+                            </select>
+                            <input type="date" id="filtro-fecha" class="filter-input">
+                            <input type="text" id="buscar-pedido" placeholder="Buscar pedido o cliente..." class="search-input">
+                            <button class="btn btn-secondary" onclick="limpiarFiltrosPedidos()">
+                                <i class="fas fa-eraser"></i> Limpiar
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Quick Actions mejoradas -->
-                <div class="quick-actions">
-                    <h3>Acciones Rápidas</h3>
-                    <div class="action-buttons">
-                        <a href="gestion-productos.html" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Nuevo Producto
-                        </a>
-                        <button class="btn btn-secondary" onclick="loadDashboardStats()">
-                            <i class="fas fa-sync"></i> Actualizar Estadísticas
+                    <!-- Estadísticas de Pedidos -->
+                    <div class="pedidos-stats">
+                        <div class="stat-card small">
+                            <div class="stat-info">
+                                <h4 id="total-pedidos-filtrados">0</h4>
+                                <p>Total Pedidos</p>
+                            </div>
+                        </div>
+                        <div class="stat-card small">
+                            <div class="stat-info">
+                                <h4 id="total-ventas-filtradas">Q 0.00</h4>
+                                <p>Total Ventas</p>
+                            </div>
+                        </div>
+                        <div class="stat-card small">
+                            <div class="stat-info">
+                                <h4 id="promedio-pedido">Q 0.00</h4>
+                                <p>Promedio/Pedido</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Pedidos -->
+                    <div class="pedidos-table-container">
+                        <table class="admin-table" id="pedidos-table">
+                            <thead>
+                                <tr>
+                                    <th>Pedido</th>
+                                    <th>Cliente</th>
+                                    <th>Productos</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pedidos-table-body">
+                                <!-- Se cargan dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Paginación -->
+                    <div class="pagination" id="pedidos-pagination">
+                        <button class="btn-pagination" id="prev-pedidos" onclick="cambiarPaginaPedidos(-1)">
+                            <i class="fas fa-chevron-left"></i> Anterior
                         </button>
-                        <!-- ⬇️ NUEVO BOTÓN -->
-                        <button class="btn btn-info" onclick="exportStats()">
-                            <i class="fas fa-download"></i> Exportar Datos
+                        <span class="pagination-info">
+                            Página <span id="pagina-actual-pedidos">1</span> de <span id="total-paginas-pedidos">1</span>
+                        </span>
+                        <button class="btn-pagination" id="next-pedidos" onclick="cambiarPaginaPedidos(1)">
+                            Siguiente <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
                 </div>
@@ -121,6 +333,69 @@
         </main>
     </div>
 
+    <!-- Modales existentes -->
+    <div id="pedido-details-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="pedido-modal-title">Detalles del Pedido</h3>
+                <button class="modal-close" onclick="cerrarModalPedido()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="pedido-modal-body">
+                <!-- Contenido dinámico -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="cerrarModalPedido()">
+                    Cerrar
+                </button>
+                <button class="btn btn-primary" id="imprimir-pedido-btn" onclick="imprimirPedidoAdmin()">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="estado-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Cambiar Estado del Pedido</h3>
+                <button class="modal-close" onclick="cerrarModalEstado()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Pedido: <strong id="pedido-numero-estado"></strong></p>
+                <p>Cliente: <strong id="cliente-nombre-estado"></strong></p>
+                <div class="form-group">
+                    <label for="nuevo-estado">Nuevo Estado:</label>
+                    <select id="nuevo-estado" class="form-control">
+                        <option value="pendiente">Pendiente</option>
+                        <option value="confirmado">Confirmado</option>
+                        <option value="enviado">Enviado</option>
+                        <option value="entregado">Entregado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notas-estado">Notas (opcional):</label>
+                    <textarea id="notas-estado" class="form-control" rows="3" placeholder="Agregar notas sobre el cambio de estado..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="cerrarModalEstado()">
+                    Cancelar
+                </button>
+                <button class="btn btn-primary" onclick="confirmarCambioEstado()">
+                    <i class="fas fa-save"></i> Guardar Cambio
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script type="module" src="scripts/admin.js"></script>
 </body>
 </html>
