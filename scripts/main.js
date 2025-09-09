@@ -51,15 +51,15 @@ const contactForm = document.getElementById('contactForm');
 // ===========================
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('🚀 [App]: Inicializando aplicación');
-    
+
     // Inicializar autenticación PRIMERO
     await authService.inicializar();
-    
+
     // ✅ CARGAR CARRITO DESPUÉS DE AUTH
     if (await authService.estaAutenticado()) {
         await carritoService.cargarCarritoDesdeDB();
     }
-    
+
     // Luego inicializar el resto
     init();
 });
@@ -187,17 +187,12 @@ async function loadProductsFromDB() {
             </div>
         `;
 
-        // CORREGIDO: Usar CONFIG importado
-        const response = await databases.listDocuments(
-            CONFIG.databaseId,           // ← Usando CONFIG importado
-            CONFIG.collections.producto,  // ← Usando CONFIG importado
-            []  // Sin queries por ahora
-        );
-
+        // Usar el servicio actualizado
+        const response = await ProductoService.getAllProducts();
         allProducts = response.documents || [];
         filteredProductsArray = [...allProducts];
 
-        console.log(`🎲 [AetherCubix]: ${allProducts.length} productos cargados`);
+        console.log(`🎲 [AetherCubix]: ${allProducts.length} productos cargados exitosamente`);
 
         // Cargar filtros dinámicos
         await loadDynamicFilters();
@@ -207,6 +202,11 @@ async function loadProductsFromDB() {
 
         // Renderizar productos con paginación
         renderProductsWithPagination();
+
+        // Log de debug para verificar
+        console.log('🎲 [Debug]: Productos por página:', itemsPerProductPage);
+        console.log('🎲 [Debug]: Total páginas calculadas:', totalProductPages);
+        console.log('🎲 [Debug]: Productos filtrados:', filteredProductsArray.length);
 
     } catch (error) {
         console.error('🎲 [AetherCubix]: Error cargando productos:', error);
@@ -239,8 +239,11 @@ function setupProductPagination() {
     if (itemsPerPageSelect) {
         itemsPerPageSelect.addEventListener('change', (e) => {
             const value = e.target.value;
-            itemsPerProductPage = value === '48' ? 999 : parseInt(value);
-            currentProductPage = 1;
+            itemsPerProductPage = value === '48' ? filteredProductsArray.length : parseInt(value);
+            currentProductPage = 1; // Resetear a primera página
+
+            console.log('🎲 [Debug]: Cambiado a', itemsPerProductPage, 'productos por página');
+
             renderProductsWithPagination();
         });
     }
@@ -251,6 +254,19 @@ function setupProductPagination() {
     document.getElementById('next-page')?.addEventListener('click', () => goToProductPage(currentProductPage + 1));
     document.getElementById('last-page')?.addEventListener('click', () => goToProductPage(totalProductPages));
 }
+
+// Añadir esta función temporal para debuggear
+window.debugPagination = function() {
+    console.log('=== DEBUG PAGINACIÓN ===');
+    console.log('Total productos:', allProducts.length);
+    console.log('Productos filtrados:', filteredProductsArray.length);
+    console.log('Productos por página:', itemsPerProductPage);
+    console.log('Página actual:', currentProductPage);
+    console.log('Total páginas:', totalProductPages);
+    console.log('Categorías únicas:', [...new Set(allProducts.map(p => p.categoria))]);
+    console.log('========================');
+};
+
 
 /**
  * Función para ir a una página específica de productos
@@ -275,8 +291,14 @@ function goToProductPage(page) {
  * Nueva función para renderizar productos con paginación
  */
 function renderProductsWithPagination() {
+    console.log('🎲 [Debug]: Iniciando renderProductsWithPagination');
+    console.log('🎲 [Debug]: Productos disponibles:', filteredProductsArray.length);
+    console.log('🎲 [Debug]: Productos por página:', itemsPerProductPage);
+
     // Calcular paginación
     totalProductPages = Math.ceil(filteredProductsArray.length / itemsPerProductPage);
+
+    console.log('🎲 [Debug]: Total páginas calculadas:', totalProductPages);
 
     // Asegurar que currentProductPage esté en rango válido
     if (currentProductPage > totalProductPages && totalProductPages > 0) {
@@ -286,10 +308,15 @@ function renderProductsWithPagination() {
         currentProductPage = 1;
     }
 
+    console.log('🎲 [Debug]: Página actual:', currentProductPage);
+
     // Calcular productos para la página actual
     const startIndex = (currentProductPage - 1) * itemsPerProductPage;
     const endIndex = startIndex + itemsPerProductPage;
     const productsForPage = filteredProductsArray.slice(startIndex, endIndex);
+
+    console.log('🎲 [Debug]: Rango de productos:', startIndex, 'a', endIndex);
+    console.log('🎲 [Debug]: Productos en esta página:', productsForPage.length);
 
     // Renderizar productos
     displayProducts(productsForPage);
@@ -1287,10 +1314,10 @@ function mostrarNotificacion(mensaje, tipo = 'info') {
 // ===========================
 // FUNCIÓN DE CARRITO - CORREGIDA
 // ===========================
-window.addToCart = async function(productId, nombre, precio, imagen, stock) {
+window.addToCart = async function (productId, nombre, precio, imagen, stock) {
     try {
         console.log('🛒 [Carrito]: Añadiendo producto:', { productId, nombre, precio, imagen, stock });
-        
+
         // Verificar si el usuario está logueado
         const usuario = await authService.obtenerUsuarioActual();
         if (!usuario) {
@@ -1301,17 +1328,17 @@ window.addToCart = async function(productId, nombre, precio, imagen, stock) {
 
         // ✅ AHORA carritoService ESTÁ DISPONIBLE
         await carritoService.agregarProducto(productId, nombre, precio, imagen, stock);
-        
+
         // Mostrar notificación de éxito
         mostrarNotificacion(`${nombre} añadido al carrito`, 'success');
-        
+
         // Efecto visual en el botón
         const btn = document.querySelector(`[data-product-id="${productId}"]`);
         if (btn) {
             btn.classList.add('pulse');
             setTimeout(() => btn.classList.remove('pulse'), 300);
         }
-        
+
     } catch (error) {
         console.error('❌ [Carrito]: Error:', error);
         mostrarNotificacion(error.message || 'Error añadiendo producto al carrito', 'error');

@@ -3,17 +3,40 @@ import config from '../config.js';
 import { Query } from 'appwrite';
 
 class ProductoService {
+    // Actualizar método para obtener TODOS los productos sin límite
     static async getAllProducts() {
         try {
-            console.log('📦 [ProductoService]: Obteniendo todos los productos');
+            console.log('📦 [ProductoService]: Obteniendo todos los productos...');
             
-            const response = await databases.listDocuments(
-                config.databaseId,
-                config.collectionId
-            );
+            let allProducts = [];
+            let offset = 0;
+            const limit = 100; // Máximo por consulta
+            let hasMore = true;
             
-            console.log(`📦 [ProductoService]: ${response.documents.length} productos obtenidos`);
-            return response;
+            while (hasMore) {
+                const response = await databases.listDocuments(
+                    config.databaseId,
+                    config.collectionId,
+                    [
+                        Query.limit(limit),
+                        Query.offset(offset),
+                        Query.orderDesc('$createdAt') // Ordenar por más recientes
+                    ]
+                );
+                
+                allProducts = [...allProducts, ...response.documents];
+                
+                // Si obtuvimos menos productos que el límite, no hay más
+                hasMore = response.documents.length === limit;
+                offset += limit;
+            }
+            
+            console.log(`📦 [ProductoService]: ${allProducts.length} productos obtenidos en total`);
+            
+            return {
+                documents: allProducts,
+                total: allProducts.length
+            };
             
         } catch (error) {
             console.error('❌ [ProductoService]: Error obteniendo productos:', error);
