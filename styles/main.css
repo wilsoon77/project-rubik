@@ -148,7 +148,7 @@ NAVEGACIÓN
 
 .nav-link {
     text-decoration: none !important;
-    color: var(--cube-black) !important; /* Negro base */
+    color:red !important; /* Negro base */
     font-weight: 600 !important;
     transition: all 0.3s ease !important;
     position: relative !important;
@@ -1301,7 +1301,7 @@ SECCIÓN HERO (INICIO)
 PIE DE PÁGINA
 =========================== */
 .footer {
-    background: white !important; /* Negro amigable */
+    background: gainsboro !important; /* Negro amigable */
     color: black   !important;
     padding: 4rem 0 2rem;
 }
@@ -1332,7 +1332,7 @@ PIE DE PÁGINA
 }
 
 .footer-section p {
-    color: var(--cube-yellow); /* Texto destacado con amarillo cálido */
+    color: black; /* Texto destacado con amarillo cálido */
     line-height: 1.6;
     margin-bottom: 1.5rem;
 }
@@ -1375,7 +1375,7 @@ PIE DE PÁGINA
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--cube-white);
+    color: black;
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -1437,7 +1437,7 @@ PIE DE PÁGINA
 }
 
 .legal-links a {
-    color: var(--cube-white);
+    color: black;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -1775,31 +1775,33 @@ PIE DE PÁGINA
         pointer-events: none;
     }
 
-    /* ===========================
-PAGINACIÓN PARA PRODUCTOS
-========================== */
-    .pagination-container {
-        background: blue;
-        backdrop-filter: blur(10px);
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 3rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
+    
+/* ===========================
+   PAGINACIÓN PARA PRODUCTOS
+   ========================== */
+.pagination-container {
+    background: rgba(29, 53, 87, 0.7) !important; /* Fondo forzado */
+    backdrop-filter: blur(10px) !important;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
 
-    .pagination-info {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: white;
-        font-size: 0.9rem;
-        font-weight: 500;
-    }
+.pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white !important; /* corregí el "white¿¿" que tenías */
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
 
     .items-per-page-select {
         padding: 0.5rem 0.75rem;
@@ -1814,12 +1816,12 @@ PAGINACIÓN PARA PRODUCTOS
 
     .items-per-page-select option {
         background: #333;
-        color: white;
+        color: red;
     }
 
     .pagination-controls {
         display: flex;
-        align-items: center;
+        align-items: center;;
         gap: 0.5rem;
     }
 
@@ -1855,7 +1857,7 @@ PAGINACIÓN PARA PRODUCTOS
         padding: 0.6rem 0.8rem;
         border: 1px solid rgba(255, 255, 255, 0.3);
         background: rgba(255, 255, 255, 0.1);
-        color: white;
+        color: rgba(29, 53, 87, 0.7);
         border-radius: 6px;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -1907,14 +1909,77 @@ PAGINACIÓN PARA PRODUCTOS
         }
     }
 
+
+    /* Fuerza el fondo en el contenedor principal (por si existe) */
+.pagination-container {
+  background: rgba(29, 53, 87, 0.7) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Aplica el mismo fondo a .pagination-controls (tu HTML usa este elemento) */
+.pagination-controls {
+  background: rgba(29, 53, 87, 0.7) !important;
+  backdrop-filter: blur(10px) !important;
+  padding: 1rem !important;           /* opcional: para que no quede pegado */
+  border-radius: 12px !important;
+  display: flex !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Asegura que los elementos internos no tapen el fondo */
+.pagination-btn,
+.items-per-page-select,
+.pagination-number,
+.pagination-numbers {
+  background: transparent !important;     /* dejan ver el fondo del contenedor */
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;              /* texto blanco para contraste */
+  backdrop-filter: none !important;
+}
+
+/* Si quieres que los "números" tengan ligero fondo translúcido */
+.pagination-number {
+  /* descomenta si prefieres un sutil bloque detrás de cada número */
+  /* background: rgba(255,255,255,0.06) !important; */
+  color: #fff !important;
+}
+
+/* Hover/activo: mantiene contraste si cambias colores */
+.pagination-number:hover,
+.pagination-btn:hover:not(:disabled) {
+  filter: brightness(1.05) !important;
+}
+
     /* ===========================
    AUTENTICACIÓN Y CARRITO
    ========================== */
+
+
+
+   .section-header {
+  background: #ffffff !important;   /* Fondo blanco */
+  padding: 2rem !important;         /* opcional: espacio interno */
+  border-radius: 12px !important;   /* opcional: esquinas suaves */
+  text-align: center;               /* opcional: centrar contenido */
+}
+
+.section-title,
+.section-subtitle {
+  color: #000000 !important;        /* Texto negro para contraste */
+}
+
 
     /* Botón de autenticación */
     .auth-nav-item {
         position: relative;
     }
+
+
+
+
 
     .auth-btn {
         background: linear-gradient(135deg, var(--cube-red), #ff4757);
@@ -1953,7 +2018,7 @@ PAGINACIÓN PARA PRODUCTOS
     }
 
     .cart-link:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: white;
         transform: scale(1.1);
     }
 
