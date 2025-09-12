@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticación exitosa - AetherCubix</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .callback-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+        .provider-info {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #dc143c;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="callback-content">
+        <i class="fas fa-check-circle success-icon"></i>
+        <h2>¡Autenticación exitosa!</h2>
+        <div id="provider-info" class="provider-info">
+            Procesando autenticación...
+        </div>
+        <p>Redirigiendo a la página principal...</p>
+        <div class="spinner"></div>
+    </div>
+
+    <script type="module">
+        import { authService } from '../scripts/services/auth.js';
+        
+        (async () => {
+            try {
+                console.log('✅ [OAuth]: Procesando autenticación exitosa...');
+                
+                // Esperar un momento para que Appwrite procese la sesión
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Verificar que el usuario esté autenticado
+                const usuario = await authService.obtenerUsuarioActual();
+                console.log('👤 [OAuth]: Usuario autenticado:', usuario);
+                
+                // Mostrar información del proveedor
+                const providerInfo = document.getElementById('provider-info');
+                if (usuario) {
+                    const provider = getProviderFromURL();
+                    providerInfo.innerHTML = `
+                        <i class="fas fa-user"></i> 
+                        Conectado como: ${usuario.name} 
+                        ${provider ? `via ${provider}` : ''}
+                    `;
+                }
+                
+                // Redirigir después de 2 segundos
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 5000);
+                
+            } catch (error) {
+                console.error('❌ [OAuth]: Error procesando callback:', error);
+                setTimeout(() => {
+                    window.location.href = '../index.html?error=oauth_failed';
+                }, 2000);
+            }
+        })();
+        
+        function getProviderFromURL() {
+            const url = new URL(window.location.href);
+            if (url.searchParams.get('provider')) {
+                return url.searchParams.get('provider');
+            }
+            if (document.referrer.includes('google')) return 'Google';
+            if (document.referrer.includes('github')) return 'GitHub';
+            return '';
+        }
+    </script>
+</body>
+</html>

@@ -21,19 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
 // Inicialización (actualiza la función existente)
 async function initProductCRUD() {
     console.log('🔧 [Admin]: Inicializando CRUD de productos');
-    
+
     // Cargar productos al inicio
     await loadProducts();
-    
+
     // Cargar categorías dinámicamente
     await loadDynamicCategories();
-    
+
     // Configurar event listeners
     setupEventListeners();
-    
+
     // Configurar paginación
     setupPagination();
-    
+
     console.log('✅ [Admin]: CRUD de productos inicializado');
 }
 
@@ -44,26 +44,26 @@ function setupEventListeners() {
     if (searchInput) {
         searchInput.addEventListener('input', debounce(filterProducts, 300));
     }
-    
+
     // Filtro por categoría
     const categoryFilter = document.getElementById('filter-category');
     if (categoryFilter) {
         categoryFilter.addEventListener('change', filterProducts);
     }
-    
+
     // Formulario de producto
     const productForm = document.getElementById('product-form');
     if (productForm) {
         productForm.addEventListener('submit', handleProductSubmit);
     }
-    
+
     // Cerrar modal con Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeProductModal();
         }
     });
-    
+
     // Cerrar modal al hacer clic fuera
     const modal = document.getElementById('product-modal');
     if (modal) {
@@ -86,7 +86,7 @@ function setupPagination() {
             renderProductsWithPagination();
         });
     }
-    
+
     // Event listeners para botones de navegación
     document.getElementById('first-page')?.addEventListener('click', () => goToPage(1));
     document.getElementById('prev-page')?.addEventListener('click', () => goToPage(currentPage - 1));
@@ -106,30 +106,30 @@ function goToPage(page) {
 function filterProducts() {
     const searchTerm = document.getElementById('search-products')?.value.toLowerCase() || '';
     const selectedCategory = document.getElementById('filter-category')?.value || '';
-    
+
     filteredProducts = currentProducts;
-    
+
     // Filtrar por búsqueda
     if (searchTerm) {
-        filteredProducts = filteredProducts.filter(product => 
+        filteredProducts = filteredProducts.filter(product =>
             product.nombre.toLowerCase().includes(searchTerm) ||
             (product.descripcion && product.descripcion.toLowerCase().includes(searchTerm))
         );
     }
-    
+
     // Filtrar por categoría
     if (selectedCategory) {
-        filteredProducts = filteredProducts.filter(product => 
+        filteredProducts = filteredProducts.filter(product =>
             product.categoria === selectedCategory
         );
     }
-    
+
     // Resetear a la primera página después de filtrar
     currentPage = 1;
-    
+
     // Renderizar con paginación
     renderProductsWithPagination();
-    
+
     console.log(`🔍 [Admin]: Mostrando ${filteredProducts.length} de ${currentProducts.length} productos`);
 }
 
@@ -137,7 +137,7 @@ function filterProducts() {
 function renderProductsWithPagination() {
     // Calcular paginación
     totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-    
+
     // Asegurar que currentPage esté en rango válido
     if (currentPage > totalPages && totalPages > 0) {
         currentPage = totalPages;
@@ -145,15 +145,15 @@ function renderProductsWithPagination() {
     if (currentPage < 1) {
         currentPage = 1;
     }
-    
+
     // Calcular productos para la página actual
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const productsForPage = filteredProducts.slice(startIndex, endIndex);
-    
+
     // Renderizar productos
     renderProducts(productsForPage);
-    
+
     // Actualizar controles de paginación
     updatePaginationControls();
 }
@@ -167,18 +167,18 @@ function updatePaginationControls() {
         const endItem = Math.min(currentPage * itemsPerPage, filteredProducts.length);
         paginationInfo.textContent = `Mostrando ${startItem}-${endItem} de ${filteredProducts.length} productos`;
     }
-    
+
     // Actualizar botones de navegación
     const firstBtn = document.getElementById('first-page');
     const prevBtn = document.getElementById('prev-page');
     const nextBtn = document.getElementById('next-page');
     const lastBtn = document.getElementById('last-page');
-    
+
     if (firstBtn) firstBtn.disabled = currentPage === 1;
     if (prevBtn) prevBtn.disabled = currentPage === 1;
     if (nextBtn) nextBtn.disabled = currentPage === totalPages || totalPages === 0;
     if (lastBtn) lastBtn.disabled = currentPage === totalPages || totalPages === 0;
-    
+
     // Generar números de página
     generatePageNumbers();
 }
@@ -187,15 +187,15 @@ function updatePaginationControls() {
 function generatePageNumbers() {
     const paginationNumbers = document.getElementById('pagination-numbers');
     if (!paginationNumbers) return;
-    
+
     paginationNumbers.innerHTML = '';
-    
+
     if (totalPages <= 1) return;
-    
+
     // Determinar rango de páginas a mostrar
     let startPage = Math.max(1, currentPage - 2);
     let endPage = Math.min(totalPages, currentPage + 2);
-    
+
     // Ajustar si estamos cerca del inicio o final
     if (currentPage <= 3) {
         endPage = Math.min(totalPages, 5);
@@ -203,7 +203,7 @@ function generatePageNumbers() {
     if (currentPage >= totalPages - 2) {
         startPage = Math.max(1, totalPages - 4);
     }
-    
+
     // Añadir primera página si no está en el rango
     if (startPage > 1) {
         addPageNumber(1);
@@ -211,12 +211,12 @@ function generatePageNumbers() {
             addPageEllipsis();
         }
     }
-    
+
     // Añadir páginas en el rango
     for (let i = startPage; i <= endPage; i++) {
         addPageNumber(i);
     }
-    
+
     // Añadir última página si no está en el rango
     if (endPage < totalPages) {
         if (endPage < totalPages - 1) {
@@ -249,10 +249,10 @@ function addPageEllipsis() {
 async function loadProducts() {
     try {
         console.log('📦 [Admin]: Cargando productos...');
-        
+
         const tableBody = document.getElementById('products-table-body');
         if (!tableBody) return;
-        
+
         // Mostrar estado de carga
         tableBody.innerHTML = `
             <tr>
@@ -261,20 +261,20 @@ async function loadProducts() {
                 </td>
             </tr>
         `;
-        
+
         // Obtener productos de Appwrite
         const response = await ProductoService.getAllProducts();
         currentProducts = response.documents || [];
         filteredProducts = [...currentProducts];
-        
+
         console.log(`📦 [Admin]: ${currentProducts.length} productos cargados`);
-        
+
         // Renderizar productos con paginación
         renderProductsWithPagination();
-        
+
     } catch (error) {
         console.error('❌ [Admin]: Error cargando productos:', error);
-        
+
         const tableBody = document.getElementById('products-table-body');
         if (tableBody) {
             tableBody.innerHTML = `
@@ -493,6 +493,8 @@ function renderProducts(products) {
     const tableBody = document.getElementById('products-table-body');
     if (!tableBody) return;
 
+    console.log('🔍 [Debug]: Renderizando', products.length, 'productos');
+
     if (!products || products.length === 0) {
         tableBody.innerHTML = `
             <tr>
@@ -504,43 +506,66 @@ function renderProducts(products) {
         return;
     }
 
-    tableBody.innerHTML = products.map(product => `
-        <tr data-product-id="${product.$id}">
-            <td>
-                <img src="${product.imagen || 'https://via.placeholder.com/50x50?text=Sin+Imagen'}" 
-                     alt="${product.nombre}" 
-                     onerror="this.src='https://via.placeholder.com/50x50?text=Sin+Imagen'">
-            </td>
-            <td>
-                <strong>${product.nombre}</strong>
-                ${product.descripcion ? `<br><small style="color: #6c757d;">${product.descripcion.substring(0, 50)}${product.descripcion.length > 50 ? '...' : ''}</small>` : ''}
-            </td>
-            <td>
-                <span class="category-badge category-${product.categoria}">
-                    ${formatCategoryName(product.categoria)}
-                </span>
-            </td>
-            <td>
-                <strong>Q ${parseFloat(product.precio || 0).toFixed(2)}</strong>
-            </td>
-            <td>
-                <span class="stock-badge ${getStockClass(product.existencia)}">
-                    ${product.existencia || 0}
-                </span>
-            </td>
-            <td>
-                <div class="product-actions">
-                    <button class="btn btn-sm btn-edit" onclick="editProduct('${product.$id}')" title="Editar">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn btn-sm btn-delete" onclick="deleteProduct('${product.$id}')" title="Eliminar">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            </td>
-        </tr>
-    `).join('');
+    tableBody.innerHTML = products.map((product, index) => {
+        // Debug de cada producto renderizado
+        console.log(`🔍 Renderizando producto ${index + 1}:`, {
+            nombre: product.nombre,
+            existencia: product.existencia,
+            tipoExistencia: typeof product.existencia
+        });
+
+        return `
+            <tr data-product-id="${product.$id}">
+                <td>
+                    <img src="${product.imagen || 'https://via.placeholder.com/50x50?text=Sin+Imagen'}" 
+                         alt="${product.nombre}" 
+                         onerror="this.src='https://via.placeholder.com/50x50?text=Sin+Imagen'"
+                         style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                </td>
+                <td>
+                    <strong>${product.nombre}</strong>
+                    ${product.descripcion ? `<br><small style="color: #6c757d;">${product.descripcion.substring(0, 50)}${product.descripcion.length > 50 ? '...' : ''}</small>` : ''}
+                </td>
+                <td>
+                    <span class="category-badge category-${product.categoria}">
+                        ${formatCategoryName(product.categoria)}
+                    </span>
+                </td>
+                <td>
+                    <strong style="color: #28a745;">Q ${parseFloat(product.precio || 0).toFixed(2)}</strong>
+                </td>
+                <td class="stock-cell">
+                    <span class=" ${getStockClass(product.existencia)}" style="
+                        display: inline-block !important;
+                        padding: 0.25rem 0.5rem !important;
+                        border-radius: 12px !important;
+                        font-size: 0.85rem !important;
+                        font-weight: 600 !important;
+                        min-width: 40px !important;
+                        text-align: center !important;
+                        color: white !important;
+                        background: ${getStockColor(product.existencia)} !important;
+                    ">
+                        ${product.existencia !== undefined && product.existencia !== null ? product.existencia : 'N/A'}
+                    </span>
+                </td>
+                <td>
+                    <div class="product-actions">
+                        <button class="btn btn-sm btn-edit" onclick="editProduct('${product.$id}')" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-delete" onclick="deleteProduct('${product.$id}')" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+
+    console.log(`✅ [Admin]: Renderizados ${products.length} productos en la tabla`);
 }
+
 
 
 // Abrir modal para nuevo producto
@@ -719,9 +744,20 @@ function formatCategoryName(category) {
 }
 
 function getStockClass(existencia) {
-    if (existencia <= 0) return 'stock-out';
+    console.log('🎨 getStockClass llamada con:', existencia, typeof existencia);
+
+    if (existencia === undefined || existencia === null) return 'stock-unknown';
+    if (existencia === 0) return 'stock-out';
     if (existencia <= 5) return 'stock-low';
     return 'stock-good';
+}
+
+// Función para obtener color de fondo del stock
+function getStockColor(existencia) {
+    if (existencia === undefined || existencia === null) return '#6c757d'; // Gris para N/A
+    if (existencia === 0) return '#dc3545'; // Rojo para sin stock
+    if (existencia <= 5) return '#fd7e14'; // Naranja para stock bajo
+    return '#28a745'; // Verde para stock bueno
 }
 
 function showNotification(message, type = 'info') {

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error de autenticación - AetherCubix</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .callback-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .error-icon {
+            font-size: 4rem;
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            background: #dc143c;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: #b91c3c;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="callback-content">
+        <i class="fas fa-exclamation-triangle error-icon"></i>
+        <h2>Error de autenticación</h2>
+        <p>No se pudo completar la autenticación con GitHub.</p>
+        <a href="../index.html" class="btn">
+            <i class="fas fa-home"></i> Volver al inicio
+        </a>
+    </div>
+</body>
+</html>

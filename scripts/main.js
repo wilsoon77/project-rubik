@@ -256,7 +256,7 @@ function setupProductPagination() {
 }
 
 // Añadir esta función temporal para debuggear
-window.debugPagination = function() {
+window.debugPagination = function () {
     console.log('=== DEBUG PAGINACIÓN ===');
     console.log('Total productos:', allProducts.length);
     console.log('Productos filtrados:', filteredProductsArray.length);
@@ -1099,12 +1099,76 @@ function init() {
     }
 }
 
+
+// ===========================
+// OAUTH FUNCTIONS
+// ===========================
+
+/**
+ * Función para iniciar OAuth con Google
+ */
+window.iniciarOAuthGoogle = async function() {
+    try {
+        console.log('🔵 [OAuth]: Iniciando sesión con Google...');
+        
+        // Mostrar loading en el botón
+        const googleBtn = document.querySelector('.btn-google');
+        const originalText = googleBtn.innerHTML;
+        googleBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando...';
+        googleBtn.disabled = true;
+        
+        // Llamar al servicio de autenticación
+        await authService.iniciarSesionConGoogle();
+        
+    } catch (error) {
+        console.error('❌ [OAuth]: Error con Google:', error);
+        mostrarNotificacion('Error al conectar con Google', 'error');
+        
+        // Restaurar botón
+        const googleBtn = document.querySelector('.btn-google');
+        if (googleBtn) {
+            googleBtn.innerHTML = '<i class="fab fa-google"></i> Continuar con Google';
+            googleBtn.disabled = false;
+        }
+    }
+};
+
+/**
+ * Función para iniciar OAuth con GitHub
+ */
+window.iniciarOAuthGitHub = async function () {
+    try {
+        console.log('🐙 [OAuth]: Iniciando sesión con GitHub...');
+
+        // Mostrar loading en el botón
+        const githubBtn = document.querySelector('.btn-github');
+        const originalText = githubBtn.innerHTML;
+        githubBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando...';
+        githubBtn.disabled = true;
+
+        // Llamar al servicio de autenticación
+        await authService.iniciarSesionConGitHub();
+
+    } catch (error) {
+        console.error('❌ [OAuth]: Error con GitHub:', error);
+        mostrarNotificacion('Error al conectar con GitHub', 'error');
+
+        // Restaurar botón
+        const githubBtn = document.querySelector('.btn-github');
+        if (githubBtn) {
+            githubBtn.innerHTML = '<i class="fab fa-github"></i> Continuar con GitHub';
+            githubBtn.disabled = false;
+        }
+    }
+};
+
+
 // ===========================
 // MODAL DE AUTENTICACIÓN
 // ===========================
 
 /**
- * Mostrar modal de autenticación
+ * Mostrar modal de autenticación con OAuth
  */
 window.showAuthModal = function () {
     const modal = document.createElement('div');
@@ -1119,6 +1183,24 @@ window.showAuthModal = function () {
             </div>
             
             <div class="auth-content">
+                <!-- ✅ BOTONES OAUTH -->
+                <div class="oauth-section">
+                    <button type="button" class="btn-oauth btn-google" onclick="iniciarOAuthGoogle()">
+                        <i class="fab fa-google"></i>
+                        Continuar con Google
+                    </button>
+                    
+                    <button type="button" class="btn-oauth btn-github" onclick="iniciarOAuthGitHub()">
+                        <i class="fab fa-github"></i>
+                        Continuar con GitHub
+                    </button>
+                    
+                    <div class="oauth-divider">
+                        <span>O continúa con email</span>
+                    </div>
+                </div>
+                
+                <!-- FORMULARIO EXISTENTE -->
                 <form id="auth-form" class="auth-form">
                     <div class="form-group" id="nombre-group" style="display: none;">
                         <label for="nombre">Nombre Completo</label>

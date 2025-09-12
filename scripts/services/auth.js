@@ -12,6 +12,89 @@ class AuthService {
     }
 
     /**
+      * Iniciar sesión con Google OAuth
+      */
+    async iniciarSesionConGoogle() {
+        try {
+            console.log('🔵 [Auth]: Iniciando OAuth con Google...');
+
+            // Crear sesión OAuth con Google
+            this.account.createOAuth2Session(
+                'google',
+                `${window.location.origin}/auth/success.html`, // Success URL
+                `${window.location.origin}/auth/failure.html`  // Failure URL
+            );
+
+        } catch (error) {
+            console.error('❌ [Auth]: Error con Google OAuth:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Iniciar sesión con GitHub OAuth
+     */
+    async iniciarSesionConGitHub() {
+        try {
+            console.log('🐙 [Auth]: Iniciando OAuth con GitHub...');
+
+            // Crear sesión OAuth con GitHub
+            this.account.createOAuth2Session(
+                'github',
+                `${window.location.origin}/auth/success.html`, // Success URL
+                `${window.location.origin}/auth/failure.html`  // Failure URL
+            );
+
+        } catch (error) {
+            console.error('❌ [Auth]: Error con GitHub OAuth:', error);
+            throw error;
+        }
+    }
+
+
+    // ✅ NUEVA FUNCIÓN: Manejar callback de OAuth
+    async manejarCallbackOAuth() {
+        try {
+            console.log('🔄 [Auth]: Procesando callback de OAuth...');
+
+            // Obtener usuario actual (ya autenticado por OAuth)
+            const usuario = await this.obtenerUsuarioActual();
+            if (!usuario) {
+                throw new Error('No se pudo obtener información del usuario');
+            }
+
+            // Buscar si ya existe perfil en BD
+            let perfil = await this.obtenerPerfilUsuario();
+
+            if (!perfil) {
+                // Crear perfil si no existe
+                perfil = await this.databases.createDocument(
+                    this.databaseId,
+                    this.usuarioCollectionId,
+                    ID.unique(),
+                    {
+                        email: usuario.email,
+                        nombre: usuario.name,
+                        avatar: usuario.prefs?.avatar || '',
+                        proveedor: 'github',
+                        rol: 'cliente'
+                    }
+                );
+                console.log('✅ [Auth]: Perfil creado para usuario OAuth:', perfil);
+            }
+
+            // Actualizar UI
+            this.actualizarUIAuth(usuario);
+
+            return { usuario, perfil };
+
+        } catch (error) {
+            console.error('❌ [Auth]: Error procesando callback OAuth:', error);
+            throw error;
+        }
+    }
+
+    /**
      * Registrar nuevo usuario
      */
     async registrar(email, password, nombre) {
