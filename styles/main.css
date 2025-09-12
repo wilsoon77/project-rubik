@@ -89,6 +89,8 @@
     }
 
 
+
+    
     
 /* ===========================
 NAVEGACIÓN
@@ -211,6 +213,30 @@ NAVEGACIÓN
 .hamburger.active span:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px) !important;
     background: var(--cube-green) !important;
+}
+
+
+/* Estado por defecto en móviles */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none !important; /* oculto inicialmente */
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 70px !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    padding: 1rem 0 !important;
+  }
+
+  /* Cuando se activa con el botón */
+  .nav-menu.active {
+    display: flex !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
 }
 
 
@@ -1375,7 +1401,7 @@ PIE DE PÁGINA
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
+    color: white;
     text-decoration: none;
     transition: all 0.3s ease;
 }
