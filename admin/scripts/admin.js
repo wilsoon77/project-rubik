@@ -11,10 +11,10 @@ let paginaActual = 1;
 let pedidosPorPagina = 10;
 let pedidoActualModal = null;
 
-// Gráficas de pedidos/ventas
+// Variables globales para las gráficas
 let ventasChart = null;
-let pedidosChart = null;
-let productosChart = null;
+let pedidosChart = null;    // ← AGREGAR
+let productosChart = null;  // ← AGREGAR
 
 // Gráficas de inventario
 let categoryChart = null;
@@ -58,12 +58,304 @@ async function initDashboard() {
             loadDashboardStats()    // Estadísticas de inventario
         ]);
 
+        // Inicializar gráficas
+        await initCharts();
+
         console.log('✅ [Admin]: Dashboard completo inicializado');
 
     } catch (error) {
         console.error('❌ [Admin]: Error inicializando dashboard completo:', error);
     }
 }
+
+/**
+ * Inicializar gráficas del dashboard - CORREGIR
+ */
+async function initCharts() {
+    try {
+        console.log('📊 [Admin]: Inicializando gráficas...');
+
+        // Verificar que Chart.js esté disponible
+        if (typeof Chart === 'undefined') {
+            console.error('❌ [Admin]: Chart.js no está cargado');
+            return;
+        }
+
+        // Cargar datos de pedidos si no están cargados
+        if (todosPedidos.length === 0) {
+            console.log('📊 [Admin]: Cargando pedidos para gráficas...');
+            await cargarPedidos();
+        }
+
+        // Inicializar gráficas en secuencia
+        console.log('📊 [Admin]: Inicializando gráfica de ventas...');
+        await initVentasChart();
+
+        console.log('📊 [Admin]: Inicializando gráfica de pedidos...');
+        await initPedidosChart();
+
+        console.log('📊 [Admin]: Inicializando gráfica de productos...');
+        await initProductosChart();
+
+        // Configurar eventos DESPUÉS de que las gráficas estén creadas
+        setTimeout(() => {
+            setupVentasChartEvents();
+        }, 100);
+
+        console.log('✅ [Admin]: Todas las gráficas inicializadas correctamente');
+
+    } catch (error) {
+        console.error('❌ [Admin]: Error inicializando gráficas:', error);
+        mostrarNotificacion('Error inicializando gráficas: ' + error.message, 'error');
+    }
+}
+
+/**
+ * Inicializar gráfica de ventas con período por defecto - CORREGIR
+ */
+async function initVentasChart() {
+    try {
+        console.log('📈 [Admin]: Inicializando gráfica de ventas...');
+        await actualizarVentasChart(7); // Por defecto 7 días
+    } catch (error) {
+        console.error('❌ [Admin]: Error inicializando gráfica de ventas:', error);
+    }
+}
+
+/**
+ * NUEVA: Inicializar gráfica de pedidos
+ */
+async function initPedidosChart() {
+    try {
+        console.log('📊 [Admin]: Inicializando gráfica de pedidos...');
+        await cargarGraficaPedidos(todosPedidos);
+    } catch (error) {
+        console.error('❌ [Admin]: Error inicializando gráfica de pedidos:', error);
+    }
+}
+
+/**
+ * NUEVA: Inicializar gráfica de productos
+ */
+async function initProductosChart() {
+    try {
+        console.log('📦 [Admin]: Inicializando gráfica de productos...');
+        await cargarGraficaProductos(todosPedidos);
+    } catch (error) {
+        console.error('❌ [Admin]: Error inicializando gráfica de productos:', error);
+    }
+}
+
+/**
+ * NUEVA: Actualizar gráfica de ventas según período seleccionado
+ */
+async function actualizarVentasChart(dias) {
+    try {
+        console.log(`📈 [Admin]: Actualizando gráfica de ventas para ${dias} días...`);
+
+        const ctx = document.getElementById('ventasChart');
+        if (!ctx) {
+            console.warn('⚠️ Canvas ventasChart no encontrado');
+            return;
+        }
+
+        // Calcular fechas
+        const fechaFin = new Date();
+        const fechaInicio = new Date();
+        fechaInicio.setDate(fechaFin.getDate() - dias);
+
+        // Generar datos para el período seleccionado
+        const datosVentas = generarDatosVentasPorDia(todosPedidos, fechaInicio, fechaFin);
+
+        // Destruir gráfica anterior si existe
+        if (ventasChart) {
+            ventasChart.destroy();
+        }
+
+        // Crear nueva gráfica
+        ventasChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: datosVentas.labels,
+                datasets: [{
+                    label: 'Ventas (Q)',
+                    data: datosVentas.ventas,
+                    borderColor: '#dc143c',
+                    backgroundColor: 'rgba(220, 20, 60, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#dc143c',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return 'Q ' + value.toFixed(0);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        console.log(`✅ [Admin]: Gráfica de ventas actualizada para ${dias} días`);
+
+    } catch (error) {
+        console.error('❌ [Admin]: Error actualizando gráfica de ventas:', error);
+    }
+}
+
+
+/**
+ * Generar datos de ventas por día para un período específico
+ */
+function generarDatosVentasPorDia(pedidos, fechaInicio, fechaFin) {
+    console.log(`📊 [Admin]: Generando datos de ventas desde ${fechaInicio.toLocaleDateString()} hasta ${fechaFin.toLocaleDateString()}`);
+
+    const datos = {
+        labels: [],
+        ventas: []
+    };
+
+    // Crear array de fechas para el período
+    const fechaActual = new Date(fechaInicio);
+    const ventasPorDia = {};
+
+    // Inicializar con 0 para cada día
+    while (fechaActual <= fechaFin) {
+        const fechaKey = fechaActual.toISOString().split('T')[0];
+        ventasPorDia[fechaKey] = 0;
+        fechaActual.setDate(fechaActual.getDate() + 1);
+    }
+
+    // Sumar ventas por día
+    pedidos.forEach(pedido => {
+        const fechaPedido = new Date(pedido.fecha_creacion);
+        const fechaKey = fechaPedido.toISOString().split('T')[0];
+
+        if (ventasPorDia.hasOwnProperty(fechaKey)) {
+            ventasPorDia[fechaKey] += pedido.total || 0;
+        }
+    });
+
+    // Convertir a arrays para Chart.js
+    Object.entries(ventasPorDia).forEach(([fecha, total]) => {
+        const fechaObj = new Date(fecha);
+        const label = fechaObj.toLocaleDateString('es-GT', {
+            month: 'short',
+            day: 'numeric'
+        });
+        datos.labels.push(label);
+        datos.ventas.push(total);
+    });
+
+    console.log('📊 [Admin]: Datos generados:', datos);
+    return datos;
+}
+
+/**
+ * Mostrar indicador de carga en gráfica
+ */
+function showChartLoading(chartCanvasId) {
+    const canvas = document.getElementById(chartCanvasId);
+    if (!canvas) return;
+
+    const container = canvas.parentElement;
+
+    // Remover indicador existente
+    const existingLoader = container.querySelector('.chart-loading');
+    if (existingLoader) existingLoader.remove();
+
+    // Agregar nuevo indicador
+    const loader = document.createElement('div');
+    loader.className = 'chart-loading';
+    loader.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Actualizando...';
+    loader.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        background: rgba(255,255,255,0.9);
+        padding: 1rem;
+        border-radius: 8px;
+        font-weight: 500;
+    `;
+
+    container.style.position = 'relative';
+    container.appendChild(loader);
+
+    // Auto-remove después de 5 segundos como fallback
+    setTimeout(() => {
+        if (loader.parentElement) {
+            loader.remove();
+        }
+    }, 5000);
+}
+
+/**
+ * Configurar eventos para la gráfica de ventas - MEJORADO
+ */
+function setupVentasChartEvents() {
+    const ventasPeriodSelect = document.getElementById('ventas-period');
+    if (ventasPeriodSelect) {
+        console.log('🎛️ [Admin]: Configurando eventos del selector de período...');
+
+        // Remover event listeners existentes
+        ventasPeriodSelect.removeEventListener('change', handlePeriodChange);
+
+        // Agregar nuevo event listener
+        ventasPeriodSelect.addEventListener('change', handlePeriodChange);
+
+        console.log('✅ [Admin]: Eventos del selector configurados');
+    } else {
+        console.warn('⚠️ [Admin]: Selector ventas-period no encontrado en el DOM');
+    }
+}
+
+/**
+ * Manejar cambio de período
+ */
+async function handlePeriodChange(e) {
+    const dias = parseInt(e.target.value);
+    console.log(`📊 [Admin]: Cambiando período de ventas a ${dias} días`);
+
+    // Mostrar loading
+    showChartLoading('ventasChart');
+
+    try {
+        await actualizarVentasChart(dias);
+        mostrarNotificacion(`Gráfica actualizada para ${dias} días`, 'success');
+
+        // Remover loading
+        const loader = document.querySelector('.chart-loading');
+        if (loader) loader.remove();
+
+    } catch (error) {
+        console.error('❌ [Admin]: Error actualizando gráfica:', error);
+        mostrarNotificacion('Error actualizando gráfica de ventas', 'error');
+
+        // Remover loading en caso de error
+        const loader = document.querySelector('.chart-loading');
+        if (loader) loader.remove();
+    }
+}
+
 
 // ===========================
 // FUNCIONES DE NAVEGACIÓN
@@ -306,82 +598,10 @@ async function cargarPedidosRecientes(pedidos) {
 
 async function cargarGraficasVentas(pedidos) {
     try {
-        // Gráfica de ventas
-        await cargarGraficaVentas(pedidos);
-        // Gráfica de estados de pedidos
-        await cargarGraficaPedidos(pedidos);
-        // Gráfica de productos más vendidos
-        await cargarGraficaProductos(pedidos);
-
-        console.log('✅ [Admin]: Gráficas de ventas cargadas');
-
-    } catch (error) {
-        console.error('❌ [Admin]: Error cargando gráficas de ventas:', error);
-    }
-}
-
-async function cargarGraficaVentas(pedidos) {
-    try {
-        const ctx = document.getElementById('ventasChart');
-        if (!ctx) return;
-
-        const dias = [];
-        const ventas = [];
-
-        for (let i = 6; i >= 0; i--) {
-            const fecha = new Date();
-            fecha.setDate(fecha.getDate() - i);
-
-            const ventasDia = pedidos
-                .filter(p => {
-                    const fechaPedido = new Date(p.fecha_creacion);
-                    return fechaPedido.toDateString() === fecha.toDateString();
-                })
-                .reduce((sum, p) => sum + (p.total || 0), 0);
-
-            dias.push(fecha.toLocaleDateString('es-GT', { weekday: 'short' }));
-            ventas.push(ventasDia);
-        }
-
-        if (ventasChart) {
-            ventasChart.destroy();
-        }
-
-        ventasChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dias,
-                datasets: [{
-                    label: 'Ventas (Q)',
-                    data: ventas,
-                    borderColor: '#dc143c',
-                    backgroundColor: 'rgba(220, 20, 60, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function (value) {
-                                return 'Q ' + value.toFixed(0);
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
+        console.log('📈 [Admin]: Cargando gráfica de ventas (método legacy)...');
+        // Esta función ahora solo se usa como fallback
+        // La función principal es actualizarVentasChart
+        await actualizarVentasChart(7);
     } catch (error) {
         console.error('❌ [Admin]: Error cargando gráfica de ventas:', error);
     }
@@ -471,8 +691,8 @@ async function cargarGraficaProductos(pedidos) {
                         }
                     }
                 }
-            }
-        });
+            } // ← AGREGAR ESTA LLAVE DE CIERRE QUE FALTABA
+        }); // ← Y AGREGAR EL PUNTO Y COMA AQUÍ
 
     } catch (error) {
         console.error('❌ [Admin]: Error cargando gráfica de productos:', error);
@@ -787,6 +1007,31 @@ function createCharts(stats) {
         } catch (error) {
             console.error('❌ [Charts]: Error creando gráfica de valor:', error);
         }
+    }
+}
+
+// ===========================
+// DASHBOARD - ESTADÍSTICAS DE PEDIDOS/VENTAS (SIMPLIFICADO)
+// ===========================
+async function cargarDashboardSimplificado() {
+    try {
+        console.log('📊 [Admin]: Cargando estadísticas simplificadas de pedidos/ventas...');
+
+        // Cargar pedidos
+        const pedidos = await pedidosService.obtenerTodosPedidos();
+        todosPedidos = pedidos; // Guardar todos los pedidos en la variable global
+
+        // Calcular estadísticas
+        await calcularEstadisticasPedidos(pedidos);
+
+        // Cargar gráficas simplificadas
+        await cargarGraficasVentas(pedidos);
+
+        console.log('✅ [Admin]: Estadísticas simplificadas de pedidos/ventas cargadas');
+
+    } catch (error) {
+        console.error('❌ [Admin]: Error cargando estadísticas simplificadas de pedidos:', error);
+        mostrarNotificacion('Error cargando estadísticas simplificadas de pedidos', 'error');
     }
 }
 
@@ -1720,7 +1965,6 @@ async function obtenerTotalUsuarios() {
             return response.total; // ← Esto te da el total sin cargar todos los documentos
         }
         */
-
 
 
     } catch (error) {

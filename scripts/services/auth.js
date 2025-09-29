@@ -219,6 +219,38 @@ class AuthService {
     }
 
     /**
+     * Verificar si el usuario actual es administrador
+     */
+    async esAdministrador() {
+        try {
+            const perfil = await this.obtenerPerfilUsuario();
+            return perfil && perfil.rol === 'admin';
+        } catch (error) {
+            console.error('❌ [Auth]: Error verificando rol admin:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Redirigir si no es administrador
+     */
+    async verificarAccesoAdmin() {
+        try {
+            const esAdmin = await this.esAdministrador();
+            if (!esAdmin) {
+                console.warn('🚫 [Auth]: Acceso denegado - No es administrador');
+                window.location.href = '../index.html';
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.error('❌ [Auth]: Error verificando acceso admin:', error);
+            window.location.href = '../index.html';
+            return false;
+        }
+    }
+
+    /**
      * Actualizar UI de autenticación
      */
     actualizarUIAuth(usuario) {
@@ -252,7 +284,7 @@ class AuthService {
     /**
      * Mostrar menú de usuario
      */
-    mostrarMenuUsuario() {
+    async mostrarMenuUsuario() {
         // Cerrar menú existente si lo hay
         const menuExistente = document.querySelector('.user-menu');
         if (menuExistente) {
@@ -260,19 +292,39 @@ class AuthService {
             return;
         }
 
+        // Verificar si es admin
+        const esAdmin = await this.esAdministrador();
+
         const menu = document.createElement('div');
         menu.className = 'user-menu';
-        menu.innerHTML = `
+        
+        let menuHTML = `
             <div class="user-menu-item" onclick="location.href='carrito.html'">
                 <i class="fas fa-shopping-cart"></i> Mi Carrito
             </div>
             <div class="user-menu-item" onclick="location.href='mis-pedidos.html'">
                 <i class="fas fa-box"></i> Mis Pedidos
             </div>
+        `;
+
+        // Agregar opción de admin solo si es administrador
+        if (esAdmin) {
+            menuHTML += `
+                <div class="user-menu-separator"></div>
+                <div class="user-menu-item admin-option" onclick="location.href='admin/index.html'">
+                    <i class="fas fa-cogs"></i> Panel Administración
+                </div>
+            `;
+        }
+
+        menuHTML += `
+            <div class="user-menu-separator"></div>
             <div class="user-menu-item" onclick="authService.cerrarSesion()">
                 <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
             </div>
         `;
+
+        menu.innerHTML = menuHTML;
 
         // Posicionar menú
         const authBtn = document.getElementById('auth-btn');

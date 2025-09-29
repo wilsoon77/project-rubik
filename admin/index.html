@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo - AetherCubix</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="styles/admin.css">
+    <link rel="stylesheet" href="styles/admin-guard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   
+
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/613/613962.png" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <div class="admin-layout">
         <!-- Sidebar -->
@@ -20,8 +23,10 @@
                 <span>AetherCubix Admin</span>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#dashboard" class="active" onclick="mostrarSeccion('dashboard')"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
-                <li><a href="#pedidos" onclick="mostrarSeccion('pedidos')"><i class="fas fa-shopping-cart"></i> Gestión de Pedidos</a></li>
+                <li><a href="#dashboard" class="active" onclick="mostrarSeccion('dashboard')"><i
+                            class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="#pedidos" onclick="mostrarSeccion('pedidos')"><i class="fas fa-shopping-cart"></i> Gestión
+                        de Pedidos</a></li>
                 <li><a href="gestion-productos.html"><i class="fas fa-box"></i> Gestión de Productos</a></li>
                 <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver al sitio</a></li>
             </ul>
@@ -55,7 +60,7 @@
                                 <div class="stat-change positive" id="products-change">+0%</div>
                             </div>
                         </div>
-                        
+
                         <div class="stat-card">
                             <i class="fas fa-layer-group"></i>
                             <div class="stat-info">
@@ -64,7 +69,7 @@
                                 <div class="stat-change neutral">3 tipos</div>
                             </div>
                         </div>
-                        
+
                         <div class="stat-card">
                             <i class="fas fa-chart-line"></i>
                             <div class="stat-info">
@@ -73,7 +78,7 @@
                                 <div class="stat-change positive" id="inventory-change">+0%</div>
                             </div>
                         </div>
-                        
+
                         <div class="stat-card alert">
                             <i class="fas fa-exclamation-triangle"></i>
                             <div class="stat-info">
@@ -82,7 +87,7 @@
                                 <div class="stat-change negative">Revisar</div>
                             </div>
                         </div>
-                  <!--en desarrollo -->      
+                        <!--en desarrollo -->
                         <!-- Nuevas stats de pedidos
                         <div class="stat-card">
                             <i class="fas fa-shopping-cart"></i>
@@ -146,48 +151,22 @@
 
                     <!-- Gráficas combinadas -->
                     <div class="charts-grid">
-                        <!-- Gráficas originales de inventario -->
-                        <!-- <div class="chart-card">
-                            <div class="chart-header">
-                                <h4><i class="fas fa-chart-pie"></i> Productos por Categoría</h4>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="categoryChart"></canvas>
-                            </div>
-                        </div> -->
-                         <div class="chart-card">
-                            <div class="chart-header">
-                                <h4><i class="fas fa-chart-bar"></i> Productos Más Vendidos</h4>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="productosChart"></canvas>
-                            </div>
-                        </div>
-
+                        <!-- Gráfica de ventas con selector -->
                         <div class="chart-card">
                             <div class="chart-header">
-                                <h4><i class="fas fa-chart-bar"></i> Estado del Stock</h4>
-                            </div>
-                            <div class="chart-container">
-                                <canvas id="stockChart"></canvas>
-                            </div>
-                        </div>
-                        
-                        <!-- Nuevas gráficas de ventas -->
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h4><i class="fas fa-chart-line"></i> Ventas Últimos 7 Días</h4>
-                                <select id="ventas-period">
-                                    <option value="7">7 días</option>
-                                    <option value="30">30 días</option>
-                                    <option value="90">3 meses</option>
+                                <h4><i class="fas fa-chart-line"></i> Tendencia de Ventas</h4>
+                                <select id="ventas-period" class="period-selector">
+                                    <option value="7">Últimos 7 días</option>
+                                    <option value="30">Últimos 30 días</option>
+                                    <option value="90">Últimos 3 meses</option>
                                 </select>
                             </div>
                             <div class="chart-container">
                                 <canvas id="ventasChart"></canvas>
                             </div>
                         </div>
-                        
+
+                        <!-- Gráfica de estados de pedidos -->
                         <div class="chart-card">
                             <div class="chart-header">
                                 <h4><i class="fas fa-chart-pie"></i> Estados de Pedidos</h4>
@@ -196,7 +175,28 @@
                                 <canvas id="pedidosChart"></canvas>
                             </div>
                         </div>
-                        
+
+                        <!-- Gráfica de productos más vendidos -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-bar"></i> Productos Más Vendidos</h4>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="productosChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Gráfica de estado del stock -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-bar"></i> Estado del Stock</h4>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="stockChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Gráfica de valor por categoría -->
                         <div class="chart-card large">
                             <div class="chart-header">
                                 <h4><i class="fas fa-chart-area"></i> Valor por Categoría</h4>
@@ -205,8 +205,6 @@
                                 <canvas id="valueChart"></canvas>
                             </div>
                         </div>
-                        
-                       
                     </div>
 
                     <!-- Pedidos Recientes -->
@@ -268,7 +266,8 @@
                                 <option value="cancelado">Cancelado</option>
                             </select>
                             <input type="date" id="filtro-fecha" class="filter-input">
-                            <input type="text" id="buscar-pedido" placeholder="Buscar pedido o cliente..." class="search-input">
+                            <input type="text" id="buscar-pedido" placeholder="Buscar pedido o cliente..."
+                                class="search-input">
                             <button class="btn btn-secondary" onclick="limpiarFiltrosPedidos()">
                                 <i class="fas fa-eraser"></i> Limpiar
                             </button>
@@ -323,7 +322,8 @@
                             <i class="fas fa-chevron-left"></i> Anterior
                         </button>
                         <span class="pagination-info">
-                            Página <span id="pagina-actual-pedidos">1</span> de <span id="total-paginas-pedidos">1</span>
+                            Página <span id="pagina-actual-pedidos">1</span> de <span
+                                id="total-paginas-pedidos">1</span>
                         </span>
                         <button class="btn-pagination" id="next-pedidos" onclick="cambiarPaginaPedidos(1)">
                             Siguiente <i class="fas fa-chevron-right"></i>
@@ -380,7 +380,8 @@
                 </div>
                 <div class="form-group">
                     <label for="notas-estado">Notas (opcional):</label>
-                    <textarea id="notas-estado" class="form-control" rows="3" placeholder="Agregar notas sobre el cambio de estado..."></textarea>
+                    <textarea id="notas-estado" class="form-control" rows="3"
+                        placeholder="Agregar notas sobre el cambio de estado..."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -395,8 +396,11 @@
     </div>
 
     <!-- scripts -->
+     <script type="module" src="scripts/admin-guard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script type="module" src="scripts/admin.js"></script>
+    
 </body>
+
 </html>
