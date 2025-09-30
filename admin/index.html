@@ -252,6 +252,61 @@
                     </div>
                 </div>
 
+
+                <!-- Panel de Insights Inteligentes -->
+                <div class="insights-panel">
+                    <div class="insights-header">
+                        <h3>Insights Inteligentes</h3>
+                        <button class="btn btn-outline" onclick="refreshInsights()">
+                            <i class="fas fa-sync"></i> Actualizar Insights
+                        </button>
+                    </div>
+
+                    <div class="insights-container">
+                        <div class="insights-tabs">
+                            <button class="insight-tab active" data-tab="ventas">
+                                <i class="fas fa-chart-line"></i> Ventas
+                            </button>
+                            <button class="insight-tab" data-tab="productos">
+                                <i class="fas fa-cube"></i> Productos
+                            </button>
+                            <button class="insight-tab" data-tab="stock">
+                                <i class="fas fa-warehouse"></i> Inventario
+                            </button>
+                            <button class="insight-tab" data-tab="predicciones">
+                                <i class="fas fa-chart-pie"></i> Predicciones
+                            </button>
+                        </div>
+
+                        <div class="insights-content">
+                            <div id="insights-ventas" class="insight-tab-content active">
+                                <div id="ventas-insights" class="insights-cards">
+                                    <!-- Aquí se generan tarjetas de ventas -->
+                                </div>
+                            </div>
+
+                            <div id="insights-productos" class="insight-tab-content">
+                                <div id="productos-insights" class="insights-cards">
+                                    <!-- Aquí se generan tarjetas de productos -->
+                                </div>
+                            </div>
+
+                            <div id="insights-stock" class="insight-tab-content">
+                                <div id="stock-insights" class="insights-cards">
+                                    <!-- Aquí se generan tarjetas de stock -->
+                                </div>
+                            </div>
+
+                            <div id="insights-predicciones" class="insight-tab-content">
+                                <div id="predicciones-insights" class="insights-cards">
+                                    <!-- Aquí se generan tarjetas de predicciones -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ====================================================== -->
+                <!-- ====================================================== -->
                 <!-- ===== SECCIÓN GESTIÓN DE PEDIDOS ===== -->
                 <div id="section-pedidos" class="admin-section">
                     <div class="section-header">
@@ -396,11 +451,12 @@
     </div>
 
     <!-- scripts -->
-     <script type="module" src="scripts/admin-guard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="scripts/admin-guard.js"></script>
     <script type="module" src="scripts/admin.js"></script>
-    
+    <script type="module" src="scripts/insights.js"></script>
+
 </body>
 
 </html>

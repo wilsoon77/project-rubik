@@ -11,6 +11,12 @@ let paginaActual = 1;
 let pedidosPorPagina = 10;
 let pedidoActualModal = null;
 
+
+
+// Hacer accesibles las variables para insights.js
+window.todosPedidos = todosPedidos;
+window.todosProductos = []; // La llenaremos cuando se carguen los productos
+
 // Variables globales para las gráficas
 let ventasChart = null;
 let pedidosChart = null;    // ← AGREGAR
@@ -710,6 +716,9 @@ window.loadDashboardStats = async function () {
         const response = await ProductoService.getAllProducts();
         const products = response.documents || [];
 
+        // AGREGAR: Actualizar la variable global para insights
+        window.todosProductos = products;
+
         console.log('📦 [Admin]: Productos obtenidos:', products.length);
 
         // Calcular estadísticas de inventario
@@ -720,7 +729,14 @@ window.loadDashboardStats = async function () {
         // Actualizar interfaz de inventario
         updateStatsUI(stats);
 
+        // AGREGAR: Refrescar insights si ya está inicializado
+        if (typeof window.insightsSystem !== 'undefined' && window.insightsSystem.initialized) {
+            console.log('🔄 [Admin]: Actualizando insights después de cargar estadísticas...');
+            setTimeout(() => window.refreshInsights(), 500);
+        }
+
         console.log('✅ [Admin]: Estadísticas de inventario cargadas');
+
 
     } catch (error) {
         console.error('❌ [Admin]: Error cargando estadísticas de inventario:', error);
@@ -1043,6 +1059,9 @@ async function cargarPedidos() {
         console.log('🛒 [Admin]: Cargando gestión de pedidos...');
 
         todosPedidos = await pedidosService.obtenerTodosPedidos();
+        // AGREGAR: Actualizar la variable global para insights
+        window.todosPedidos = todosPedidos;
+        
         pedidosFiltrados = [...todosPedidos];
         pedidosFiltrados.sort((a, b) => new Date(b.fecha_creacion) - new Date(a.fecha_creacion));
 

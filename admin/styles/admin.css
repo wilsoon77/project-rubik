@@ -1515,3 +1515,231 @@
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
+/* Estilos para el Panel de Insights */
+
+.insights-panel {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin: 2rem 0;
+    overflow: hidden;
+}
+
+.insights-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.insights-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    overflow-x: auto;
+    padding: 0 1rem;
+}
+
+.insight-tab {
+    padding: 1rem 1.5rem;
+    border: none;
+    background: none;
+    color: #666;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+}
+
+.insight-tab:hover {
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.insight-tab.active {
+    color: #dc143c;
+    border-bottom: 3px solid #dc143c;
+}
+
+.insight-tab i {
+    margin-right: 8px;
+}
+
+.insights-content {
+    padding: 1.5rem;
+}
+
+.insight-tab-content {
+    display: none;
+}
+
+.insight-tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Tarjetas de insights */
+.insights-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.insight-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    border-left: 5px solid #ccc;
+}
+
+.insight-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Variantes de tarjetas */
+.insight-card.success {
+    border-left-color: #28a745;
+}
+
+.insight-card.info {
+    border-left-color: #17a2b8;
+}
+
+.insight-card.warning {
+    border-left-color: #ffc107;
+}
+
+.insight-card.danger {
+    border-left-color: #dc3545;
+}
+
+.insight-card.loading {
+    border-left-color: #6c757d;
+    opacity: 0.7;
+}
+
+.insight-card.error {
+    border-left-color: #dc3545;
+    background-color: #fff8f8;
+}
+
+/* Ícono */
+.insight-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.insight-card.success .insight-icon {
+    color: #28a745;
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.insight-card.info .insight-icon {
+    color: #17a2b8;
+    background: rgba(23, 162, 184, 0.1);
+}
+
+.insight-card.warning .insight-icon {
+    color: #ffc107;
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.insight-card.danger .insight-icon {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.insight-card.error .insight-icon {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+/* Contenido */
+.insight-content {
+    flex: 1;
+}
+
+.insight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.insight-content h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.insight-content p {
+    margin: 0 0 1rem 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.insight-value {
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    background: #f8f9fa;
+    white-space: nowrap;
+}
+
+.insight-value.positive {
+    color: #28a745;
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.insight-value.negative {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.insight-value.neutral {
+    color: #6c757d;
+    background: rgba(108, 117, 125, 0.1);
+}
+
+.insight-action {
+    border: none;
+    background: #f8f9fa;
+    color: #5a67d8;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+.insight-action:hover {
+    background: #e9ecef;
+    color: #4c51bf;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .insights-cards {
+        grid-template-columns: 1fr;
+    }
+}
