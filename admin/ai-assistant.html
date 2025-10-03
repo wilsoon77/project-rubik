@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente IA - AetherCubix Admin</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <!-- Marked para Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
+    <link rel="stylesheet" href="styles/ai-assistant.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix Admin</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="index.html#pedidos"><i class="fas fa-shopping-cart"></i> Gestión de Pedidos</a></li>
+                <li><a href="gestion-productos.html"><i class="fas fa-box"></i> Gestión de Productos</a></li>
+                <li><a href="power-bi.html"><i class="fas fa-chart-pie"></i> Power BI Analytics</a></li>
+                <li><a href="ai-assistant.html" class="active"><i class="fas fa-robot"></i> Asistente IA</a></li>
+                <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver al sitio</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1><i class="fas fa-robot"></i> Asistente IA - AetherCubix</h1>
+                <div class="ai-status" id="ai-status">
+                    <div class="status-indicator"></div>
+                    <span>IA Lista</span>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <div class="ai-layout">
+                    <!-- Panel de chat -->
+                    <div class="ai-chat-panel">
+                        <div class="chat-header">
+                            <h3><i class="fas fa-comments"></i> Consulta con IA</h3>
+                            <button class="btn btn-secondary btn-sm" onclick="clearChat()">
+                                <i class="fas fa-trash"></i> Limpiar
+                            </button>
+                        </div>
+
+                        <div class="chat-container" id="chat-container">
+                            <div class="ai-message welcome">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    <p>¡Hola! Soy tu asistente de AetherCubix. Puedo ayudarte con:</p>
+                                    <ul>
+                                        <li>📊 Análisis de ventas y estadísticas</li>
+                                        <li>📈 Generar gráficas automáticas</li>
+                                        <li>🔍 Buscar información específica</li>
+                                        <li>💡 Insights sobre productos y clientes</li>
+                                    </ul>
+                                    <p><strong>Ejemplos de preguntas:</strong></p>
+                                    <div class="example-queries">
+                                        <span class="query-example" onclick="askExample(this)">¿Cuál fue mi producto más
+                                            vendido este mes?</span>
+                                        <span class="query-example" onclick="askExample(this)">Muéstrame las ventas por
+                                            categoría</span>
+                                        <span class="query-example" onclick="askExample(this)">¿Cuántos pedidos tengo
+                                            pendientes?</span>
+                                        <span class="query-example" onclick="askExample(this)">Genera una gráfica de
+                                            ventas mensuales</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-input-container">
+                            <div class="chat-input-box">
+                                <input type="text" id="chat-input"
+                                    placeholder="Escribe tu pregunta aquí... ej: ¿Cuáles son mis productos más vendidos?">
+                                <button id="send-btn" onclick="sendQuery()">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <div class="chat-suggestions">
+                                <span class="suggestion" onclick="askSuggestion(this)">Resumen de ventas hoy</span>
+                                <span class="suggestion" onclick="askSuggestion(this)">Top 5 clientes</span>
+                                <span class="suggestion" onclick="askSuggestion(this)">Productos con poco stock</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel de resultados y gráficas -->
+                    <div class="ai-results-panel">
+                        <div class="results-header">
+                            <h3><i class="fas fa-chart-area"></i> Resultados y Visualizaciones</h3>
+                        </div>
+
+                        <div class="results-container" id="results-container">
+                            <div class="empty-results">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Los gráficos y análisis aparecerán aquí</p>
+                                <small>Haz una pregunta al asistente para ver visualizaciones automáticas</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading modal -->
+    <div id="ai-loading-modal" class="modal ai-loading" style="display: none;">
+        <div class="modal-content">
+            <div class="loading-animation">
+                <div class="robot-thinking">
+                    <i class="fas fa-robot"></i>
+                    <div class="thinking-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <p>Analizando datos con IA...</p>
+                <small id="loading-status">Procesando consulta</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/admin-guard.js"></script>
+    <script type="module" src="scripts/ai-assistant.js"></script>
+</body>
+
+</html>

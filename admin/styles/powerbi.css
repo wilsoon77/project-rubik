@@ -1,0 +1,366 @@
+/**
+ * Estilos para la integración con Power BI
+ */
+
+/* Contenedor principal de Power BI */
+.powerbi-container {
+    margin-top: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 500px;
+}
+
+/* Placeholder cuando no hay informe seleccionado */
+.powerbi-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    text-align: center;
+    background: #f9f9f9;
+    color: #666;
+    padding: 2rem;
+}
+
+.powerbi-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #999;
+}
+
+.powerbi-placeholder h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.powerbi-placeholder p {
+    max-width: 400px;
+    font-size: 0.95rem;
+}
+
+/* Opciones de informes */
+.powerbi-options {
+    margin: 2rem 0;
+}
+
+.powerbi-options h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.powerbi-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.powerbi-option {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.powerbi-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #dc143c;
+}
+
+.powerbi-option.active {
+    border-color: #dc143c;
+    box-shadow: 0 5px 15px rgba(220, 20, 60, 0.1);
+    position: relative;
+}
+
+.powerbi-option.active:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #dc143c;
+}
+
+.option-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.option-icon i {
+    font-size: 1.5rem;
+    color: #dc143c;
+}
+
+.powerbi-option h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.powerbi-option p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Info box */
+.info-box {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: #f9f9fc;
+    border-left: 4px solid #4a6fa5;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.info-box i {
+    font-size: 1.5rem;
+    color: #4a6fa5;
+    margin-right: 1rem;
+}
+
+.info-box p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.info-box p:first-child {
+    margin-bottom: 0.5rem;
+}
+
+.info-box a {
+    color: #dc143c;
+    text-decoration: none;
+}
+
+.info-box a:hover {
+    text-decoration: underline;
+}
+
+/* Informe de Power BI */
+.powerbi-report {
+    padding: 1.5rem;
+    background: white;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.report-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.report-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Tarjetas de resumen */
+.report-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+}
+
+.summary-card.positive {
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.summary-card.warning {
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.summary-card.negative {
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.summary-title {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.summary-change {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.summary-change.positive {
+    color: #28a745;
+}
+
+.summary-change.negative {
+    color: #dc3545;
+}
+
+/* Contenedores de gráficos */
+.report-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.chart-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 1rem;
+    position: relative;
+}
+
+.chart-container.large {
+    grid-column: 1 / -1;
+}
+
+.chart-container.medium {
+    min-height: 300px;
+}
+
+/* Tablas de datos */
+.report-table {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+}
+
+.report-table h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th {
+    background: #f5f5f5;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+}
+
+.data-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table .positive {
+    color: #28a745;
+}
+
+.data-table .negative {
+    color: #dc3545;
+}
+
+.data-table .warning {
+    color: #ffc107;
+}
+
+.data-table .neutral {
+    color: #6c757d;
+}
+
+/* Animación de carga */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #dc143c;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .report-summary {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    
+    .report-charts {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-value {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .powerbi-option {
+        padding: 1rem;
+    }
+    
+    .option-icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+

@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/wilsoon77/project-rubik#readme",
   "dependencies": {
-    "appwrite": "^19.0.0"
+    "appwrite": "^19.0.0",
+    "marked": "^16.3.0"
   }
 }

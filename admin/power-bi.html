@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="styles/admin.css">
     <link rel="stylesheet" href="styles/admin-guard.css">
     <link rel="stylesheet" href="styles/insights.css">
+    <link rel="stylesheet" href="styles/powerbi.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -21,10 +23,13 @@
                 <span>AetherCubix Admin</span>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="index.html"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
-                <li><a href="index.html#pedidos" onclick="window.location='index.html#pedidos'"><i class="fas fa-shopping-cart"></i> Gestión de Pedidos</a></li>
+                <li><a href="index.html" class="active" onclick="mostrarSeccion('dashboard')"><i
+                            class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="#pedidos" onclick="mostrarSeccion('pedidos')"><i class="fas fa-shopping-cart"></i> Gestión
+                        de Pedidos</a></li>
                 <li><a href="gestion-productos.html"><i class="fas fa-box"></i> Gestión de Productos</a></li>
-                <li><a href="power-bi.html" class="active"><i class="fas fa-chart-pie"></i> Power BI</a></li>
+                <li><a href="power-bi.html"><i class="fas fa-chart-pie"></i> Power BI Analytics</a></li>
+                <li><a href="ai-assistant.html"><i class="fas fa-robot"></i> Asistente IA</a></li>
                 <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver al sitio</a></li>
             </ul>
         </nav>
@@ -45,10 +50,13 @@
 
             <div class="admin-content">
                 <div class="section-header">
-                    <h2><i class="fas fa-chart-pie"></i> Análisis con Power BI</h2>
+                    <h2><i class="fas fa-chart-pie"></i> Power BI Analytics</h2>
                     <div class="section-actions">
-                        <button class="btn btn-primary" onclick="exportToPowerBI()">
-                            <i class="fas fa-file-export"></i> Exportar Datos
+                        <button class="btn btn-primary" onclick="exportToExcel()">
+                            <i class="fas fa-file-excel"></i> Exportar Excel
+                        </button>
+                        <button class="btn btn-outline" onclick="exportToCSV()">
+                            <i class="fas fa-file-csv"></i> Exportar CSV
                         </button>
                     </div>
                 </div>
@@ -56,8 +64,10 @@
                 <div class="info-box">
                     <i class="fas fa-info-circle"></i>
                     <div>
-                        <p><strong>Importante:</strong> Para ver los informes completos, necesitas acceder a Power BI Service o instalar la aplicación de Power BI Desktop.</p>
-                        <p>Puedes <a href="#" onclick="exportToPowerBI()">exportar los datos</a> para importarlos en tu instancia de Power BI.</p>
+                        <p><strong>Importante:</strong> Para ver los informes completos, necesitas acceder a Power BI
+                            Service o instalar la aplicación de Power BI Desktop.</p>
+                        <p>Puedes <a href="#" onclick="exportToPowerBI()">exportar los datos</a> para importarlos en tu
+                            instancia de Power BI.</p>
                     </div>
                 </div>
 
@@ -71,7 +81,7 @@
                             <h4>Análisis de Ventas</h4>
                             <p>Tendencias, comparativas y proyecciones de ventas</p>
                         </div>
-                        
+
                         <div class="powerbi-option" onclick="loadPowerBIReport('productos')">
                             <div class="option-icon">
                                 <i class="fas fa-box"></i>
@@ -79,7 +89,7 @@
                             <h4>Análisis de Productos</h4>
                             <p>Rendimiento, popularidad y categorías de productos</p>
                         </div>
-                        
+
                         <div class="powerbi-option" onclick="loadPowerBIReport('inventario')">
                             <div class="option-icon">
                                 <i class="fas fa-warehouse"></i>
@@ -87,7 +97,7 @@
                             <h4>Análisis de Inventario</h4>
                             <p>Estado, rotación y valor del inventario</p>
                         </div>
-                        
+
                         <div class="powerbi-option" onclick="loadPowerBIReport('clientes')">
                             <div class="option-icon">
                                 <i class="fas fa-users"></i>
@@ -107,6 +117,66 @@
                     </div>
                     <div id="powerbi-report" style="display: none;"></div>
                 </div>
+
+                <div class="powerbi-container">
+                    <div class="powerbi-placeholder">
+                        <i class="fas fa-chart-pie"></i>
+                        <h3>Informes de Power BI</h3>
+                        <p>Hay dos opciones para visualizar tus datos:</p>
+
+                        <div class="powerbi-options">
+                            <div class="powerbi-option active" onclick="showExportSection()">
+                                <div class="option-icon">
+                                    <i class="fas fa-file-export"></i>
+                                </div>
+                                <h4>Exportar para Power BI</h4>
+                                <p>Exporta los datos para usar en Power BI Desktop o Service</p>
+                            </div>
+
+                            <div class="powerbi-option" onclick="showEmbeddedReports()">
+                                <div class="option-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <h4>Informes Integrados</h4>
+                                <p>Visualiza los informes publicados directamente aquí</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reemplazar la sección de exportación existente -->
+
+                    <div id="powerbi-export-section" style="display: none;">
+                        <h3>Exportar datos para Power BI</h3>
+                        <p>Elige el formato que prefieres para exportar tus datos:</p>
+                        <div class="export-buttons">
+                            <button class="btn btn-primary" onclick="exportToPowerBICSV()">
+                                <i class="fas fa-file-csv"></i> Exportar a CSV (recomendado)
+                            </button>
+                            <button class="btn btn-outline" onclick="exportToExcel()">
+                                <i class="fas fa-file-excel"></i> Exportar a Excel
+                            </button>
+                        </div>
+                        <div class="format-info">
+                            <div class="format-card">
+                                <div class="format-icon"><i class="fas fa-file-csv"></i></div>
+                                <h4>CSV (recomendado)</h4>
+                                <p>Mejor compatibilidad con caracteres especiales (tildes, acentos)</p>
+                            </div>
+                            <div class="format-card">
+                                <div class="format-icon"><i class="fas fa-file-excel"></i></div>
+                                <h4>Excel</h4>
+                                <p>Múltiples hojas en un solo archivo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="powerbi-embedded-reports" style="display: none;">
+                        <iframe id="powerbi-iframe" width="100%" height="600"
+                            src="https://app.powerbi.com/view?r=CODIGO_DE_TU_INFORME" frameborder="0"
+                            allowFullScreen="true">
+                        </iframe>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -115,6 +185,29 @@
     <script type="module" src="scripts/admin-guard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/powerbi-client/dist/powerbi.min.js"></script>
     <script type="module" src="scripts/powerbi.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script type="module" src="scripts/powerbi-real.js"></script>
+
+    <script>
+        function showExportSection() {
+            document.querySelectorAll('.powerbi-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelector('.powerbi-option:nth-child(1)').classList.add('active');
+            document.getElementById('powerbi-export-section').style.display = 'block';
+            document.getElementById('powerbi-embedded-reports').style.display = 'none';
+        }
+
+        function showEmbeddedReports() {
+            document.querySelectorAll('.powerbi-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelector('.powerbi-option:nth-child(2)').classList.add('active');
+            document.getElementById('powerbi-export-section').style.display = 'none';
+            document.getElementById('powerbi-embedded-reports').style.display = 'block';
+
+            // Cargar informe embebido (después de publicar en Power BI)
+            const iframe = document.getElementById('powerbi-iframe');
+            // Reemplazar con tu URL de informe publicado
+            iframe.src = "https://app.powerbi.com/view?r=CODIGO_DE_TU_INFORME";
+        }
+    </script>
 </body>
 
 </html>
