@@ -66,115 +66,19 @@
                     <div>
                         <p><strong>Importante:</strong> Para ver los informes completos, necesitas acceder a Power BI
                             Service o instalar la aplicación de Power BI Desktop.</p>
-                        <p>Puedes <a href="https://app.powerbi.com/" onclick="exportToPowerBI()">exportar los datos</a> para importarlos en tu
+                        <p>Puedes <a href="https://app.powerbi.com/" onclick="exportToPowerBI()">exportar los datos</a>
+                            para importarlos en tu
                             instancia de Power BI.</p>
                     </div>
                 </div>
 
                 <div class="powerbi-options">
-                    <h3>Opciones de visualización</h3>
-                    <div class="powerbi-options-grid">
-                        <div class="powerbi-option" onclick="loadPowerBIReport('ventas')">
-                            <div class="option-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h4>Análisis de Ventas</h4>
-                            <p>Tendencias, comparativas y proyecciones de ventas</p>
-                        </div>
-
-                        <div class="powerbi-option" onclick="loadPowerBIReport('productos')">
-                            <div class="option-icon">
-                                <i class="fas fa-box"></i>
-                            </div>
-                            <h4>Análisis de Productos</h4>
-                            <p>Rendimiento, popularidad y categorías de productos</p>
-                        </div>
-
-                        <div class="powerbi-option" onclick="loadPowerBIReport('inventario')">
-                            <div class="option-icon">
-                                <i class="fas fa-warehouse"></i>
-                            </div>
-                            <h4>Análisis de Inventario</h4>
-                            <p>Estado, rotación y valor del inventario</p>
-                        </div>
-
-                        <div class="powerbi-option" onclick="loadPowerBIReport('clientes')">
-                            <div class="option-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h4>Análisis de Clientes</h4>
-                            <p>Segmentación, fidelización y comportamiento</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contenedor para el informe de Power BI -->
-                <div class="powerbi-container">
-                    <div class="powerbi-placeholder">
-                        <i class="fas fa-chart-pie"></i>
-                        <h3>Selecciona un informe para visualizar</h3>
-                        <p>Haz clic en una de las opciones de arriba para cargar el informe correspondiente</p>
-                    </div>
-                    <div id="powerbi-report" style="display: none;"></div>
-                </div>
-
-                <div class="powerbi-container">
-                    <div class="powerbi-placeholder">
-                        <i class="fas fa-chart-pie"></i>
-                        <h3>Informes de Power BI</h3>
-                        <p>Hay dos opciones para visualizar tus datos:</p>
-
-                        <div class="powerbi-options">
-                            <div class="powerbi-option active" onclick="showExportSection()">
-                                <div class="option-icon">
-                                    <i class="fas fa-file-export"></i>
-                                </div>
-                                <h4>Exportar para Power BI</h4>
-                                <p>Exporta los datos para usar en Power BI Desktop o Service</p>
-                            </div>
-
-                            <div class="powerbi-option" onclick="showEmbeddedReports()">
-                                <div class="option-icon">
-                                    <i class="fas fa-chart-bar"></i>
-                                </div>
-                                <h4>Informes Integrados</h4>
-                                <p>Visualiza los informes publicados directamente aquí</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Reemplazar la sección de exportación existente -->
-
-                    <div id="powerbi-export-section" style="display: none;">
-                        <h3>Exportar datos para Power BI</h3>
-                        <p>Elige el formato que prefieres para exportar tus datos:</p>
-                        <div class="export-buttons">
-                            <button class="btn btn-primary" onclick="exportToPowerBICSV()">
-                                <i class="fas fa-file-csv"></i> Exportar a CSV (recomendado)
-                            </button>
-                            <button class="btn btn-outline" onclick="exportToExcel()">
-                                <i class="fas fa-file-excel"></i> Exportar a Excel
-                            </button>
-                        </div>
-                        <div class="format-info">
-                            <div class="format-card">
-                                <div class="format-icon"><i class="fas fa-file-csv"></i></div>
-                                <h4>CSV (recomendado)</h4>
-                                <p>Mejor compatibilidad con caracteres especiales (tildes, acentos)</p>
-                            </div>
-                            <div class="format-card">
-                                <div class="format-icon"><i class="fas fa-file-excel"></i></div>
-                                <h4>Excel</h4>
-                                <p>Múltiples hojas en un solo archivo</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="powerbi-embedded-reports" style="display: none;">
-                        <iframe id="powerbi-iframe" width="100%" height="600"
-                            src="https://app.powerbi.com/view?r=CODIGO_DE_TU_INFORME" frameborder="0"
-                            allowFullScreen="true">
-                        </iframe>
+                    <h3>Visualización En Power BI</h3>
+                    <!-- IFRAME INTEGRADO AL PRINCIPIO -->
+                    <div style="display:flex;justify-content:center;margin:30px 0;">
+                        <iframe title="Cubix" width="800" height="500"
+                            src="https://app.powerbi.com/view?r=eyJrIjoiYTg5OTZkNDEtNWE4NC00M2FiLWJiODUtZDllMWVhNmU1NmQxIiwidCI6IjVmNTNiNGNlLTYzZDQtNGVlOC04OGQyLTIyZjBiMmQ0YjI3YSIsImMiOjR9"
+                            frameborder="0" allowFullScreen="true"></iframe>
                     </div>
                 </div>
             </div>
