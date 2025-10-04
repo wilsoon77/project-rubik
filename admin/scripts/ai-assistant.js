@@ -150,7 +150,7 @@ class AIAssistant {
         const productosStock = this.analizarStock();
         const estadosPedidos = this.calcularEstadosPedidos();
         const ventasMesActual = this.calcularVentasMesActual();
-        const topClientes = this.calcularTopClientes(); // ✅ AGREGAR
+        const topClientes = this.calcularTopClientes(); 
 
         return {
             resumen: {
