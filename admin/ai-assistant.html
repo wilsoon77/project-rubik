@@ -15,9 +15,14 @@
 </head>
 
 <body>
+    <!-- Botón hamburguesa para menú lateral -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="admin-layout">
         <!-- Sidebar -->
-        <nav class="admin-sidebar">
+        <nav class="admin-sidebar" id="adminSidebar">
             <div class="sidebar-header">
                 <i class="fas fa-cube"></i>
                 <span>AetherCubix Admin</span>
@@ -137,6 +142,41 @@
     <!-- Scripts -->
     <script type="module" src="scripts/admin-guard.js"></script>
     <script type="module" src="scripts/ai-assistant.js"></script>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const adminSidebar = document.getElementById('adminSidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const adminHeader = document.querySelector('.admin-header');
+
+        function openSidebar() {
+            adminSidebar.classList.add('open');
+            sidebarOverlay.classList.add('active');
+            if (window.innerWidth < 900 && adminHeader) {
+                adminHeader.classList.add('hide-on-menu');
+            }
+        }
+        function closeSidebar() {
+            adminSidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+            if (adminHeader) {
+                adminHeader.classList.remove('hide-on-menu');
+            }
+        }
+        menuToggle.addEventListener('click', function () {
+            if (adminSidebar.classList.contains('open')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        document.querySelectorAll('.admin-sidebar a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 900) closeSidebar();
+            });
+        });
+    </script>
 </body>
 
 </html>

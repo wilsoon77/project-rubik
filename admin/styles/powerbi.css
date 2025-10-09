@@ -364,3 +364,8 @@
     }
 }
 
+@media (max-width: 900px) {
+    .admin-header.hide-on-menu {
+        display: none !important;
+    }
+}

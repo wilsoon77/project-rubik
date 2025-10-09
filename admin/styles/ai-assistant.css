@@ -290,6 +290,44 @@
     }
 }
 
+/* Mejorar layout en móvil */
+@media (max-width: 900px) {
+    .ai-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        height: auto;
+        min-height: 100vh;
+    }
+    .ai-chat-panel,
+    .ai-results-panel {
+        min-height: 220px;
+        max-height: none;
+        height: auto;
+    }
+    .chat-container,
+    .results-container {
+        max-height: 320px;
+        min-height: 120px;
+        overflow-y: auto;
+    }
+}
+
+/* Opcional: mejora el scroll en móvil */
+@media (max-width: 600px) {
+    .ai-chat-panel,
+    .ai-results-panel {
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    .chat-container,
+    .results-container {
+        padding: 12px;
+        font-size: 0.98rem;
+    }
+}
+
 /* Estilos para mensajes de IA con Markdown */
 .ai-message .message-text {
     line-height: 1.6;
@@ -402,3 +440,8 @@
     font-style: italic;
 }
 
+@media (max-width: 900px) {
+    .admin-header.hide-on-menu {
+        display: none !important;
+    }
+}
