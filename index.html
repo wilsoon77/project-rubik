@@ -3,10 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>AetherCubix - Tu Tienda de Cubos Rubik</title>
     <meta name="description"
         content="AetherCubix - La mejor tienda online de cubos Rubik. Encuentra cubos 2x2, 3x3, 4x4, Megaminx y más. Aprende a resolver con nuestros tutoriales.">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AetherCubix">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-192x192.png">
+    
+    <!-- Splash screens para iOS -->
+    <link rel="apple-touch-startup-image" href="/icons/icon-512x512.png">
 
     <!-- Preconnect para optimización -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,6 +261,9 @@
 
     <!-- JavaScript -->
     <script type="module" src="scripts/main.js"></script>
+    
+    <!-- PWA Manager - Carga asíncrona para no bloquear -->
+    <script type="module" src="scripts/pwa-manager.js" async></script>
 </body>
 
 

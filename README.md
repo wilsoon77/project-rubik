@@ -1,5 +1,45 @@
 # 🎲 AetherCubix - Tienda Profesional de Cubos Rubik
 
+## 📱 **AHORA ES UNA PWA - APLICACIÓN MÓVIL**
+
+**AetherCubix** es un **e-commerce completo** de cubos Rubik que funciona como:
+- 🌐 **Sitio web** profesional y responsivo
+- 📱 **Aplicación móvil** instalable (PWA)
+- 🔌 **App offline** - funciona sin conexión
+- ⚡ **App nativa** - instalable en Android, iOS y Desktop
+
+---
+
+## 📄 Descripción
+
+AetherCubix es una tienda online completa especializada en cubos Rubik con funcionalidades de e-commerce profesionales. Ahora convertida en una **Progressive Web App (PWA)**, ofrece experiencia de app móvil nativa sin necesidad de Google Play o App Store.
+
+## ✨ Características Principales
+
+### 📱 PWA - Aplicación Móvil (¡NUEVO!)
+- **📥 Instalable**: Como app nativa en móvil y desktop
+- **🔌 Funciona Offline**: Caché inteligente de recursos
+- **⚡ Súper Rápida**: Pre-caché y carga instantánea
+- **🔄 Auto-actualizable**: Notificaciones de nuevas versiones
+- **🎨 Iconos Profesionales**: Generador incluido
+- **📲 Sin tiendas**: No necesita Play Store ni App Store
+
+### 🛒 E-commerce Completo
+- **Autenticación**: Login/Registro con Appwrite
+- **Carrito de Compras**: Agregar/quitar productos en tiempo real
+- **Checkout**: Proceso de compra completo
+- **Historial de Pedidos**: Ver compras anteriores
+- **Panel de Admin**: Gestión de productos (CRUD)
+- **AI Assistant**: Chatbot con OpenRouter/DeepSeek
+- **Power BI Analytics**: Dashboard de ventas
+
+### 🎨 Diseño Visual
+- **Colores icónicos del cubo Rubik**: Rojo, azul, verde, amarillo, naranja y blanco
+- **Animación 3D del cubo**: Cubo Rubik animado en CSS3
+- **Diseño responsivo**: Adaptado para móvil, tablet y desktop
+- **Efectos visuales modernos**: Animaciones, gradientes, sombras suaves e interacciones
+- **Tipografía profesional**: Orbitron (futurista) e Inter (legible)ix - Tienda Profesional de Cubos Rubik
+
 ## 📄 Descripción
 
 AetherCubix es un sitio web estático profesional y visualmente atractivo diseñado para una tienda especializada en la venta de cubos Rubik. El proyecto utiliza tecnologías web modernas y presenta una interfaz elegante, animaciones fluidas y una experiencia de usuario excepcional.
@@ -14,63 +54,219 @@ AetherCubix es un sitio web estático profesional y visualmente atractivo diseñ
 - **Tipografía profesional**: Orbitron (futurista) e Inter (legible)
 
 ### 🏗️ Estructura del Sitio
+
+#### Páginas Públicas:
 1. **Inicio** - Landing page con hero section y cubo animado
-2. **Sobre Nosotros** - Historia, estadísticas y equipo
-3. **Productos** - Catálogo filtrable de cubos y accesorios
-4. **Aprende** - Recursos educativos, tutoriales y niveles de aprendizaje
-5. **Contacto** - Formulario funcional con validación y animación
+2. **Productos** - Catálogo completo con Appwrite
+3. **Carrito** - Gestión de carrito de compras
+4. **Checkout** - Proceso de pago
+5. **Mis Pedidos** - Historial de compras
+6. **Login/Registro** - Autenticación con Appwrite
+7. **Sobre Nosotros** - Historia y equipo
+8. **Aprende** - Tutoriales y recursos
+9. **Contacto** - Formulario de contacto
+
+#### Panel de Administración:
+1. **Dashboard Admin** - Vista general
+2. **Gestión de Productos** - CRUD completo
+3. **AI Assistant** - Chatbot con IA
+4. **Power BI** - Analytics y reportes
 
 ### 🔧 Funcionalidades Técnicas
+- **PWA**: Service Worker, Manifest, Offline support
+- **Autenticación**: Sistema completo con Appwrite
+- **Base de datos**: 5 colecciones en Appwrite
+- **Carrito persistente**: LocalStorage + Appwrite
 - **Navegación fija**: Menú sticky con efectos de scroll
-- **Filtros de productos**: Sistema de filtrado dinámico con JavaScript
-- **Formulario de contacto**: Validación completa, feedback visual y animación de envío
-- **Animaciones CSS**: Efectos de entrada, hover y transiciones suaves
-- **Easter egg**: Código Konami para activar un cubo virtual oculto
+- **Filtros de productos**: Sistema dinámico con JavaScript
+- **Animaciones CSS**: Efectos de entrada, hover y transiciones
+- **Responsive**: Mobile-first design
 
 ## 🛠️ Tecnologías Utilizadas
 
 ### Frontend
 - **HTML5**: Estructura semántica moderna
 - **CSS3**: Grid, Flexbox, animaciones y media queries
-- **JavaScript ES6+**: Funcionalidad interactiva
+- **JavaScript ES6+**: Módulos y funcionalidad moderna
+- **Vite**: Build tool y dev server
 - **Font Awesome**: Iconografía profesional
 - **Google Fonts**: Tipografías Orbitron e Inter
 
+### Backend as a Service (BaaS)
+- **Appwrite**: Autenticación, base de datos, storage
+- **OpenRouter**: AI Assistant (DeepSeek)
+- **Power BI**: Analytics integrado
+
+### PWA
+- **Service Worker**: Caché y funcionalidad offline
+- **Web App Manifest**: Configuración de instalación
+- **Cache API**: Estrategias de caché inteligentes
+
 ### Estructura de Archivos
 ```
-├── index.html
-├── aprende.html
-├── productos.html
-├── sobre-nosotros.html
-├── contacto.html
-├── styles/
-│   ├── main.css
-│   ├── animations.css
-│   └── responsive.css
-├── scripts/
-│   └── main.js
-├── public/
-├── README.md
-├── package.json
-└── vite.config.ts
-
+├── index.html                    # Página principal
+├── productos.html                # Catálogo
+├── carrito.html                  # Carrito de compras
+├── checkout.html                 # Proceso de pago
+├── confirmacion.html             # Confirmación de pedido
+├── mis-pedidos.html              # Historial
+├── login.html                    # Autenticación
+├── sobre-nosotros.html           # Información
+├── aprende.html                  # Tutoriales
+├── contacto.html                 # Contacto
+│
+├── admin/                        # Panel de administración
+│   ├── index.html                # Dashboard
+│   ├── gestion-productos.html    # CRUD productos
+│   ├── ai-assistant.html         # Chatbot IA
+│   └── power-bi.html             # Analytics
+│
+├── public/                       # Archivos públicos
+│   ├── manifest.json             # ⭐ PWA Manifest
+│   ├── service-worker.js         # ⭐ Service Worker
+│   ├── icon-generator.html       # ⭐ Generador de iconos
+│   ├── icons/                    # Iconos PWA
+│   └── screenshots/              # Capturas para PWA
+│
+├── scripts/                      # JavaScript
+│   ├── main.js                   # Script principal
+│   ├── pwa-manager.js            # ⭐ Gestor PWA
+│   ├── auth-ui.js                # Autenticación UI
+│   ├── carrito-page.js           # Lógica carrito
+│   ├── checkout-page.js          # Lógica checkout
+│   ├── services/                 # Servicios
+│   │   ├── appwrite.js           # Config Appwrite
+│   │   ├── auth.js               # Autenticación
+│   │   ├── carrito.js            # Carrito
+│   │   ├── productos.js          # Productos
+│   │   └── pedidos.js            # Pedidos
+│   └── utils/                    # Utilidades
+│
+├── styles/                       # CSS
+│   ├── main.css                  # Estilos principales
+│   ├── animations.css            # Animaciones
+│   ├── responsive.css            # Media queries
+│   └── auth.css                  # Estilos auth
+│
+├── PWA-GUIDE.md                  # ⭐ Guía completa PWA
+├── PWA-QUICKSTART.md             # ⭐ Inicio rápido PWA
+├── RESUMEN-PWA.md                # ⭐ Resumen ejecutivo
+├── README.md                     # Este archivo
+├── package.json                  # Dependencias
+├── vite.config.ts                # Configuración Vite
+└── netlify.toml                  # Deploy Netlify
 ```
 
 ## 🚀 Instalación y Uso
 
-### Desarrollo en servidor Local (VITE)
-1. **Clona o descarga el proyecto**
-2. **Instala dependencias**: `npm install`
-3. **Inicia el servidor local (Vite)**: `npm run dev`
-4. **Abre** en el navegador: [http://localhost:3000/](http://localhost:3000/)
+### 1️⃣ Clonar e Instalar
+```bash
+# Clonar el repositorio
+git clone https://github.com/wilsoon77/project-rubik.git
+cd project-rubik
 
+# Instalar dependencias
+npm install
+```
 
-### Despliegue
-El sitio es completamente estático y puede desplegarse en:
-- **GitHub Pages**
-- **Netlify**
-- **Surge.sh**
-- Cualquier servidor web estático
+### 2️⃣ Configurar Appwrite
+Crea un archivo `.env` basado en `.env.example`:
+```env
+VITE_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+VITE_APPWRITE_PROJECT_ID=tu_project_id
+VITE_APPWRITE_DATABASE_ID=tu_database_id
+VITE_APPWRITE_COLLECTION_PRODUCTO_ID=tu_collection_id
+# ... más configuraciones
+```
+
+### 3️⃣ Generar Iconos PWA (IMPORTANTE)
+```bash
+# Inicia el servidor
+npm run dev
+
+# Abre en el navegador:
+http://localhost:3000/icon-generator.html
+
+# Genera y descarga los 8 iconos
+# Guárdalos en: public/icons/
+```
+
+### 4️⃣ Iniciar Desarrollo
+```bash
+# Modo desarrollo (recomendado)
+npm run dev
+
+# O usar Vite directamente
+npx vite
+
+# Abre: http://localhost:3000
+```
+
+### 5️⃣ Build para Producción
+```bash
+# Compilar para producción
+npm run build
+
+# Previsualizar build
+npm run preview
+
+# Los archivos estarán en: dist/
+```
+
+### 6️⃣ Desplegar (con PWA incluida)
+
+#### Opción A: Netlify (Recomendado - Ya configurado)
+```bash
+git add .
+git commit -m "feat: PWA implementada"
+git push origin main
+# Netlify despliega automáticamente
+```
+
+#### Opción B: Vercel
+```bash
+npm run build
+vercel --prod
+```
+
+#### Opción C: Cualquier hosting con HTTPS
+```bash
+npm run build
+# Sube la carpeta 'dist/' a tu hosting
+# ⚠️ Importante: Debe tener HTTPS para que PWA funcione
+```
+
+---
+
+## 📱 Usar como Aplicación Móvil
+
+### En Android (Chrome):
+1. Abre la URL en Chrome
+2. Verás "Instalar AetherCubix"
+3. Toca "Instalar"
+4. ¡La app aparecerá en tu pantalla de inicio! 🎉
+
+### En iOS (Safari):
+1. Abre la URL en Safari
+2. Toca el botón compartir (⬆️)
+3. Selecciona "Agregar a pantalla de inicio"
+4. ¡Listo! 📱
+
+### En Desktop (Chrome/Edge):
+1. Verás ícono ⊕ en la barra de URL
+2. Haz clic en "Instalar"
+3. La app se abre en ventana propia 🖥️
+
+---
+
+## 📚 Documentación PWA
+
+Para información detallada sobre la PWA:
+- **`RESUMEN-PWA.md`** - Resumen ejecutivo y próximos pasos
+- **`PWA-QUICKSTART.md`** - Guía de inicio rápido (5 minutos)
+- **`PWA-GUIDE.md`** - Documentación completa y técnica
+
+---
 
 ## 📱 Responsive Design
 

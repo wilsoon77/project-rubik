@@ -50,7 +50,9 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       input: generateInputs()
-    }
+    },
+    // Copiar archivos PWA importantes
+    copyPublicDir: true
   },
   server: {
     port: 3000,

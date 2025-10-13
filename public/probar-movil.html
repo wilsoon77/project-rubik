@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 Cómo Probar en Móvil - AetherCubix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .ip-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .ip-box:hover {
+            transform: scale(1.05);
+        }
+        
+        .ip-box small {
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        .step-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .step-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .step-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .step-card ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        
+        .step-card li {
+            margin-bottom: 8px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .qr-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        #qrcode {
+            display: inline-block;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #38a169;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Prueba tu PWA en Móvil</h1>
+        <p class="subtitle">Instala AetherCubix en tu móvil como una app nativa</p>
+        
+        <div class="ip-box" onclick="copyIP()">
+            <div id="ipAddress">http://192.168.1.10:3001</div>
+            <small>👆 Toca para copiar • Úsala en tu móvil</small>
+        </div>
+        
+        <div class="warning-box">
+            <strong>⚠️ Importante:</strong> Asegúrate de que tu móvil y PC estén conectados a la <strong>misma red WiFi</strong>.
+        </div>
+        
+        <div class="qr-section">
+            <h3>🔍 Escanea este QR desde tu móvil</h3>
+            <div id="qrcode"></div>
+            <p style="margin-top: 15px; color: #666;">
+                <small>Abre la cámara de tu móvil y apunta al código QR</small>
+            </p>
+        </div>
+        
+        <div class="step-card">
+            <h3>
+                <div class="step-number">1</div>
+                En tu Móvil Android
+            </h3>
+            <ul>
+                <li>Abre <strong>Chrome</strong></li>
+                <li>Escribe la IP de arriba o escanea el QR</li>
+                <li>Verás un banner: <strong>"Instalar AetherCubix"</strong></li>
+                <li>Toca <strong>"Instalar"</strong></li>
+            </ul>
+        </div>
+        
+        <div class="step-card">
+            <h3>
+                <div class="step-number">2</div>
+                En tu iPhone
+            </h3>
+            <ul>
+                <li>Abre <strong>Safari</strong> (NO Chrome)</li>
+                <li>Escribe la IP de arriba o escanea el QR</li>
+                <li>Toca el botón <strong>Compartir</strong> (□↑)</li>
+                <li>Selecciona <strong>"Agregar a pantalla de inicio"</strong></li>
+            </ul>
+        </div>
+        
+        <div class="success-box">
+            <strong>✅ ¡Listo!</strong> La app aparecerá en tu pantalla de inicio como WhatsApp o Instagram.
+        </div>
+        
+        <div class="step-card">
+            <h3>
+                <div class="step-number">3</div>
+                Prueba las Funcionalidades
+            </h3>
+            <p>Abre la app desde tu móvil y verifica:</p>
+            <ul>
+                <li>✅ Ver productos</li>
+                <li>✅ Agregar al carrito</li>
+                <li>✅ Login/Registro</li>
+                <li>✅ Proceso de checkout</li>
+                <li>✅ Ver mis pedidos</li>
+                <li>✅ Panel de admin (si eres admin)</li>
+            </ul>
+        </div>
+        
+        <div class="button-group">
+            <button class="btn-primary" onclick="openInNewTab()">🚀 Abrir en Nueva Pestaña</button>
+            <button class="btn-secondary" onclick="copyIP()">📋 Copiar IP</button>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #e8f4fd; border-radius: 10px;">
+            <strong>💡 Tip:</strong> Si no aparece la opción de instalar, verifica que:
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Estés en la misma red WiFi</li>
+                <li>Hayas generado los iconos (192x192.png y 512x512.png)</li>
+                <li>El servidor esté corriendo (<code>npm run dev</code>)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script>
+        // Obtener IP y puerto dinámicamente
+        const currentURL = window.location.origin;
+        const ipAddress = 'http://192.168.1.10:3001'; // Tu IP
+        
+        // Generar QR Code
+        new QRCode(document.getElementById("qrcode"), {
+            text: ipAddress,
+            width: 200,
+            height: 200,
+            colorDark: "#667eea",
+            colorLight: "#ffffff",
+        });
+        
+        // Copiar IP al portapapeles
+        function copyIP() {
+            navigator.clipboard.writeText(ipAddress).then(() => {
+                const ipBox = document.querySelector('.ip-box');
+                const originalText = ipBox.innerHTML;
+                ipBox.innerHTML = '✅ ¡Copiado al portapapeles!';
+                ipBox.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    ipBox.innerHTML = originalText;
+                    ipBox.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                }, 2000);
+            }).catch(err => {
+                alert('No se pudo copiar. Cópialo manualmente: ' + ipAddress);
+            });
+        }
+        
+        // Abrir en nueva pestaña
+        function openInNewTab() {
+            window.open(ipAddress, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -3,8 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Carrito de Compras - AetherCubix</title>
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AetherCubix">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-192x192.png">
+    
+    <!-- Splash screens para iOS -->
+    <link rel="apple-touch-startup-image" href="/icons/icon-512x512.png">
+
     <meta name="description" content="Revisa y finaliza tu compra de cubos Rubik y puzzles 3D en AetherCubix.">
 
     <!-- Preconnect para optimización -->
@@ -199,6 +219,9 @@
     <!-- JavaScript -->
      <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/carrito-page.js"></script>
+
+    <!-- PWA Manager -->
+    <script type="module" src="/scripts/pwa-manager.js" async></script>
 </body>
 
 </html>
