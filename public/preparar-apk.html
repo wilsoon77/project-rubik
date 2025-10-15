@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparar APK - Checklist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid #e0e0e0;
+        }
+
+        .checklist li:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .checklist li.completed {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .info-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .success-box h3 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .link-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px 10px 10px 0;
+            transition: transform 0.2s;
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .link-button.secondary {
+            background: #28a745;
+        }
+
+        .link-button.tertiary {
+            background: #ff9900;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+        }
+
+        .comparison-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📦 Preparar APK - Checklist Completa</h1>
+        <p class="subtitle">Sigue estos pasos para convertir tu PWA en APK y subirlo a tiendas</p>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar">0%</div>
+        </div>
+
+        <!-- PASO 1: VERIFICACIÓN PWA -->
+        <div class="section">
+            <h2><span class="step-number">1</span> ✅ Verificar PWA</h2>
+            <ul class="checklist" data-section="1">
+                <li>
+                    <input type="checkbox" id="check1-1">
+                    <label for="check1-1">PWA funciona correctamente en hosting</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check1-2">
+                    <label for="check1-2">Manifest.json válido y accesible</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check1-3">
+                    <label for="check1-3">Service Worker activo</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check1-4">
+                    <label for="check1-4">HTTPS funcionando (candado verde)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check1-5">
+                    <label for="check1-5">Iconos 512x512 generados</label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- PASO 2: GENERAR APK -->
+        <div class="section">
+            <h2><span class="step-number">2</span> 🔨 Generar APK con PWABuilder</h2>
+            
+            <a href="https://www.pwabuilder.com/" target="_blank" class="link-button">
+                🚀 Ir a PWABuilder
+            </a>
+
+            <ul class="checklist" data-section="2">
+                <li>
+                    <input type="checkbox" id="check2-1">
+                    <label for="check2-1">Ingresar URL en PWABuilder</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check2-2">
+                    <label for="check2-2">Esperar análisis y verificar puntuación</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check2-3">
+                    <label for="check2-3">Hacer clic en "Package For Stores" → Android</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check2-4">
+                    <label for="check2-4">Configurar Package ID (ej: com.aethercubix.app)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check2-5">
+                    <label for="check2-5">Descargar ZIP con APK firmado</label>
+                </li>
+            </ul>
+
+            <div class="info-box">
+                <h3>💡 Configuración recomendada:</h3>
+                <div class="code-block">
+App name: AetherCubix<br>
+Package ID: com.aethercubix.app<br>
+Version: 1.0.0<br>
+Version code: 1<br>
+Display: standalone<br>
+Status bar color: #6366f1
+                </div>
+            </div>
+        </div>
+
+        <!-- PASO 3: PROBAR APK -->
+        <div class="section">
+            <h2><span class="step-number">3</span> 🧪 Probar APK</h2>
+            <ul class="checklist" data-section="3">
+                <li>
+                    <input type="checkbox" id="check3-1">
+                    <label for="check3-1">Transferir APK a móvil Android</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check3-2">
+                    <label for="check3-2">Activar "Instalar apps desconocidas" en Configuración</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check3-3">
+                    <label for="check3-3">Instalar APK en el móvil</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check3-4">
+                    <label for="check3-4">Probar todas las funcionalidades</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check3-5">
+                    <label for="check3-5">Verificar que el ícono aparezca correctamente</label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- PASO 4: DECIDIR TIENDA -->
+        <div class="section">
+            <h2><span class="step-number">4</span> 🏪 Elegir Tienda de Apps</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tienda</th>
+                        <th>Costo</th>
+                        <th>Alcance</th>
+                        <th>Tiempo Revisión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Google Play</strong> ⭐</td>
+                        <td>$25 USD (único)</td>
+                        <td>Millones de usuarios</td>
+                        <td>1-7 días</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amazon Appstore</strong> 🆓</td>
+                        <td>GRATIS</td>
+                        <td>Moderado</td>
+                        <td>1-3 días</td>
+                    </tr>
+                    <tr>
+                        <td><strong>APKPure</strong></td>
+                        <td>GRATIS</td>
+                        <td>Bajo</td>
+                        <td>1 día</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="https://play.google.com/console" target="_blank" class="link-button">
+                📱 Google Play Console
+            </a>
+            <a href="https://developer.amazon.com/" target="_blank" class="link-button secondary">
+                🆓 Amazon Appstore (GRATIS)
+            </a>
+        </div>
+
+        <!-- PASO 5: PREPARAR ASSETS -->
+        <div class="section">
+            <h2><span class="step-number">5</span> 🎨 Preparar Assets para la Tienda</h2>
+            <ul class="checklist" data-section="5">
+                <li>
+                    <input type="checkbox" id="check5-1">
+                    <label for="check5-1">3-8 capturas de pantalla (mín 320px)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check5-2">
+                    <label for="check5-2">Ícono en alta resolución (512x512)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check5-3">
+                    <label for="check5-3">Descripción corta (80 caracteres)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check5-4">
+                    <label for="check5-4">Descripción completa (4000 caracteres)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check5-5">
+                    <label for="check5-5">Política de privacidad (URL pública)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check5-6">
+                    <label for="check5-6">Email de soporte</label>
+                </li>
+            </ul>
+
+            <div class="info-box">
+                <h3>📝 Ejemplo de descripción:</h3>
+                <p><strong>Corta:</strong> La mejor tienda online de cubos Rubik. Compra, aprende y gestiona pedidos.</p>
+                <p><strong>Completa:</strong> AetherCubix es tu tienda definitiva para cubos Rubik. Descubre nuestra amplia selección de cubos de diferentes niveles, desde principiantes hasta profesionales. Gestiona tus compras, aprende técnicas de resolución y sigue tus pedidos en tiempo real.</p>
+            </div>
+        </div>
+
+        <!-- PASO 6: SUBIR A TIENDA -->
+        <div class="section">
+            <h2><span class="step-number">6</span> 🚀 Subir a la Tienda</h2>
+            <ul class="checklist" data-section="6">
+                <li>
+                    <input type="checkbox" id="check6-1">
+                    <label for="check6-1">Crear cuenta de desarrollador</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check6-2">
+                    <label for="check6-2">Crear nueva aplicación</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check6-3">
+                    <label for="check6-3">Subir APK</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check6-4">
+                    <label for="check6-4">Completar toda la información requerida</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check6-5">
+                    <label for="check6-5">Agregar capturas de pantalla</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check6-6">
+                    <label for="check6-6">Configurar categoría y clasificación</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check6-7">
+                    <label for="check6-7">Enviar a revisión</label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- PASO 7: ASSETLINKS -->
+        <div class="section">
+            <h2><span class="step-number">7</span> 🔐 Configurar Digital Asset Links</h2>
+            
+            <p style="margin-bottom: 15px;">Para que tu APK funcione correctamente, necesitas agregar este archivo a tu hosting:</p>
+            
+            <div class="code-block">
+Ruta: /.well-known/assetlinks.json
+
+Contenido:
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.aethercubix.app",
+    "sha256_cert_fingerprints": ["FINGERPRINT_DE_PWABUILDER"]
+  }
+}]
+            </div>
+
+            <ul class="checklist" data-section="7">
+                <li>
+                    <input type="checkbox" id="check7-1">
+                    <label for="check7-1">Copiar fingerprint del ZIP de PWABuilder</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check7-2">
+                    <label for="check7-2">Crear archivo assetlinks.json en tu hosting</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="check7-3">
+                    <label for="check7-3">Verificar que sea accesible desde navegador</label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            <h3>🎉 ¡Felicidades!</h3>
+            <p>Una vez completados todos los pasos, tu app estará en proceso de revisión. Recibirás un email cuando sea aprobada (usualmente en 1-7 días).</p>
+            <p style="margin-top: 10px;"><strong>Mientras tanto:</strong> Puedes distribuir el APK directamente a amigos o clientes para que lo prueben.</p>
+        </div>
+    </div>
+
+    <script>
+        // Actualizar progreso
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const total = checkboxes.length;
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const percentage = Math.round((checked / total) * 100);
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+
+            // Guardar en localStorage
+            saveProgress();
+        }
+
+        // Guardar progreso en localStorage
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const progress = {};
+            checkboxes.forEach(checkbox => {
+                progress[checkbox.id] = checkbox.checked;
+            });
+            localStorage.setItem('apk-checklist-progress', JSON.stringify(progress));
+        }
+
+        // Cargar progreso desde localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('apk-checklist-progress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                Object.keys(progress).forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = progress[id];
+                        if (progress[id]) {
+                            checkbox.parentElement.classList.add('completed');
+                        }
+                    }
+                });
+                updateProgress();
+            }
+        }
+
+        // Event listeners para checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.parentElement.classList.add('completed');
+                } else {
+                    this.parentElement.classList.remove('completed');
+                }
+                updateProgress();
+            });
+
+            // Hacer que todo el li sea clickeable
+            checkbox.parentElement.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'INPUT') {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+
+        // Cargar progreso al iniciar
+        window.addEventListener('load', loadProgress);
+    </script>
+</body>
+</html>

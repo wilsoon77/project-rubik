@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.aethercubix.app",
+        "sha256_cert_fingerprints": ["69:E8:25:80:31:BD:29:A6:9B:F6:2E:7F:62:8D:0C:33:EE:84:2C:57:FB:3C:E2:76:DE:F7:80:98:29:D0:77:A0"]
+      }
+    }]
