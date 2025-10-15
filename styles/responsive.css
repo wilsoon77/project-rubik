@@ -4,6 +4,30 @@
    ========================== */
 
 /* ===========================
+   BOTÓN DESCARGAR APP - SOLO MÓVILES
+   ========================== */
+
+/* Ocultar por defecto en desktop */
+.mobile-only-menu {
+    display: none;
+}
+
+/* Estilos para el link de descarga */
+.nav-link-download {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.nav-link-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* ===========================
    BREAKPOINTS PRINCIPALES
    ========================== */
 
@@ -878,5 +902,14 @@
     a {
         text-decoration: underline;
         color: black !important;
+    }
+}
+
+/* ===========================
+   MOSTRAR BOT�N DESCARGAR APP EN M�VILES
+   ========================== */
+@media screen and (max-width: 768px) {
+    .mobile-only-menu {
+        display: block !important;
     }
 }

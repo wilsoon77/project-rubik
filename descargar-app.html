@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Descargar App - AetherCubix</title>
+    <meta name="description"
+        content="Descarga la app móvil de AetherCubix para Android. Disfruta de la mejor experiencia de compra de cubos Rubik desde tu dispositivo móvil.">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AetherCubix">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-192x192.png">
+    
+    <!-- Splash screens para iOS -->
+    <link rel="apple-touch-startup-image" href="/icons/icon-512x512.png">
+
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/128/613/613962.png" />
+    
+    <!-- Estilos específicos de la página -->
+    <style>
+        .download-section {
+            padding: 8rem 0 4rem;
+            min-height: 100vh;
+        }
+
+        .download-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .download-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .download-header p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .download-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .download-info {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(220, 20, 60, 0.1);
+        }
+
+        .download-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .platform-badge i {
+            font-size: 1.5rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.3);
+            transition: all 0.3s ease;
+            margin: 2rem 0;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.5);
+        }
+
+        .download-btn i {
+            font-size: 1.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .version-info {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(220, 20, 60, 0.1);
+        }
+
+        .version-item {
+            flex: 1;
+        }
+
+        .version-item strong {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .version-item span {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .qr-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(220, 20, 60, 0.1);
+        }
+
+        .qr-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .qr-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .qr-code-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        #qrcode {
+            margin: 0 auto;
+        }
+
+        #qrcode canvas,
+        #qrcode img {
+            border-radius: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-box {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(220, 20, 60, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .feature-box p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .instructions-section {
+            margin-top: 5rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(220, 20, 60, 0.1);
+        }
+
+        .instructions-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: rgba(220, 20, 60, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .step-card ol {
+            margin-left: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .step-card li {
+            margin-bottom: 0.8rem;
+        }
+
+        .requirements-box {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.1));
+            border-left: 4px solid #ffc107;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .requirements-box h3 {
+            color: #f57c00;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .requirements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .requirement-item i {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+
+        .faq-section {
+            margin-top: 5rem;
+        }
+
+        .faq-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(220, 20, 60, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.2);
+        }
+
+        .faq-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .faq-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 968px) {
+            .download-content {
+                grid-template-columns: 1fr;
+            }
+
+            .download-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .download-section {
+                padding: 6rem 0 2rem;
+            }
+
+            .download-header h1 {
+                font-size: 2rem;
+            }
+
+            .download-header p {
+                font-size: 1.1rem;
+            }
+
+            .download-info,
+            .qr-section {
+                padding: 2rem;
+            }
+
+            .features-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+        <div class="floating-cube"></div>
+    </div>
+
+    <!-- Navegación fija -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cube"></i>
+                <span>AetherCubix</span>
+            </div>
+
+            <!-- Menú de navegación -->
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="productos.html" class="nav-link">Productos</a></li>
+                <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li class="mobile-only-menu"><a href="descargar-app.html" class="nav-link nav-link-download active">📱 Descargar App</a></li>
+            </ul>
+
+            <!-- Botón hamburguesa para móvil -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección principal de descarga -->
+    <section class="download-section">
+        <div class="container">
+            <!-- Encabezado -->
+            <div class="download-header">
+                <h1>📱 Descarga AetherCubix</h1>
+                <p>Lleva tu tienda favorita de cubos Rubik siempre contigo. Disponible para Android.</p>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="download-content">
+                <!-- Información de descarga -->
+                <div class="download-info">
+                    <span class="platform-badge">
+                        <i class="fab fa-android"></i>
+                        Disponible para Android
+                    </span>
+
+                    <h2>App Nativa para Android</h2>
+                    <p>Descarga nuestra aplicación móvil y disfruta de:</p>
+
+                    <ul style="margin: 2rem 0; line-height: 2;">
+                        <li>✅ Acceso rápido desde tu pantalla de inicio</li>
+                        <li>✅ Experiencia de app nativa</li>
+                        <li>✅ Notificaciones de ofertas especiales</li>
+                        <li>✅ Compra de forma segura</li>
+                        <li>✅ Gestión de pedidos en tiempo real</li>
+                    </ul>
+
+                    <a href="/downloads/AetherCubix.apk" download class="download-btn">
+                        <i class="fas fa-download"></i>
+                        <span>Descargar APK</span>
+                    </a>
+
+                    <div class="version-info">
+                        <div class="version-item">
+                            <strong>Versión</strong>
+                            <span>1.0.0</span>
+                        </div>
+                        <div class="version-item">
+                            <strong>Tamaño</strong>
+                            <span>1.6 MB</span>
+                        </div>
+                        <div class="version-item">
+                            <strong>Última actualización</strong>
+                            <span>Oct 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Código QR -->
+                <div class="qr-section">
+                    <h3>📲 Escanea el código QR</h3>
+                    <p>Abre la cámara de tu móvil y apunta al código</p>
+                    
+                    <div class="qr-code-box">
+                        <div id="qrcode"></div>
+                    </div>
+
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                        El código te llevará directamente a la descarga del APK
+                    </p>
+                </div>
+            </div>
+
+            <!-- Características -->
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Rápido y Ligero</h4>
+                    <p>Solo 1.6 MB de tamaño. Descarga e instala en segundos.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>100% Seguro</h4>
+                    <p>APK firmado digitalmente. Tus datos están protegidos.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <h4>Siempre Actualizado</h4>
+                    <p>El contenido se actualiza automáticamente desde nuestros servidores.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Experiencia Nativa</h4>
+                    <p>Diseñada específicamente para dispositivos móviles Android.</p>
+                </div>
+            </div>
+
+            <!-- Instrucciones de instalación -->
+            <div class="instructions-section">
+                <h2>🔧 Cómo Instalar</h2>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Descargar</h4>
+                        <ol>
+                            <li>Haz clic en el botón "Descargar APK"</li>
+                            <li>O escanea el código QR desde tu móvil</li>
+                            <li>Espera a que termine la descarga</li>
+                        </ol>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Habilitar Instalación</h4>
+                        <ol>
+                            <li>Ve a Configuración → Seguridad</li>
+                            <li>Busca "Instalar apps desconocidas"</li>
+                            <li>Permite instalación desde tu navegador</li>
+                        </ol>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Instalar y Usar</h4>
+                        <ol>
+                            <li>Abre el archivo APK descargado</li>
+                            <li>Toca "Instalar" y espera</li>
+                            <li>¡Abre la app y comienza a comprar!</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Requisitos -->
+                <div class="requirements-box">
+                    <h3>📋 Requisitos del Sistema</h3>
+                    <div class="requirements-list">
+                        <div class="requirement-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Android 5.0 (Lollipop) o superior</span>
+                        </div>
+                        <div class="requirement-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Mínimo 2 MB de espacio libre</span>
+                        </div>
+                        <div class="requirement-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Conexión a Internet</span>
+                        </div>
+                        <div class="requirement-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Permisos de instalación habilitados</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="faq-section">
+                <h2>❓ Preguntas Frecuentes</h2>
+
+                <div class="faq-item">
+                    <h4>¿Es seguro instalar este APK?</h4>
+                    <p>Sí, completamente seguro. Nuestro APK está firmado digitalmente y solo accede a tu información cuando inicias sesión voluntariamente. No recopilamos datos sin tu consentimiento.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>¿Por qué no está en Google Play Store?</h4>
+                    <p>Este es un proyecto educativo y estamos en proceso de publicación en tiendas oficiales. Mientras tanto, puedes descargar directamente desde nuestra web de forma segura.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>¿Necesito crear una cuenta?</h4>
+                    <p>Puedes navegar y explorar productos sin cuenta, pero necesitas registrarte para realizar compras, y ver tu historial de pedidos.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>¿La app funciona sin Internet?</h4>
+                    <p>Necesitas conexión a Internet para navegar productos actualizados y realizar compras.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>¿Cómo actualizo la app?</h4>
+                    <p>Por ahora, las actualizaciones son manuales. Descarga la nueva versión e instálala sobre la anterior. Tus datos y configuración se mantendrán intactos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>AetherCubix</span>
+                    </div>
+                    <p>Tu tienda de confianza para cubos Rubik de todos los niveles. Calidad garantizada y envíos rápidos.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="productos.html">Todos los Cubos</a></li>
+                        <li><a href="#">Cubos 2x2</a></li>
+                        <li><a href="#">Cubos 3x3</a></li>
+                        <li><a href="#">Cubos 4x4+</a></li>
+                        <li><a href="#">Pyraminx</a></li>
+                        <li><a href="#">Megaminx</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="aprende.html">Tutoriales</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Suscríbete para recibir ofertas exclusivas y novedades</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <span>&copy; 2025 AetherCubix. Todos los derechos reservados.</span>
+                    <div class="legal-links">
+                        <a href="#">Política de Privacidad</a>
+                        <a href="#">Términos de Servicio</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón scroll to top -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script type="module" src="scripts/main.js"></script>
+    
+    <!-- PWA Manager -->
+    <script type="module" src="scripts/pwa-manager.js" async></script>
+    
+    <!-- Script para generar QR Code -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadUrl = window.location.origin + '/downloads/AetherCubix.apk';
+            
+            new QRCode(document.getElementById("qrcode"), {
+                text: downloadUrl,
+                width: 256,
+                height: 256,
+                colorDark: "#dc143c",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        });
+
+        // Detectar dispositivo móvil
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        if (isMobile()) {
+            console.log('Usuario en dispositivo móvil detectado');
+        }
+    </script>
+</body>
+
+</html>
