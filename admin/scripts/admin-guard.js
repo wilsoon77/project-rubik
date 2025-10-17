@@ -18,7 +18,7 @@ class AdminGuard {
             const estaAutenticado = await authService.estaAutenticado();
             if (!estaAutenticado) {
                 console.warn('🚫 [AdminGuard]: Usuario no autenticado');
-                this.redirigirConMensaje('login', 'Debes iniciar sesión para acceder al panel de administración');
+                this.redirigirConMensaje('login', 'Debes sión para acceder al panel de administración');
                 return;
             }
 

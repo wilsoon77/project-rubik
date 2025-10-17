@@ -445,3 +445,55 @@
         display: none !important;
     }
 }
+
+
+
+
+/* cosa de menu jeje*/
+
+/* ==== MENÚ DE USUARIO (GENERAL) ==== */
+.user-menu {
+  position: fixed;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  overflow: hidden;
+  z-index: 10000;
+  max-width: 90vw;
+}
+
+/* ==== MENÚ RESPONSIVE ==== */
+.user-menu {
+  position: fixed;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 10000;
+  min-width: 200px;
+  max-width: 90vw;
+}
+
+.user-menu-item {
+  padding: 10px 15px;
+  font-size: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.user-menu-item:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 600px) {
+  .user-menu {
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 10px !important;
+    transform: translateX(-50%) !important;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+}
+

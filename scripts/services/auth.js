@@ -329,14 +329,36 @@ class AuthService {
         // Posicionar menú
         const authBtn = document.getElementById('auth-btn');
         const rect = authBtn.getBoundingClientRect();
+const isMobile = window.innerWidth < 600;
 
-        menu.style.cssText = `
-            position: fixed;
-            top: ${rect.bottom + 10}px;
-            right: ${window.innerWidth - rect.right}px;
-            z-index: 10000;
-            min-width: 200px;
-        `;
+if (isMobile) {
+  menu.style.cssText = `
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    min-width: 200px;
+    max-width: 90vw;
+  `;
+} else {
+  // Calcular posición sin salir del viewport
+  const menuWidth = 200;
+  let rightOffset = window.innerWidth - rect.right;
+  if (rect.right + menuWidth > window.innerWidth) {
+    rightOffset = 10; // mantener un margen mínimo
+  }
+
+  menu.style.cssText = `
+    position: fixed;
+    top: ${rect.bottom + 10}px;
+    right: ${rightOffset}px;
+    z-index: 10000;
+    min-width: ${menuWidth}px;
+    max-width: 90vw;
+  `;
+}
+
 
         document.body.appendChild(menu);
 
