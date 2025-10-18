@@ -529,50 +529,52 @@
 
 
 /*Iconos */
-    .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    text-align: center;
+.features-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important; /* Una sola columna, puedes ajustar */
+  gap: 20px !important;
+  justify-items: center !important;
+  width: 100%;
 }
 
 .feature-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+  background: #fff !important;
+  padding: 20px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  width: 90% !important;
+  max-width: 340px !important;
 }
 
 .feature-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    background-color: #ffe6e6;
-    margin-bottom: 10px;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 12px !important;
+  background-color: #ffe6e6 !important;
+  margin-bottom: 12px !important;
 }
 
 .feature-icon i {
-    color: #fd0000;
-    font-size: 30px;
+  font-size: 32px !important;
+  color: #fd0000 !important;
+  text-align: center !important;
+  line-height: 1 !important;
 }
 
-.feature-box h4 {
-    color: #111;
-    margin: 10px 0 5px;
-    font-weight: 600;
-}
-
+.feature-box h4,
 .feature-box p {
-    color: #444;
-    font-size: 15px;
-    line-height: 1.5;
+  width: 100% !important;
+  text-align: center !important;
 }
+
 
     </style>
 </head>
@@ -760,6 +762,8 @@
                     </div>
                 </div>
             </div>
+
+    
 
             <!-- Requisitos -->
             <div class="requirements-box">
