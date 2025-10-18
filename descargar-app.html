@@ -528,7 +528,7 @@
         }
 
 
-
+/*Iconos */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -549,17 +549,19 @@
             transform: translateY(-5px);
         }
 
-        .feature-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+.feature-icon {
+    display: flex;
+    justify-content: center !important; /* centra horizontalmente */
+    align-items: flex-start  !important; /* alinea arriba verticalmente */
+    margin-bottom: 10px;
+    height: 60px !important; /* define una altura para que el icono se posicione arriba */
+}
 
         .feature-icon i {
             color: #fd0000;
             /* Ícono rojo */
             font-size: 36px;
+             line-height: 60px !important;
         }
 
         .feature-box h4 {
