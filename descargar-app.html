@@ -213,53 +213,7 @@
             border-radius: 10px;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .feature-box {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(220, 20, 60, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-box:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-        }
-
-        .feature-icon i {
-            font-size: 2rem;
-            color: white;
-        }
-
-        .feature-box h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--text-color);
-        }
-
-        .feature-box p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
+     
         .instructions-section {
             margin-top: 5rem;
             background: var(--card-bg);
@@ -531,47 +485,59 @@
 /*Iconos */
 .features-grid {
   display: grid !important;
-  grid-template-columns: 1fr !important; /* Una sola columna, puedes ajustar */
-  gap: 20px !important;
-  justify-items: center !important;
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  gap: 2rem !important;
+  margin-top: 4rem !important;
+  justify-items: center !important; /* 🔥 Centra horizontalmente las feature-box */
 }
 
 .feature-box {
+  background: var(--card-bg, #fff) !important;
+  border-radius: 15px !important;
+  padding: 2rem !important;
+  text-align: center !important;
+  box-shadow: 0 5px 20px rgba(220, 20, 60, 0.1) !important;
+  transition: transform 0.3s ease !important;
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;
+  align-items: center !important; /* 🔥 Centra el ícono y texto */
   justify-content: flex-start !important;
-  text-align: center !important;
-  background: #fff !important;
-  padding: 20px !important;
-  border-radius: 16px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
-  width: 90% !important;
-  max-width: 340px !important;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px) !important;
 }
 
 .feature-icon {
   display: flex !important;
-  justify-content: center !important;
   align-items: center !important;
-  width: 60px !important;
-  height: 60px !important;
-  border-radius: 12px !important;
-  background-color: #ffe6e6 !important;
-  margin-bottom: 12px !important;
+  justify-content: center !important;
+  width: 70px !important;
+  height: 70px !important;
+  margin: 0 auto 1.5rem !important;
+  background: linear-gradient(135deg, var(--primary-color, #ff4b5c), var(--secondary-color, #ff7f50)) !important;
+  border-radius: 50% !important;
+  text-align: center !important;
+  flex-shrink: 0 !important; /* 🔥 evita que el ícono se mueva */
 }
 
 .feature-icon i {
-  font-size: 32px !important;
-  color: #fd0000 !important;
+  font-size: 2rem !important;
+  color: white !important;
   text-align: center !important;
-  line-height: 1 !important;
+  display: block !important;
 }
 
-.feature-box h4,
+.feature-box h4 {
+  font-size: 1.2rem !important;
+  margin-bottom: 1rem !important;
+  color: var(--text-color, #111) !important;
+}
+
 .feature-box p {
-  width: 100% !important;
+  color: var(--text-secondary, #444) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
   text-align: center !important;
 }
 
