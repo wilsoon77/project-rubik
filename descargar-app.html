@@ -481,68 +481,100 @@
         }
 
 
+        .steps-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step-card {
+            flex: 1 1 300px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .step-number {
+            background-color: #e50914;
+            color: white;
+            font-weight: 700;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .step-card h4 {
+            margin: 0;
+            font-size: 20px;
+            color: #222;
+        }
+
+        .step-card ol {
+            margin-left: 20px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .feature-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
         .feature-icon i {
-  color: #fd0000; /* negro */
-}
+            color: #fd0000;
+            /* Ícono rojo */
+            font-size: 36px;
+        }
 
+        .feature-box h4 {
+            color: #111;
+            /* Título oscuro */
+            margin: 10px 0 5px;
+            font-weight: 600;
+        }
 
-.feature-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-
-
-.steps-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.step-card {
-  flex: 1 1 300px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 16px;
-}
-
-.step-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.step-number {
-  background-color: #e50914;
-  color: white;
-  font-weight: 700;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-
-.step-card h4 {
-  margin: 0;
-  font-size: 20px;
-  color: #222;
-}
-
-.step-card ol {
-  margin-left: 20px;
-  color: #444;
-  line-height: 1.6;
-}
-
-
+        .feature-box p {
+            color: #444;
+            /* Texto gris */
+            font-size: 15px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 
@@ -688,105 +720,105 @@
                 </div>
             </div>
 
-           <div class="instructions-section">
-  <h2>🔧 Cómo Instalar</h2>
+            <div class="instructions-section">
+                <h2>🔧 Cómo Instalar</h2>
 
-  <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-number">1</div>
-        <h4>Descargar</h4>
-      </div>
-      <ol>
-        <li>Haz clic en el botón "Descargar APK"</li>
-        <li>O escanea el código QR desde tu móvil</li>
-        <li>Espera a que termine la descarga</li>
-      </ol>
-    </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <h4>Descargar</h4>
+                        </div>
+                        <ol>
+                            <li>Haz clic en el botón "Descargar APK"</li>
+                            <li>O escanea el código QR desde tu móvil</li>
+                            <li>Espera a que termine la descarga</li>
+                        </ol>
+                    </div>
 
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-number">2</div>
-        <h4>Habilitar Instalación</h4>
-      </div>
-      <ol>
-        <li>Ve a Configuración → Seguridad</li>
-        <li>Busca "Instalar apps desconocidas"</li>
-        <li>Permite instalación desde tu navegador</li>
-      </ol>
-    </div>
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-number">2</div>
+                            <h4>Habilitar Instalación</h4>
+                        </div>
+                        <ol>
+                            <li>Ve a Configuración → Seguridad</li>
+                            <li>Busca "Instalar apps desconocidas"</li>
+                            <li>Permite instalación desde tu navegador</li>
+                        </ol>
+                    </div>
 
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-number">3</div>
-        <h4>Instalar y Usar</h4>
-      </div>
-      <ol>
-        <li>Abre el archivo APK descargado</li>
-        <li>Toca "Instalar" y espera</li>
-        <li>¡Abre la app y comienza a comprar!</li>
-      </ol>
-    </div>
-  </div>
-</div>
-
-                <!-- Requisitos -->
-                <div class="requirements-box">
-                    <h3>📋 Requisitos del Sistema</h3>
-                    <div class="requirements-list">
-                        <div class="requirement-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Android 5.0 (Lollipop) o superior</span>
+                    <div class="step-card">
+                        <div class="step-header">
+                            <div class="step-number">3</div>
+                            <h4>Instalar y Usar</h4>
                         </div>
-                        <div class="requirement-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Mínimo 2 MB de espacio libre</span>
-                        </div>
-                        <div class="requirement-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Conexión a Internet</span>
-                        </div>
-                        <div class="requirement-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Permisos de instalación habilitados</span>
-                        </div>
+                        <ol>
+                            <li>Abre el archivo APK descargado</li>
+                            <li>Toca "Instalar" y espera</li>
+                            <li>¡Abre la app y comienza a comprar!</li>
+                        </ol>
                     </div>
                 </div>
             </div>
 
-            <!-- FAQ -->
-            <div class="faq-section">
-                <h2>❓ Preguntas Frecuentes</h2>
-
-                <div class="faq-item">
-                    <h4>¿Es seguro instalar este APK?</h4>
-                    <p>Sí, completamente seguro. Nuestro APK está firmado digitalmente y solo accede a tu información
-                        cuando inicias sesión voluntariamente. No recopilamos datos sin tu consentimiento.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h4>¿Por qué no está en Google Play Store?</h4>
-                    <p>Este es un proyecto educativo y estamos en proceso de publicación en tiendas oficiales. Mientras
-                        tanto, puedes descargar directamente desde nuestra web de forma segura.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h4>¿Necesito crear una cuenta?</h4>
-                    <p>Puedes navegar y explorar productos sin cuenta, pero necesitas registrarte para realizar compras,
-                        y ver tu historial de pedidos.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h4>¿La app funciona sin Internet?</h4>
-                    <p>Necesitas conexión a Internet para navegar productos actualizados y realizar compras.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h4>¿Cómo actualizo la app?</h4>
-                    <p>Por ahora, las actualizaciones son manuales. Descarga la nueva versión e instálala sobre la
-                        anterior. Tus datos y configuración se mantendrán intactos.</p>
+            <!-- Requisitos -->
+            <div class="requirements-box">
+                <h3>📋 Requisitos del Sistema</h3>
+                <div class="requirements-list">
+                    <div class="requirement-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Android 5.0 (Lollipop) o superior</span>
+                    </div>
+                    <div class="requirement-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Mínimo 2 MB de espacio libre</span>
+                    </div>
+                    <div class="requirement-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Conexión a Internet</span>
+                    </div>
+                    <div class="requirement-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Permisos de instalación habilitados</span>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2>❓ Preguntas Frecuentes</h2>
+
+            <div class="faq-item">
+                <h4>¿Es seguro instalar este APK?</h4>
+                <p>Sí, completamente seguro. Nuestro APK está firmado digitalmente y solo accede a tu información
+                    cuando inicias sesión voluntariamente. No recopilamos datos sin tu consentimiento.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>¿Por qué no está en Google Play Store?</h4>
+                <p>Este es un proyecto educativo y estamos en proceso de publicación en tiendas oficiales. Mientras
+                    tanto, puedes descargar directamente desde nuestra web de forma segura.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>¿Necesito crear una cuenta?</h4>
+                <p>Puedes navegar y explorar productos sin cuenta, pero necesitas registrarte para realizar compras,
+                    y ver tu historial de pedidos.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>¿La app funciona sin Internet?</h4>
+                <p>Necesitas conexión a Internet para navegar productos actualizados y realizar compras.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>¿Cómo actualizo la app?</h4>
+                <p>Por ahora, las actualizaciones son manuales. Descarga la nueva versión e instálala sobre la
+                    anterior. Tus datos y configuración se mantendrán intactos.</p>
+            </div>
+        </div>
         </div>
     </section>
 
